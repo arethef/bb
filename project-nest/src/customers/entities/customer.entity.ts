@@ -9,22 +9,18 @@ import {
   RelationId,
 } from 'typeorm';
 
-@Entity('brands')
-export class Brand extends BaseEntity {
+@Entity('customers')
+export class Customer extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: string;
 
   @Column({ nullable: false })
-  @RelationId((brand: Brand) => brand.user)
+  @RelationId((customer: Customer) => customer.user)
   userId: string;
   @ManyToOne(() => User, { eager: true })
   @JoinColumn()
   user: User;
 
   @Column()
-  businessName: string;
-  @Column()
-  brn: string; // business registration number
-  @Column({ nullable: true, type: 'text' })
-  introduction: string;
+  nickname: string;
 }

@@ -5,6 +5,11 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { LoggingModule } from './interceptor/logging.module';
 import { BrandsModule } from './brands/brands.module';
 import { CustomersModule } from './customers/customers.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { RolesModule } from './roles/roles.module';
+import { AppController } from './app.controller';
+import { PlacesModule } from './places/places.module';
 
 @Module({
   imports: [
@@ -29,8 +34,12 @@ import { CustomersModule } from './customers/customers.module';
     LoggingModule,
     BrandsModule,
     CustomersModule,
+    AuthModule,
+    UsersModule,
+    RolesModule,
+    PlacesModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
