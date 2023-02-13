@@ -1,9 +1,18 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <div>
+    <main>
+      <p>[HomeView.vue]</p>
+      <div class="grid gap-4 grid-flow-col">
+        <div>
+          <RouterLink to="/login">Login</RouterLink>
+        </div>
+        <div>
+          <RouterLink to="/signup">Signup</RouterLink>
+        </div>
+      </div>
+    </main>
+  </div>
 </template>
