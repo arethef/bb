@@ -10,12 +10,14 @@ import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { AppController } from './app.controller';
 import { PlacesModule } from './places/places.module';
+import { AdmissionsModule } from './admissions/admissions.module';
+import emailConfig from './config/emailConfig';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: [`${__dirname}/config/env/.${process.env.NODE_ENV}.env`],
-      load: [],
+      load: [emailConfig],
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
@@ -38,6 +40,7 @@ import { PlacesModule } from './places/places.module';
     UsersModule,
     RolesModule,
     PlacesModule,
+    AdmissionsModule,
   ],
   controllers: [AppController],
   providers: [],

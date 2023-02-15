@@ -1,17 +1,17 @@
 export class ReqSignupUserDto {
   readonly user: {
-    email: string;
-    password: string;
-    username: string;
+    readonly email: string;
+    readonly password: string;
+    readonly username: string;
   };
   readonly role: {
-    position: 'brand' | 'customer';
+    readonly position: 'brand' | 'customer';
   };
   readonly place?: {
     // brand는 필수o, customer는 필수x
-    zipcode: string;
-    basic: string;
-    detail: string;
+    readonly zipcode: string;
+    readonly basic: string;
+    readonly detail: string;
   };
 
   /* brand */

@@ -1,6 +1,3 @@
-<script setup>
-</script>
-
 <template>
   <div>
     <main>
@@ -16,3 +13,11 @@
     </main>
   </div>
 </template>
+
+<script>
+export default {
+  created() {
+    console.log(import.meta.env);
+  },
+};
+</script>

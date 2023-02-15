@@ -7,6 +7,7 @@ import { Role } from 'src/roles/entities/role.entity';
 import { ReqSignupUserDto } from './dto/req-signup-user.dto';
 import { User } from './entities/user.entity';
 import { DataSource } from 'typeorm';
+import { Admission } from 'src/admissions/entities/admission.entity';
 
 @Injectable()
 export class UsersService {
@@ -16,6 +17,7 @@ export class UsersService {
     console.log(`++++++ [users.service.ts] createUser() ++++++`);
 
     const isUserEmailExists = await this.checkUserEmailExists(dto.user.email);
+    console.log(`❯❯❯❯❯❯ isUserEmailExists:`, isUserEmailExists);
     if (isUserEmailExists) {
       throw new UnprocessableEntityException(
         '[users.service.ts] createUser() 이미 가입된 이메일이다.',
@@ -24,11 +26,13 @@ export class UsersService {
     const isUserUsernameExists = await this.checkUserUsernameExists(
       dto.user.username,
     );
+    console.log(`❯❯❯❯❯❯ isUserUsernameExists:`, isUserUsernameExists);
     if (isUserUsernameExists) {
       throw new UnprocessableEntityException(
         '[users.service.ts] createUser() 이미 등록된 username이다.',
       );
     }
+    // const signupVerifyToken = uuid.v4();
     const user: User = new User();
     user.email = dto.user.email;
     user.password = dto.user.password;
@@ -37,8 +41,6 @@ export class UsersService {
       where: { position: dto.role.position },
     });
     user.role = role;
-    const signupVerifyToken = uuid.v4();
-    user.signupVerifyToken = signupVerifyToken;
     // const userSaveResult = await User.save(user);
     // console.log(`❯❯❯❯❯❯ userSaveResult:`, userSaveResult);
     if (dto.role.position === 'brand') {
@@ -56,8 +58,10 @@ export class UsersService {
       await qr.connect();
       await qr.startTransaction();
       try {
-        await qr.manager.save(user);
-        await qr.manager.save(brand);
+        const userSaveResult = await qr.manager.save(user);
+        console.log(`❯❯❯❯❯❯ userSaveResult:`, userSaveResult);
+        const brandSaveResult = await qr.manager.save(brand);
+        console.log(`❯❯❯❯❯❯ brandSaveResult:`, brandSaveResult);
         await qr.commitTransaction();
       } catch (e) {
         await qr.rollbackTransaction();
@@ -86,17 +90,24 @@ export class UsersService {
       // console.log(`❯❯❯❯❯❯ customerSaveResult:`, customerSaveResult);
     }
   }
-  private async checkUserEmailExists(email: string): Promise<boolean> {
+  async checkUserEmailExists(email: string): Promise<boolean> {
+    console.log(`++++++ [users.service.ts] checkUserEmailExists()) ++++++`);
+    console.log(`❯❯❯❯❯❯ email:`, email);
+
     const user: User = await User.findOne({
       where: { email },
     });
-    return user !== (undefined || null);
+    console.log(`❯❯❯❯❯❯ user:`, user);
+    return user !== null;
   }
   private async checkUserUsernameExists(username: string): Promise<boolean> {
+    console.log(`++++++ [users.service.ts] checkUserUsernameExists() ++++++`);
+    console.log(`❯❯❯❯❯❯ username:`, username);
     const user: User = await User.findOne({
       where: { username },
     });
-    return user !== (undefined || null);
+    console.log(`❯❯❯❯❯❯ user:`, user);
+    return user !== null;
   }
 
   async findUserbyUsername(username: string): Promise<User> {

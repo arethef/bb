@@ -1,8 +1,3 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
-</script>
-
 <template>
   <div class="font-mono">
     <p>[App.vue] root vue ? !</p>
@@ -20,5 +15,12 @@ import HelloWorld from "./components/HelloWorld.vue";
   </div>
 </template>
 
-<style scoped>
+<script setup>
+</script>
+
+<!-- <style scoped> -->
+<style>
+html {
+  background-color: #fffcf2;
+}
 </style>

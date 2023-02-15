@@ -7,7 +7,17 @@ module.exports = {
       serif: ['Merriweather', 'serif'],
       mono: ['monospace']
     },
-    extend: {},
+    extend: {
+      colors: {
+        bb: {
+          bg: '#fffcf2',
+          txt: '#54473a',
+          a: '#785130',
+          b: '#a8886d',
+          c: '#f3e5bf'
+        }
+      }
+    },
   },
   plugins: [],
 }

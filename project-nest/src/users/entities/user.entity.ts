@@ -45,9 +45,9 @@ export class User extends Base {
   @JoinColumn()
   place: Place;
 
-  @Column({ select: false, nullable: true })
-  @Exclude()
-  signupVerifyToken: string;
+  // @Column({ select: false, nullable: true })
+  // @Exclude()
+  // signupVerifyToken: string;
   @Column({ select: false, nullable: true })
   @Exclude() // refresh token과 같은 민감 데이터 응답에서 제외시키기
   refreshToken?: string;

@@ -26,7 +26,7 @@ export class AuthService {
   async validateUser(username: string, password: string): Promise<any> {
     const user: User = await this.usersService.findUserbyUsername(username);
     if (user && (await user.comparePassword(password))) {
-      const { password, signupVerifyToken, refreshToken, ...result } = user;
+      const { password, refreshToken, ...result } = user;
       return result;
     } else {
       throw new NotFoundException(
