@@ -1,5 +1,10 @@
 import * as uuid from 'uuid';
-import { Injectable, UnprocessableEntityException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { Brand } from 'src/brands/entities/brand.entity';
 import { Customer } from 'src/customers/entities/customer.entity';
 import { Place } from 'src/places/entities/place.entity';
@@ -7,7 +12,6 @@ import { Role } from 'src/roles/entities/role.entity';
 import { ReqSignupUserDto } from './dto/req-signup-user.dto';
 import { User } from './entities/user.entity';
 import { DataSource } from 'typeorm';
-import { Admission } from 'src/admissions/entities/admission.entity';
 
 @Injectable()
 export class UsersService {
@@ -110,10 +114,72 @@ export class UsersService {
     return user !== null;
   }
 
-  async findUserbyUsername(username: string): Promise<User> {
+  async findUserByUserUsername(username: string): Promise<User> {
     const user: User = await User.findOne({
       where: { username },
     });
     return user;
   }
+
+  async findUserByUserId(id: string): Promise<User> {
+    const user: User = await User.findOne({
+      where: { id },
+    });
+    return user;
+  }
+
+  async findUserByIdAndRefreshToken(id: string, refreshToken: string) {
+    console.log(
+      `++++++ [users.service.ts] findUserByIdAndRefreshToken() ++++++`,
+    );
+    const user: User = await User.findOne({
+      where: { id },
+    });
+    console.log(
+      `❯❯❯❯❯❯ refreshToken:`,
+      refreshToken,
+      ', user.refreshToken:',
+      user.refreshToken,
+    );
+    const isRefreshTokenMatch = await user.compareRefreshToken(refreshToken);
+    if (isRefreshTokenMatch) {
+      return user;
+    } else {
+      throw new HttpException(
+        '[users.service.ts] findUserByIdAndRefreshToken() 리프레시 토큰 다르다.',
+        HttpStatus.UNAUTHORIZED,
+      );
+    }
+  }
+
+  async findUserByUserEmail(email: string): Promise<User> {
+    const user: User = await User.findOne({
+      where: { email },
+    });
+    return user;
+  }
+
+  async saveRefreshTokenWithUserId(id: string, refreshToken: string) {
+    console.log(
+      `++++++ [users.service.ts] saveRefreshTokenWithUserId() ++++++`,
+    );
+    console.log(`❯❯❯❯❯❯ id:`, id, `, refreshToken:`, refreshToken);
+    const user: User = await User.findOne({ where: { id } });
+    await user.encryptRefreshToken(refreshToken);
+    await User.save(user);
+  }
+  // async findBrandOrCustomerByUserId(id: string): Promise<Brand | Customer> {
+  //   const brand: Brand = await Brand.findOne({
+  //     where: { userId: id },
+  //   });
+  //   const customer: Customer = await Customer.findOne({
+  //     where: { userId: id },
+  //   });
+
+  //   if (brand) {
+  //     return brand;
+  //   } else {
+  //     return customer;
+  //   }
+  // }
 }

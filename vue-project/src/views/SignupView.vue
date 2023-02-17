@@ -56,7 +56,7 @@
                   rounded
                   select-none
                   peer-checked:bg-pink-300
-                  peer=checked:font-bold
+                  peer-checked:font-bold
                   peer-checked:text-white
                 "
                 >Brand</label

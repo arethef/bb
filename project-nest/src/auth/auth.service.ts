@@ -24,10 +24,16 @@ export class AuthService {
    * password, signupVerifyToken, refreshToken 제외한 나머지 부분
    */
   async validateUser(username: string, password: string): Promise<any> {
-    const user: User = await this.usersService.findUserbyUsername(username);
+    console.log(`++++++ [auth.service.ts] validateUser() ++++++`);
+    console.log(`❯❯❯❯❯❯ username:`, username, `, password:`, password);
+
+    const user: User = await this.usersService.findUserByUserUsername(username);
+    console.log(`❯❯❯❯❯❯ user:`, user);
+
     if (user && (await user.comparePassword(password))) {
       const { password, refreshToken, ...result } = user;
       return result;
+      // return user;
     } else {
       throw new NotFoundException(
         `[auth.service.ts] valudateUser()에서 사용자를 찾을 수 없다.`,
@@ -50,9 +56,11 @@ export class AuthService {
 
     return {
       accessToken,
-      domain: 'localhost',
+      // domain: 'localhost',
+      domain: '127.0.0.1',
       path: '/',
       httpOnly: true,
+      secure: false,
       maxAge: Number(this.configService.get('JWT_EXPIRATION_ACCESS_TOKEN')),
     };
   }
@@ -70,9 +78,11 @@ export class AuthService {
 
     return {
       refreshToken,
-      domain: 'localhost',
+      // domain: 'localhost',
+      domain: '127.0.0.1',
       path: '/',
       httpOnly: true,
+      secure: false,
       maxAge: Number(this.configService.get(`JWT_EXPIRATION_REFRESH_TOKEN`)),
     };
   }
@@ -81,15 +91,19 @@ export class AuthService {
     console.log(`[auth.service.ts] getCookieForLogout()`);
     return {
       accessOption: {
-        domain: 'localhost',
+        // domain: 'localhost',
+        domain: '127.0.0.1',
         path: '/',
         httpOnly: true,
+        secure: false,
         maxAge: 0,
       },
       refreshOption: {
-        domain: 'localhost',
+        // domain: 'localhost',
+        domain: '127.0.0.1',
         path: '/',
         httpOnly: true,
+        secure: false,
         maxAge: 0,
       },
     };

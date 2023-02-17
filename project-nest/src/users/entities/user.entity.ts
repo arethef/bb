@@ -22,8 +22,9 @@ const saltRounds = 10;
 export class User extends Base {
   @Column({ unique: true })
   email: string;
-  @Column({ select: false })
+  // @Column({ select: false })
   @Exclude()
+  @Column()
   password: string;
   @Column({ unique: true })
   username: string;
@@ -45,11 +46,12 @@ export class User extends Base {
   @JoinColumn()
   place: Place;
 
-  // @Column({ select: false, nullable: true })
   // @Exclude()
+  // @Column({ select: false, nullable: true })
   // signupVerifyToken: string;
-  @Column({ select: false, nullable: true })
+  // @Column({ select: false, nullable: true })
   @Exclude() // refresh token과 같은 민감 데이터 응답에서 제외시키기
+  @Column({ nullable: true })
   refreshToken?: string;
 
   @OneToMany(() => Brand, (brand) => brand.user)
@@ -79,7 +81,12 @@ export class User extends Base {
    */
   async comparePassword(plainPassword: string): Promise<boolean> {
     console.log(`++++++ [user.entity.ts] comparePassword() ++++++`);
-    console.log(`plainPassword`, plainPassword);
+    console.log(
+      `❯❯❯❯❯❯ plainPassword`,
+      plainPassword,
+      `, this.password:`,
+      this.password,
+    );
     return await bcrypt.compare(plainPassword, this.password);
   }
 

@@ -12,6 +12,8 @@ import { AppController } from './app.controller';
 import { PlacesModule } from './places/places.module';
 import { AdmissionsModule } from './admissions/admissions.module';
 import emailConfig from './config/emailConfig';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtGuard } from './auth/guards/jwt.guard';
 
 @Module({
   imports: [
@@ -43,6 +45,11 @@ import emailConfig from './config/emailConfig';
     AdmissionsModule,
   ],
   controllers: [AppController],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtGuard,
+    },
+  ],
 })
 export class AppModule {}

@@ -4,36 +4,28 @@
       <p>[CustomersignupForm.vue]</p>
       <div class="grid grid-flow-col-dense grid-cols-4 gap-2">
         <div class="col-span-1 grid gap-1 m-1">
-          <div class="form-check form-check-inline p-1">
-            <label for="email" class="form-check-label">이메일</label>
+          <div class="p-1">
+            <label for="email" class="block">이메일</label>
           </div>
-          <div class="form-check form-check-inline p-1">
-            <label for="password" class="form-check-label">비밀번호</label>
+          <div class="p-1">
+            <label for="password" class="block">비밀번호</label>
           </div>
-          <div class="form-check form-check-inline p-1">
-            <label for="passwordCheck" class="form-check-label"
-              >비밀번호확인</label
-            >
+          <div class="p-1">
+            <label for="passwordCheck" class="block">비밀번호확인</label>
           </div>
-          <div class="form-check form-check-inline p-1">
-            <label for="username" class="form-check-label">사용자이름</label>
+          <div class="p-1">
+            <label for="username" class="block">사용자이름</label>
           </div>
-          <div class="form-check form-check-inline p-1">
-            <label for="nickname" class="form-check-label">닉네임</label>
+          <div class="p-1">
+            <label for="nickname" class="block">닉네임</label>
           </div>
         </div>
         <div class="col-span-3 grid gap-1 m-1">
-          <div
-            class="
-              form-check form-check-inline
-              grid grid-flow-col-dense grid-cols-9
-              p-1
-            "
-          >
+          <div class="grid grid-flow-col-dense grid-cols-9 p-1">
             <input
               type="email"
               id="email"
-              class="form-check-input col-span-7 px-2"
+              class="col-span-7 form-input block text-xs"
               placeholder="bbang@example.com"
               v-model="reqCustomerSignupDto.user.email"
             />
@@ -66,62 +58,38 @@
               확인
             </button>
           </div>
-          <div
-            class="
-              form-check form-check-inline
-              grid grid-flow-col-dense grid-cols-9
-              p-1
-            "
-          >
+          <div class="grid grid-flow-col-dense grid-cols-9 p-1">
             <input
               type="password"
               id="password"
-              class="form-check-input col-span-7 px-2"
+              class="col-span-7 form-input block text-xs"
               placeholder="********"
               v-model="reqCustomerSignupDto.user.password"
             />
           </div>
-          <div
-            class="
-              form-check form-check-inline
-              grid grid-flow-col-dense grid-cols-9
-              p-1
-            "
-          >
+          <div class="grid grid-flow-col-dense grid-cols-9 p-1">
             <input
               type="password"
               id="passwordCheck"
-              class="form-check-input col-span-7 px-2"
+              class="col-span-7 form-input block text-xs"
               placeholder="********"
               v-model="passwordCheck"
             />
           </div>
-          <div
-            class="
-              form-check form-check-inline
-              grid grid-flow-col-dense grid-cols-9
-              p-1
-            "
-          >
+          <div class="grid grid-flow-col-dense grid-cols-9 p-1">
             <input
               type="text"
               id="username"
-              class="form-check-input col-span-7 px-2"
+              class="col-span-7 form-input block text-xs"
               placeholder="johncoopermaster"
               v-model="reqCustomerSignupDto.user.username"
             />
           </div>
-          <div
-            class="
-              form-check form-check-inline
-              grid grid-flow-col-dense grid-cols-9
-              p-1
-            "
-          >
+          <div class="grid grid-flow-col-dense grid-cols-9 p-1">
             <input
               type="text"
               id="nickname"
-              class="form-check-input col-span-7 px-2"
+              class="col-span-7 form-input block text-xs"
               placeholder="John Cooper"
               v-model="reqCustomerSignupDto.customer.nickname"
             />

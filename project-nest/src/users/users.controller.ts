@@ -1,5 +1,6 @@
 import { Body, Controller, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
+import { Public } from 'src/auth/decorators/public-auth.decorator';
 import { ReqCheckEmailUserDto } from './dto/req-check-email-user.dto';
 import { ReqSignupUserDto } from './dto/req-signup-user.dto';
 import { UsersService } from './users.service';
@@ -8,6 +9,7 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @Public()
   @Post('email-check')
   async checkUserEmailExists(
     @Body() dto: ReqCheckEmailUserDto,
@@ -22,6 +24,7 @@ export class UsersController {
     return isUserEmailExists;
   }
 
+  @Public()
   @Post('signup')
   async signup(
     @Body() dto: ReqSignupUserDto,
