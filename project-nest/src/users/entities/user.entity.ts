@@ -120,4 +120,12 @@ export class User extends Base {
     console.log(`plainRefreshToken`, plainRefreshToken);
     return await bcrypt.compare(plainRefreshToken, this.refreshToken);
   }
+
+  removePasswordAndRefreshTokenFromUser(user: User) {
+    return Object.fromEntries(
+      Object.entries(user).filter(
+        ([key, value]) => key !== 'password' && key !== 'refreshToken',
+      ),
+    );
+  }
 }

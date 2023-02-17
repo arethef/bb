@@ -10,12 +10,12 @@ export const useUserStore = defineStore('user', {
   },
   actions: {
     async checkEmailExists(reqCheckEmailDto) {
-      console.log(`[user.js] checkEmailExists()`);
-      console.log(`❯❯❯❯❯❯ reqCheckEmailDto:`, reqCheckEmailDto);
+      console.log(`++++++ [user.js] checkEmailExists() ++++++`);
+      console.log(`❯❯❯❯❯❯ [user.js] checkEmailExists() reqCheckEmailDto:`, reqCheckEmailDto);
       let result = {}
       await axios.post(`/api/users/email-check`, reqCheckEmailDto)
         .then((res) => {
-          console.log(`❯❯❯❯❯❯ res.data:`, res.data);
+          console.log(`❯❯❯❯❯❯ [user.js] checkEmailExists() res.data:`, res.data);
           result = res.data;
         }).catch((err) => {
           console.error(err);
@@ -24,7 +24,7 @@ export const useUserStore = defineStore('user', {
     },
     async checkBrnValidates(data) {
       console.log(`[user.js] checkBrnValidates()`);
-      console.log(`❯❯❯❯❯❯ data:`, data);
+      console.log(`❯❯❯❯❯❯ [user.js] checkBrnValidates() data:`, data);
       let result = {}
       await axios({
         method: 'post',
@@ -36,22 +36,22 @@ export const useUserStore = defineStore('user', {
         },
         data
       }).then((res) => {
-        console.log(`❯❯❯❯❯❯ res.data:`, res.data);
-        console.log(`❯❯❯❯❯❯ res.data.data:`, res.data.data);
-        console.log(`❯❯❯❯❯❯ res.data.data[0]:`, res.data.data[0]);
+        console.log(`❯❯❯❯❯❯ [user.js] checkBrnValidates() res.data:`, res.data);
+        console.log(`❯❯❯❯❯❯ [user.js] checkBrnValidates() res.data.data:`, res.data.data);
+        console.log(`❯❯❯❯❯❯ [user.js] checkBrnValidates() res.data.data[0]:`, res.data.data[0]);
         result = res.data.data[0];
       }).catch((err) => {
-        console.error(`❯❯❯❯❯❯ err:`, err);
+        console.error(`❯❯❯❯❯❯ [user.js] checkBrnValidates() err:`, err);
       });
       return result;
     },
     async signup(reqSignupDto) {
-      console.log(`[user.js] signup()`);
-      console.log(`❯❯❯❯❯❯ reqSignupDto:`, reqSignupDto);
+      console.log(`++++++ [user.js] signup() ++++++`);
+      console.log(`❯❯❯❯❯❯ [user.js] signup() reqSignupDto:`, reqSignupDto);
       let result = {}
       await axios.post(`/api/users/signup`, reqSignupDto)
         .then((res) => {
-          console.log(`❯❯❯❯❯❯ res:`, res);
+          console.log(`❯❯❯❯❯❯ [user.js] signup() res:`, res);
           result = res.data.result;
         }).catch((err) => {
           console.error(err);
@@ -60,7 +60,7 @@ export const useUserStore = defineStore('user', {
     },
     async login(reqLoginDto) {
       console.log(`++++++ [user.js] login() ++++++`);
-      console.log(`❯❯❯❯❯❯ reqLoginDto:`, reqLoginDto);
+      console.log(`❯❯❯❯❯❯ [user.js] login() reqLoginDto:`, reqLoginDto);
       let result = {}
       const params = new URLSearchParams();
       const { username, password } = reqLoginDto
@@ -77,9 +77,9 @@ export const useUserStore = defineStore('user', {
       //   });
       const axiosResult = await axios.post(`/api/auth/login`, params)
         .catch((err) => {
-          console.error(`❯❯❯❯❯❯ err:`, err);
+          console.error(`❯❯❯❯❯❯ [user.js] login() err:`, err);
         });
-      console.log(`❯❯❯❯❯❯ axiosResult:`, axiosResult);
+      console.log(`❯❯❯❯❯❯ [user.js] login() axiosResult:`, axiosResult);
       return axiosResult.data;
     },
     async testRefresh() {
@@ -87,9 +87,9 @@ export const useUserStore = defineStore('user', {
       let result = {}
       const axiosResult = await axios.get(`/api/auth/refresh`)
         .catch((err) => {
-          console.error(`❯❯❯❯❯❯ err:`, err);
+          console.error(`❯❯❯❯❯❯ [user.js] testRefresh() err:`, err);
         });
-      console.log(`❯❯❯❯❯❯ axiosResult:`, axiosResult);
+      console.log(`❯❯❯❯❯❯ [user.js] testRefresh() axiosResult:`, axiosResult);
       return axiosResult
       
     }

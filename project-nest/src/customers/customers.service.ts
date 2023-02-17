@@ -20,4 +20,11 @@ export class CustomersService {
     });
     return customer;
   }
+
+  async findCustomerByUserId(userId: string): Promise<Customer> {
+    const customer: Customer = await Customer.findOne({
+      where: { userId },
+    });
+    return customer;
+  }
 }

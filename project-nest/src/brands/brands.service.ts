@@ -20,4 +20,11 @@ export class BrandsService {
     });
     return brand;
   }
+
+  async findBrandByUserId(userId: string): Promise<Brand> {
+    const brand: Brand = await Brand.findOne({
+      where: { userId },
+    });
+    return brand;
+  }
 }

@@ -94,8 +94,12 @@ export default {
       const result = await this.userStore.login(this.reqLoginDto);
       console.log(`❯❯❯❯❯❯ result:`, result);
       if (result.role.position === "brand") {
+        // 브랜드 정보 저장할 수 있도록 정보 요청 후 라우터 푸시
+        await this.brandStore.getBrand();
         this.$router.push("/b");
       } else {
+        // 고객 정보 저장할 수 있도록 정보 요청 후 라우터 푸시
+        await this.customerStore.getCustomer();
         this.$router.push("/c");
       }
     },

@@ -25,10 +25,15 @@ export class AuthService {
    */
   async validateUser(username: string, password: string): Promise<any> {
     console.log(`++++++ [auth.service.ts] validateUser() ++++++`);
-    console.log(`❯❯❯❯❯❯ username:`, username, `, password:`, password);
+    console.log(
+      `❯❯❯❯❯❯ [auth.service.ts] validateUser() username:`,
+      username,
+      `, password:`,
+      password,
+    );
 
     const user: User = await this.usersService.findUserByUserUsername(username);
-    console.log(`❯❯❯❯❯❯ user:`, user);
+    console.log(`❯❯❯❯❯❯ [auth.service.ts] validateUser() user:`, user);
 
     if (user && (await user.comparePassword(password))) {
       const { password, refreshToken, ...result } = user;
