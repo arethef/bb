@@ -1,3 +1,4 @@
+import { Address } from 'src/addresses/entities/address.entity';
 import { User } from 'src/users/entities/user.entity';
 import {
   BaseEntity,
@@ -21,4 +22,6 @@ export class Place extends BaseEntity {
 
   @OneToMany(() => User, (user) => user.place)
   users: User[];
+  @OneToMany(() => Address, (address) => address.place)
+  addresses: Address[];
 }

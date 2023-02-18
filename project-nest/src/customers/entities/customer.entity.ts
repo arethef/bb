@@ -1,3 +1,6 @@
+import { Address } from 'src/addresses/entities/address.entity';
+import { Bookmark } from 'src/bookmarks/entities/bookmark.entity';
+import { Ticket } from 'src/tickets/entities/ticket.entity';
 import { User } from 'src/users/entities/user.entity';
 import {
   BaseEntity,
@@ -5,6 +8,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   RelationId,
 } from 'typeorm';
@@ -23,4 +27,11 @@ export class Customer extends BaseEntity {
 
   @Column()
   nickname: string;
+
+  @OneToMany(() => Address, (address) => address.customer)
+  addresses: Address[];
+  @OneToMany(() => Ticket, (ticket) => ticket.customer)
+  tickets: Ticket[];
+  @OneToMany(() => Bookmark, (bookmark) => bookmark.customer)
+  bookmarks: Bookmark[];
 }

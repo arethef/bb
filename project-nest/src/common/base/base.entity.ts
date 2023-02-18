@@ -14,8 +14,8 @@ export class Base extends BaseEntity {
   createdAt: Date;
   @UpdateDateColumn()
   updatedAt: Date;
-  // @DeleteDateColumn()
-  // deletedAt: Date;
-  // @VersionColumn({ default: 1 })
-  // version: number;
+  @DeleteDateColumn()
+  deletedAt: Date;
+  @VersionColumn({ default: 1 })
+  version: number;
 }

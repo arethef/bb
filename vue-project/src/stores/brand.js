@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 
 export const useBrandStore = defineStore('brand', {
   state: () => ({
-    brand: {
+    profile: {
       id: "",
       userId: "",
       user: {},
@@ -13,7 +13,9 @@ export const useBrandStore = defineStore('brand', {
     }
   }),
   getters: {
-
+    brandProfile(state) {
+      return state.profile;
+    }
   },
   actions: {
     async getBrand() {
@@ -23,6 +25,8 @@ export const useBrandStore = defineStore('brand', {
           console.error(`❯❯❯❯❯❯ [brand.js] getBrand() err:`, err);
         });
       console.log(`❯❯❯❯❯❯ [brand.js] getBrand() axiosResult:`, axiosResult);
+      this.profile = axiosResult.data;
+      console.log(`❯❯❯❯❯❯ [brand.js] getBrand() this.profile:`, this.profile);
     }
   }
 })

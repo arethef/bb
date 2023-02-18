@@ -14,6 +14,15 @@ import { AdmissionsModule } from './admissions/admissions.module';
 import emailConfig from './config/emailConfig';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtGuard } from './auth/guards/jwt.guard';
+import { ProductsModule } from './products/products.module';
+import { MarketsModule } from './markets/markets.module';
+import { AddressesModule } from './addresses/addresses.module';
+import { LineupsModule } from './lineups/lineups.module';
+import { TicketsModule } from './tickets/tickets.module';
+import { OrdersModule } from './orders/orders.module';
+import { BookmarksModule } from './bookmarks/bookmarks.module';
+import { TargetsModule } from './targets/targets.module';
+import { LinksModule } from './links/links.module';
 
 @Module({
   imports: [
@@ -43,6 +52,15 @@ import { JwtGuard } from './auth/guards/jwt.guard';
     RolesModule,
     PlacesModule,
     AdmissionsModule,
+    ProductsModule,
+    MarketsModule,
+    AddressesModule,
+    LineupsModule,
+    TicketsModule,
+    OrdersModule,
+    BookmarksModule,
+    TargetsModule,
+    LinksModule,
   ],
   controllers: [AppController],
   providers: [

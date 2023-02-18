@@ -29,6 +29,11 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     });
   }
 
+  /**
+   * strategy에서 validate() 함수의 반환값이 controller의 req로 간다
+   * @param payload payload
+   * @returns user entity에서 비밀번호와 리프레시토큰을 제외한 부분
+   */
   async validate(payload: any) {
     console.log(`++++++ [jwt.strategy.ts] validate() ++++++`);
     console.log(`❯❯❯❯❯❯ [jwt.strategy.ts] validate() payload:`, payload);

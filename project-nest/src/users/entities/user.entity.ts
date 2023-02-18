@@ -39,6 +39,7 @@ export class User extends Base {
   @Column({ nullable: true })
   imageId: string;
 
+  // place는 브랜드의 경우 주소, 고객의 경우 기본배송지
   @Column({ nullable: true })
   @RelationId((user: User) => user.place)
   placeId: string;
