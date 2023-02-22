@@ -22,5 +22,6 @@
 <style>
 html {
   background-color: #fffcf2;
+  color: #54473a;
 }
 </style>

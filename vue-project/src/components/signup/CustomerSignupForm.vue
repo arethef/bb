@@ -173,7 +173,7 @@ export default {
       }
       const result = await this.userStore.signup(this.reqCustomerSignupDto);
       if (result) {
-        this.$router.push("/c");
+        this.$router.push("/login");
       }
     },
   },

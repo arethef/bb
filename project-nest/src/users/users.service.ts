@@ -168,6 +168,12 @@ export class UsersService {
     await user.encryptRefreshToken(refreshToken);
     await User.save(user);
   }
+
+  async testGetUserByUserId(id: string) {
+    const user: User = await User.findOne({ where: { id } });
+    console.log(`❯❯❯❯❯❯ [users.service.ts] testGetUserByUserId() user:`, user);
+    return user;
+  }
   // async findBrandOrCustomerByUserId(id: string): Promise<Brand | Customer> {
   //   const brand: Brand = await Brand.findOne({
   //     where: { userId: id },

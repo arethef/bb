@@ -92,17 +92,28 @@ export const useUserStore = defineStore('user', {
       console.log(`❯❯❯❯❯❯ [user.js] testRefresh() axiosResult:`, axiosResult);
       return axiosResult
       
+    },
+    async testJwtGuard() {
+      console.log(`++++++ [user.js] testJwtGuard() ++++++`);
+      let result = {}
+      const axiosResult = await axios.get(`/api/auth/test-profile`)
+        .catch((err) => {
+          console.error(`❯❯❯❯❯❯ err:`, err);
+        });
+      console.log(`❯❯❯❯❯❯ axiosResult:`, axiosResult);
+      return axiosResult
+    },
+    async testReturnUser() {
+      console.log(`++++++ [user.js] testReturnUser() ++++++`);
+      let result = {}
+      const axiosResult = await axios.get(`/api/users/test`)
+        .catch((err) => {
+          console.error(`❯❯❯❯❯❯ err:`, err);
+        });
+      console.log(`❯❯❯❯❯❯ axiosResult:`, axiosResult);
+      return axiosResult
+      
     }
-    // async testJwtGuard() {
-    //   console.log(`++++++ [user.js] testJwtGuard() ++++++`);
-    //   let result = {}
-    //   const axiosResult = await axios.get(`/api/auth/test-profile`)
-    //     .catch((err) => {
-    //       console.error(`❯❯❯❯❯❯ err:`, err);
-    //     });
-    //   console.log(`❯❯❯❯❯❯ axiosResult:`, axiosResult);
-    //   return axiosResult
-    // }
   //   async sendAndVerifyEmail(reqSendEmailDto) {
   //     console.log(`[user.js] sendAndVerifyEmail()`);
   //     console.log(`❯❯❯❯❯❯ reqSendEmailDto:`, reqSendEmailDto);

@@ -117,7 +117,7 @@ export default {
     return {};
   },
   created() {
-    this.brandStore.getBrand();
+    this.brandStore.getBrandProfile();
   },
 };
 </script>

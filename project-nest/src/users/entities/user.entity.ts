@@ -4,6 +4,7 @@ import { Exclude } from 'class-transformer';
 import { Brand } from 'src/brands/entities/brand.entity';
 import { Base } from 'src/common/base/base.entity';
 import { Customer } from 'src/customers/entities/customer.entity';
+import { Image } from 'src/images/entities/image.entity';
 import { Place } from 'src/places/entities/place.entity';
 import { Role } from 'src/roles/entities/role.entity';
 import {
@@ -37,7 +38,11 @@ export class User extends Base {
   role: Role;
 
   @Column({ nullable: true })
+  @RelationId((user: User) => user.image)
   imageId: string;
+  @ManyToOne(() => Image, { eager: true })
+  @JoinColumn()
+  image: Image;
 
   // place는 브랜드의 경우 주소, 고객의 경우 기본배송지
   @Column({ nullable: true })

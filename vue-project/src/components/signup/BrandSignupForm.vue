@@ -288,7 +288,7 @@ export default {
       }
       const result = await this.userStore.signup(this.reqBrandSignupDto);
       if (result) {
-        this.$router.push("/b");
+        this.$router.push("/login");
       }
     },
     // async onClickEmailVerifyBtn() {

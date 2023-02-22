@@ -1,4 +1,14 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  ClassSerializerInterceptor,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Req,
+  Res,
+  UseInterceptors,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { Public } from 'src/auth/decorators/public-auth.decorator';
 import { ReqCheckEmailUserDto } from './dto/req-check-email-user.dto';
@@ -38,5 +48,17 @@ export class UsersController {
     return {
       result: 'success',
     };
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('test')
+  async testGetUserByUserId(@Req() req) {
+    console.log(`++++++ [users.controller.ts] testGetUserByUserId() ++++++`);
+    console.log(
+      `❯❯❯❯❯❯ [users.controller.ts] testGetUserByUserId() req.user.id:`,
+      req.user.id,
+    );
+    const result = await this.usersService.testGetUserByUserId(req.user.id);
+    return result;
   }
 }

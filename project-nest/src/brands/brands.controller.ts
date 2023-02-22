@@ -10,12 +10,12 @@ export class BrandsController {
   @Get('profile')
   async getBrandProfile(@Req() req, @Res({ passthrough: true }) res: Response) {
     console.log(`++++++ [brands.controller.ts] getBrandProfile() ++++++`);
-    console.log(`❯❯❯❯❯❯ req.user:`, req.user);
+    // console.log(`❯❯❯❯❯❯ req.user:`, req.user);
     const brand: Brand = await this.brandsService.findBrandByUserId(
       req.user.id,
     );
     const user = brand.user.removePasswordAndRefreshTokenFromUser(brand.user);
-    console.log(`❯❯❯❯❯❯ user:`, user);
+    // console.log(`❯❯❯❯❯❯ user:`, user);
 
     return {
       id: brand.id,

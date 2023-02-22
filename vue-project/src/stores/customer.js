@@ -14,13 +14,13 @@ export const useCustomerStore = defineStore('customer', {
 
   },
   actions: {
-    async getCustomer() {
-      console.log(`++++++ [customer.js] getCustomer() ++++++`);
+    async getCustomeProfile() {
+      console.log(`++++++ [customer.js] getCustomeProfile() ++++++`);
       const axiosResult = await axios.get(`/api/customers/profile`)
         .catch((err) => {
-          console.error(`❯❯❯❯❯❯ [customer.js] getCustomer() err:`, err);
+          console.error(`❯❯❯❯❯❯ [customer.js] getCustomeProfile() err:`, err);
         });
-      console.log(`❯❯❯❯❯❯ [customer.js] getCustomer() axiosResult:`, axiosResult);
+      console.log(`❯❯❯❯❯❯ [customer.js] getCustomeProfile() axiosResult:`, axiosResult);
     }
   }
 })

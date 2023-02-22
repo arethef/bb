@@ -6,6 +6,7 @@ import router from './router'
 
 // import './assets/main.css'
 import './assets/index.css'
+// import 'mdb-vue-ui-kit/css/mdb.min.css'
 
 const app = createApp(App)
 

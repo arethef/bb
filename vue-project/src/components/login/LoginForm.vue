@@ -61,7 +61,8 @@
         로그인하기
       </button>
       <button @click="onClickTestRefreshBtn">테스트Refresh</button>
-      <!-- <button @click="onClickTestJwtGuardBtn">테스트JwtGuard</button> -->
+      <button @click="onClickTestJwtGuardBtn">테스트JwtGuard</button>
+      <button @click="onClickTestReturnUserBtn">테스트ReturnUser</button>
     </div>
   </div>
 </template>
@@ -95,11 +96,11 @@ export default {
       console.log(`❯❯❯❯❯❯ result:`, result);
       if (result.role.position === "brand") {
         // 브랜드 정보 저장할 수 있도록 정보 요청 후 라우터 푸시
-        await this.brandStore.getBrand();
+        await this.brandStore.getBrandProfile();
         this.$router.push("/b");
       } else {
         // 고객 정보 저장할 수 있도록 정보 요청 후 라우터 푸시
-        await this.customerStore.getCustomer();
+        await this.customerStore.getCustomerProfile();
         this.$router.push("/c");
       }
     },
@@ -108,11 +109,16 @@ export default {
       const axiosResult = await this.userStore.testRefresh();
       console.log(`❯❯❯❯❯❯ axiosResult:`, axiosResult);
     },
-    // async onClickTestJwtGuardBtn() {
-    //   console.log(`++++++ [LoginForm.vue] onClickTestJwtGuardBtn() ++++++`);
-    //   const axiosResult = await this.userStore.testJwtGuard();
-    //   console.log(`❯❯❯❯❯❯ axiosResult:`, axiosResult);
-    // },
+    async onClickTestJwtGuardBtn() {
+      console.log(`++++++ [LoginForm.vue] onClickTestJwtGuardBtn() ++++++`);
+      const axiosResult = await this.userStore.testJwtGuard();
+      console.log(`❯❯❯❯❯❯ axiosResult:`, axiosResult);
+    },
+    async onClickTestReturnUserBtn() {
+      console.log(`++++++ [LoginForm.vue] onClickTestReturnUserBtn() ++++++`);
+      const axiosResult = await this.userStore.testReturnUser();
+      console.log(`❯❯❯❯❯❯ axiosResult:`, axiosResult);
+    },
   },
 };
 </script>

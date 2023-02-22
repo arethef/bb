@@ -25,5 +25,8 @@ export default defineConfig({
     hmr: {
       overlay: false
     }
+  },
+  css: {
+    devSourcemap: true,
   }
 })

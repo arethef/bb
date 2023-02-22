@@ -10,23 +10,36 @@ export const useBrandStore = defineStore('brand', {
       businessName: "",
       brn: "",
       introduction:"",
-    }
+    },
+    tickets: []
   }),
   getters: {
     brandProfile(state) {
       return state.profile;
+    },
+    brandTickets(state) {
+      return state.tickets
     }
   },
   actions: {
-    async getBrand() {
-      console.log(`++++++ [brand.js] getBrand() ++++++`);
+    async getBrandProfile() {
+      console.log(`++++++ [brand.js] getBrandProfile() ++++++`);
       const axiosResult = await axios.get(`/api/brands/profile`)
         .catch((err) => {
-          console.error(`❯❯❯❯❯❯ [brand.js] getBrand() err:`, err);
+          console.error(`❯❯❯❯❯❯ [brand.js] getBrandProfile() err:`, err);
         });
-      console.log(`❯❯❯❯❯❯ [brand.js] getBrand() axiosResult:`, axiosResult);
+      console.log(`❯❯❯❯❯❯ [brand.js] getBrandProfile() axiosResult:`, axiosResult);
       this.profile = axiosResult.data;
-      console.log(`❯❯❯❯❯❯ [brand.js] getBrand() this.profile:`, this.profile);
+      console.log(`❯❯❯❯❯❯ [brand.js] getBrandProfile() this.profile:`, this.profile);
+    },
+    async getBrandTickets() {
+      console.log(`++++++ [brand.js] getBrandTickets() ++++++`);
+      const axiosResult = await axios.get(`/api/tickets/brand/`)
+        .catch((err) => {
+          console.error(`❯❯❯❯❯❯ [brand.js] getBrandTickets() err:`, err);
+        });
+      this.tickets = axiosResult.data;
+      console.log(`❯❯❯❯❯❯ [brand.js] getBrandTickets() this.tickets:`, this.tickets);
     }
   }
 })

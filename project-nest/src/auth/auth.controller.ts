@@ -32,8 +32,8 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ) {
     console.log(`++++++ [auth.controller.ts] login() ++++++`);
-    console.log(`❯❯❯❯❯❯ dto:`, dto);
-    console.log(`❯❯❯❯❯❯ req:`, req);
+    // console.log(`❯❯❯❯❯❯ dto:`, dto);
+    // console.log(`❯❯❯❯❯❯ req:`, req);
 
     // const { username } = dto.user;
     const username = req.user.username;
@@ -56,16 +56,16 @@ export class AuthController {
     const { accessToken, ...accessOption } =
       this.authService.genCookieWithJwtAccessToken(user.id);
     res.cookie('Authentication', accessToken, accessOption);
-    console.log(`++++++ [auth.controller.ts] refresh() ++++++`);
-    console.log(`❯❯❯❯❯❯ user:`, user);
+    // console.log(`++++++ [auth.controller.ts] refresh() ++++++`);
+    // console.log(`❯❯❯❯❯❯ user:`, user);
     return user;
   }
 
   @UseGuards(JwtGuard)
   @Get('test-profile')
   getProfile(@Req() req) {
-    console.log(`++++++ [auth.controller.ts] getProfile() ++++++`);
-    console.log(`❯❯❯❯❯❯ req.cookies:`, req.cookies);
+    // console.log(`++++++ [auth.controller.ts] getProfile() ++++++`);
+    // console.log(`❯❯❯❯❯❯ req.cookies:`, req.cookies);
 
     return req.user;
   }

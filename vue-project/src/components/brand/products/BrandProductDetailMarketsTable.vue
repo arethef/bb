@@ -1,27 +1,34 @@
 <template>
   <div>
-    <p>[BrandTicketsView.vue]</p>
-    <!-- 번호 주문번호 주문날짜 구매자닉네임 총수량 총가격 상태(완or미완) -->
+    <p>[BrandProductDetailMarketsTable.vue]</p>
+    <p>
+      번호 | 마켓번호 | 마켓제목 | 마켓오픈일시 | 마켓마감일시 | 마감여부 |
+      티켓수량
+    </p>
     <div class="md:container md:mx-auto flex flex-col">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
           <div class="overflow-hidden">
-            <table class="min-w-full border text-center">
+            <table class="min-w-full border text-center text-xs">
               <thead class="bg-gray-100">
                 <tr class="border-b">
                   <th scope="col" class="font-medium px-6 py-2 border-r">#</th>
                   <th scope="col" class="font-medium px-6 py-2 border-r">
-                    주문번호
+                    마켓번호
                   </th>
                   <th scope="col" class="font-medium px-6 py-2 border-r">
-                    주문날짜
+                    마켓제목
                   </th>
                   <th scope="col" class="font-medium px-6 py-2 border-r">
-                    구매자닉네임
+                    마켓오픈일시
                   </th>
-                  <th scope="col" class="font-medium px-6 py-2">총수량</th>
-                  <th scope="col" class="font-medium px-6 py-2">총가격</th>
-                  <th scope="col" class="font-medium px-6 py-2">상태</th>
+                  <th scope="col" class="font-medium px-6 py-2 border-r">
+                    마켓마감일시
+                  </th>
+                  <th scope="col" class="font-medium px-6 py-2 border-r">
+                    마감여부
+                  </th>
+                  <th scope="col" class="font-medium px-6 py-2">티켓수량</th>
                 </tr>
               </thead>
               <!-- <tbody class="bg-white">
@@ -96,24 +103,7 @@
 </template>
 
 <script>
-import { useBrandStore } from "@/stores/brand";
-import { useTicketStore } from "@/stores/ticket";
-export default {
-  setup() {
-    const brandStore = useBrandStore();
-    const ticketStore = useTicketStore();
-    return { brandStore, ticketStore };
-  },
-  data() {
-    return {};
-  },
-  created() {
-    // this.brandStore.getBrandTickets();
-  },
-  methods: {
-    // 여기부터 컬럼 가져와서 테이블 만들기
-  },
-};
+export default {};
 </script>
 
 <style>

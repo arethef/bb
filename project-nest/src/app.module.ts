@@ -23,12 +23,20 @@ import { OrdersModule } from './orders/orders.module';
 import { BookmarksModule } from './bookmarks/bookmarks.module';
 import { TargetsModule } from './targets/targets.module';
 import { LinksModule } from './links/links.module';
+import { ImagesModule } from './images/images.module';
+import fileConfig from './config/fileConfig';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      // rootPath: join(__dirname, '..', 'client'),
+      rootPath: join(__dirname, '..', 'static'),
+    }),
     ConfigModule.forRoot({
       envFilePath: [`${__dirname}/config/env/.${process.env.NODE_ENV}.env`],
-      load: [emailConfig],
+      load: [emailConfig, fileConfig],
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
@@ -61,6 +69,7 @@ import { LinksModule } from './links/links.module';
     BookmarksModule,
     TargetsModule,
     LinksModule,
+    ImagesModule,
   ],
   controllers: [AppController],
   providers: [

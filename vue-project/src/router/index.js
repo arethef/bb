@@ -38,7 +38,17 @@ const router = createRouter({
         {
           path: 'products',
           name: 'BrandProducts',
-          component: () => import('../views/brand/products/BrandProductsView.vue')
+          component: () => import('../views/brand/products/BrandProductsView.vue'),
+          // beforeEnter: async (to, from, next) => {
+          //   await this.productStore.loadProducts();
+          //   next();
+          // }
+        },
+        {
+          path: 'products/:productId',
+          name: 'BrandProductDetail',
+          component: () => import('../views/brand/products/BrandProductDetailView.vue'),
+          props: true,
         },
         {
           path: 'markets',

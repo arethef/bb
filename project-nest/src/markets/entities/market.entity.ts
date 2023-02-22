@@ -1,5 +1,6 @@
 import { Brand } from 'src/brands/entities/brand.entity';
 import { Base } from 'src/common/base/base.entity';
+import { Image } from 'src/images/entities/image.entity';
 import { Lineup } from 'src/lineups/entities/lineup.entity';
 import { Target } from 'src/targets/entities/target.entity';
 import { Ticket } from 'src/tickets/entities/ticket.entity';
@@ -29,8 +30,12 @@ export class Market extends Base {
   @Column()
   content: string;
 
-  @Column()
+  @Column({ nullable: true })
+  @RelationId((market: Market) => market.image)
   imageId: string;
+  @ManyToOne(() => Image, { eager: true })
+  @JoinColumn()
+  image: Image;
 
   @Column()
   deliveryFee: number;
