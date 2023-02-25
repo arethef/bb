@@ -59,4 +59,43 @@ export class ProductsController {
     );
     return result;
   }
+
+  @Get('list-market-new-products')
+  async loadMarketNewProducts(
+    @Req() req,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    console.log(
+      `++++++ [products.controller.ts] loadMarketNewProducts() ++++++`,
+    );
+    console.log(
+      `❯❯❯❯❯❯ [products.controller.ts] loadMarketNewProducts() req.user:`,
+      req.user,
+    );
+    const result = await this.productsService.loadMarketNewProducts(
+      req.user.id,
+    );
+    return result;
+  }
+
+  @Post('list-market-new-lineup')
+  async loadMarketNewLineup(
+    @Req() req,
+    @Body() marketNewLineup,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    console.log(`++++++ [products.controller.ts] loadMarketNewLineup() ++++++`);
+    console.log(
+      `❯❯❯❯❯❯ [products.controller.ts] loadMarketNewLineup() req.user:`,
+      req.user,
+    );
+    console.log(
+      `❯❯❯❯❯❯ [products.controller.ts] loadMarketNewLineup() marketNewLineup:`,
+      marketNewLineup,
+    );
+    const result = await this.productsService.loadMarketNewLineupProducts(
+      marketNewLineup,
+    );
+    return result;
+  }
 }

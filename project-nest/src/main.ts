@@ -16,6 +16,7 @@ async function bootstrap() {
   );
   app.enableCors();
   app.use(cookieParser());
+  app.setGlobalPrefix('api');
   const config = new DocumentBuilder()
     .setTitle('bb')
     .setDescription('The bb api description')

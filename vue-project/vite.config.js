@@ -17,7 +17,7 @@ export default defineConfig({
         target: "http://localhost:3333",
         // target: process.env.VITE_API_BASE_URL,
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        // rewrite: (path) => path.replace(/^\/api/, ''),
         secure: false,
         // ws: true
       },
@@ -28,5 +28,5 @@ export default defineConfig({
   },
   css: {
     devSourcemap: true,
-  }
+  },
 })

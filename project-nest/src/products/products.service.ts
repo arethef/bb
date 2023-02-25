@@ -5,13 +5,12 @@ import { Lineup } from 'src/lineups/entities/lineup.entity';
 import { Market } from 'src/markets/entities/market.entity';
 import { Order } from 'src/orders/entities/order.entity';
 import { ReqCreateProductDto } from './dto/req-create-product.dto';
+import { ResBrandMarketNewProductDto } from './dto/res-brand-market-new-product.dto';
 import { ResBrandTableProductDto } from './dto/res-brand-table-product.dto';
 import { Product } from './entities/product.entity';
 
 @Injectable()
 export class ProductsService {
-  constructor() {}
-
   async createProduct(dto: ReqCreateProductDto, userId: string) {
     const { name, description, price, imageId } = dto;
     const product: Product = new Product();
@@ -107,6 +106,64 @@ export class ProductsService {
       result,
     );
 
+    const tempCount = await Lineup.count({ where: { productId: '1' } });
+    console.log(
+      `❯❯❯❯❯❯ [products.service.ts] loadBrandTableProducts() tempCount:`,
+      tempCount,
+    );
+    return result;
+  }
+  async loadMarketNewProducts(userId: string) {
+    console.log(`++++++ [products.service.ts] loadMarketNewProducts() ++++++`);
+    const brand: Brand = await Brand.findOne({
+      where: { userId },
+    });
+    const products: Product[] = await Product.find({
+      where: { brandId: brand.id },
+    });
+    const result: ResBrandMarketNewProductDto[] = [];
+    for (const p of products) {
+      result.push({
+        product: {
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          image: p.image,
+        },
+      });
+    }
+    return result;
+  }
+
+  async loadMarketNewLineupProducts(marketNewLineup: any) {
+    console.log(
+      `++++++ [products.service.ts] loadMarketNewLineupProducts() ++++++`,
+    );
+    const result = [];
+    for (const key of Object.keys(marketNewLineup)) {
+      const product: Product = await Product.findOne({
+        where: { id: marketNewLineup[key] },
+      });
+      console.log(
+        `❯❯❯❯❯❯ [products.service.ts] loadMarketNewLineupProducts() key:`,
+        key,
+      );
+      result.push({
+        product: {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+        },
+      });
+    }
+    // Object.keys(marketNewLineup).forEach(async (key) => {
+
+    // });
+    console.log(
+      `❯❯❯❯❯❯ [products.service.ts] loadMarketNewLineupProducts() result:`,
+      result,
+    );
     return result;
   }
 }

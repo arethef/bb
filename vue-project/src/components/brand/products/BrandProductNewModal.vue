@@ -3,23 +3,7 @@
     <div class="flex justify-end">
       <button
         @click="openProductNewModal"
-        class="
-          inline-block
-          px-4
-          py-2
-          bg-bb-b
-          text-white
-          font-medium
-          text-xs
-          leading-tight
-          rounded
-          shadow-md
-          hover:bg-bb-a hover:shadow-lg
-          active:bg-bb-a1 active:shadow-lg
-          transition
-          duration-150
-          ease-in-out
-        "
+        class="inline-block px-4 py-2 bg-bb-b text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-bb-a hover:shadow-lg active:bg-bb-a1 active:shadow-lg transition duration-150 ease-in-out"
         type="button"
       >
         상품추가
@@ -27,14 +11,7 @@
 
       <div
         v-show="isProductNewModalVisible"
-        class="
-          absolute
-          inset-0
-          flex
-          items-center
-          justify-center
-          bg-gray-700 bg-opacity-50
-        "
+        class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50"
       >
         <div class="max-w-2xl p-6 bg-white rounded-md shadow-xl">
           <!-- modal header -->

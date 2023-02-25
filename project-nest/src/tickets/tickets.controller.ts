@@ -1,4 +1,12 @@
-import { Controller, Get, Req, Res } from '@nestjs/common';
+import {
+  ClassSerializerInterceptor,
+  Controller,
+  Get,
+  Param,
+  Req,
+  Res,
+  UseInterceptors,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { TicketsService } from './tickets.service';
 
@@ -14,6 +22,19 @@ export class TicketsController {
     // const result = await this.ticketsService.findTicketsByBrandId();
     const result = await this.ticketsService.findTicketsByBrandUserId(
       req.uesr.id,
+    );
+    return result;
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('market-detail/:marketId')
+  async loadMarketDetailTableTickets(
+    @Req() req,
+    @Param('marketId') marketId: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const result = await this.ticketsService.loadMarketDetailTableTickets(
+      marketId,
     );
     return result;
   }

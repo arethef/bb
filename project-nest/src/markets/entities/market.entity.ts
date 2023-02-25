@@ -1,10 +1,16 @@
 import { Brand } from 'src/brands/entities/brand.entity';
 import { Base } from 'src/common/base/base.entity';
+import {
+  generateMarketDayNumber,
+  generateYYYYMMDD,
+  getKST,
+} from 'src/common/un';
 import { Image } from 'src/images/entities/image.entity';
 import { Lineup } from 'src/lineups/entities/lineup.entity';
 import { Target } from 'src/targets/entities/target.entity';
 import { Ticket } from 'src/tickets/entities/ticket.entity';
 import {
+  BeforeInsert,
   Column,
   Entity,
   JoinColumn,
@@ -12,6 +18,9 @@ import {
   OneToMany,
   RelationId,
 } from 'typeorm';
+
+const dayCount = generateMarketDayNumber();
+let lastMarketDate = getKST();
 
 @Entity('markets')
 export class Market extends Base {
@@ -38,7 +47,9 @@ export class Market extends Base {
   image: Image;
 
   @Column()
-  deliveryFee: number;
+  deliveryFee: number; // 일반 배송비
+  @Column()
+  deliveryFeeAdded: number; // 도서산간지역 배송비
   @Column()
   deliveryFree: number;
   @Column()
@@ -54,4 +65,13 @@ export class Market extends Base {
   tickets: Ticket[];
   @OneToMany(() => Target, (target) => target.market)
   targets: Target[];
+
+  @BeforeInsert()
+  increaseDayCount() {
+    lastMarketDate = getKST();
+  }
+
+  generateUN() {
+    return `${generateYYYYMMDD()}14${Date.now()}${dayCount.next().value}`;
+  }
 }

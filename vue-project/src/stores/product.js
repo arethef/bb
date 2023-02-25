@@ -1,25 +1,27 @@
 import axios from "axios";
 import { defineStore } from "pinia";
 
-export const useProductStore = defineStore('product', {
+export const useProductStore = defineStore("product", {
   state: () => ({
     currentProduct: {
-      id: '',
-      un: '',
-      createdAt: '',
-      updatedAt: '',
-      deletedAt: '',
+      id: "",
+      un: "",
+      createdAt: "",
+      updatedAt: "",
+      deletedAt: "",
       version: 0,
-      name: '',
-      description: '',
+      name: "",
+      description: "",
       price: 0,
       brand: {},
-      brandId: '',
+      brandId: "",
       image: {},
-      imageId: '',
+      imageId: "",
     },
-    currentProductId: '',
-    allTableProducts: []
+    currentProductId: "",
+    allTableProducts: [],
+    brandMarketNewProducts: [],
+    brandMarketNewLineup: [],
   }),
   getters: {
     productCurrentProduct(state) {
@@ -30,7 +32,13 @@ export const useProductStore = defineStore('product', {
     },
     productAllTableProducts(state) {
       return state.allTableProducts;
-    }
+    },
+    productBrandMarketNewProducts(state) {
+      return state.brandMarketNewProducts;
+    },
+    productBrandMarketNewLineup(state) {
+      return state.brandMarketNewLineup;
+    },
   },
   actions: {
     setCurrentProductId(currentProductId) {
@@ -42,13 +50,23 @@ export const useProductStore = defineStore('product', {
     setAllTableProducts(allTableProducts) {
       this.allTableProducts = allTableProducts;
     },
+    setBrandMarketNewProducts(brandMarketNewProducts) {
+      this.brandMarketNewProducts = brandMarketNewProducts;
+    },
+    setBrandMarketNewLineup(brandMarketNewLineup) {
+      this.brandMarketNewLineup = brandMarketNewLineup;
+    },
     async createProduct(reqCreateProductDto) {
       console.log(`++++++ [product.js] createProduct() ++++++`);
-      let result = {}
-      await axios.post(`/api/products`, reqCreateProductDto)
+      let result = {};
+      await axios
+        .post(`/api/products`, reqCreateProductDto)
         .then((res) => {
           // console.log(`❯❯❯❯❯❯ [product.js] createProduct() res:`, res);
-          console.log(`❯❯❯❯❯❯ [product.js] createProduct() res.data:`, res.data);
+          console.log(
+            `❯❯❯❯❯❯ [product.js] createProduct() res.data:`,
+            res.data
+          );
           result = res.data;
         })
         .catch((err) => {
@@ -59,12 +77,16 @@ export const useProductStore = defineStore('product', {
     async detailProduct(id) {
       console.log(`++++++ [product.js] detailProduct() ++++++`);
       console.log(`❯❯❯❯❯❯ [product.js] detailProduct() id:`, id);
-      const axiosResult = await axios.get(`/api/products/detail/${id}`)
+      const axiosResult = await axios
+        .get(`/api/products/detail/${id}`)
         .catch((err) => {
           console.error(`❯❯❯❯❯❯ [product.js] detailProduct() err:`, err);
         });
       this.currentProduct = axiosResult.data;
-      console.log(`❯❯❯❯❯❯ [product.js] detailProduct() this.currentProduct:`, this.currentProduct);
+      console.log(
+        `❯❯❯❯❯❯ [product.js] detailProduct() this.currentProduct:`,
+        this.currentProduct
+      );
       // let result = {}
       // await axios.get(`/api/products/detail/${id}`)
       //   .then((res) => {
@@ -79,8 +101,9 @@ export const useProductStore = defineStore('product', {
     },
     async loadProducts() {
       console.log(`++++++ [product.js] loadProducts() ++++++`);
-      let result = {}
-      await axios.get(`/api/products/table-list`)
+      let result = {};
+      await axios
+        .get(`/api/products/table-list`)
         .then((res) => {
           // console.log(`❯❯❯❯❯❯ [product.js] loadProducts() res:`, res);
           console.log(`❯❯❯❯❯❯ [product.js] loadProducts() res.data:`, res.data);
@@ -90,6 +113,43 @@ export const useProductStore = defineStore('product', {
           console.log(`❯❯❯❯❯❯ [product.js] loadProducts() err:`, err);
         });
       return result;
-    }
+    },
+    async loadMarketNewProducts() {
+      console.log(`++++++ [product.js] loadMarketNewProducts() ++++++`);
+      let result = {};
+      await axios
+        .get(`/api/products/list-market-new-products`)
+        .then((res) => {
+          console.log(
+            `❯❯❯❯❯❯ [product.js] loadMarketNewProducts() res.data:`,
+            res.data
+          );
+          result = res.data;
+        })
+        .catch((err) => {
+          console.error(
+            `❯❯❯❯❯❯ [product.js] loadMarketNewProducts() err:`,
+            err
+          );
+        });
+      return result;
+    },
+    async loadMarketNewLineup(marketNewLineup) {
+      console.log(`++++++ [product.js] loadMarketNewLineup() ++++++`);
+      let result = {};
+      await axios
+        .post(`/api/products/list-market-new-lineup`, marketNewLineup)
+        .then((res) => {
+          console.log(
+            `❯❯❯❯❯❯ [product.js] loadMarketNewLineup() res.data:`,
+            res.data
+          );
+          result = res.data;
+        })
+        .catch((err) => {
+          console.error(`❯❯❯❯❯❯ [product.js] loadMarketNewLineup() err:`, err);
+        });
+      return result;
+    },
   },
-})
+});
