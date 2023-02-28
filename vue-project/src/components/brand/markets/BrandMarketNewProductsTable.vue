@@ -4,15 +4,15 @@
 		<table class="min-w-full border text-center">
 			<thead class="bg-gray-100">
 				<tr class="border-b">
-					<th scope="col" class="px-2 border-r"></th>
-					<th scope="col" class="px-2 border-r">#</th>
-					<th scope="col" class="px-2 border-r">상품이름</th>
-					<th scope="col" class="px-2 border-r">상품사진</th>
-					<th scope="col" class="px-2 border-r">상품가격</th>
-					<th scope="col" class="px-2 border-r">수량</th>
+					<th scope="col" class="px-2 py-2 border-r"></th>
+					<th scope="col" class="px-2 py-2 border-r">#</th>
+					<th scope="col" class="px-2 py-2 border-r">상품이름</th>
+					<th scope="col" class="px-2 py-2 border-r">상품사진</th>
+					<th scope="col" class="px-2 py-2 border-r">상품가격</th>
+					<th scope="col" class="px-2 py-2 border-r">수량</th>
 				</tr>
 			</thead>
-			<tbody class="bg-white text-xs">
+			<tbody class="bg-white">
 				<tr
 					v-for="(product, index) in this.productStore
 						.productBrandMarketNewProducts"
@@ -27,25 +27,25 @@
 							@change="checkMarketNewProducts()"
 						/>
 					</td>
-					<th scope="row" class="px-2 whitespace-nowrap border-r">
+					<th scope="row" class="px-2 py-2 whitespace-nowrap border-r">
 						{{ index + 1 }}
 					</th>
-					<th scope="row" class="px-2 whitespace-nowrap border-r">
+					<th scope="row" class="px-2 py-2 whitespace-nowrap border-r">
 						{{ product.product.name }}
 					</th>
-					<th scope="row" class="px-2 whitespace-nowrap border-r">
+					<th scope="row" class="px-2 py-2 whitespace-nowrap border-r">
 						<img :src="`${product.product.image.url}`" class="h-16" />
 					</th>
-					<th scope="row" class="px-2 whitespace-nowrap border-r">
+					<th scope="row" class="px-2 py-2 whitespace-nowrap border-r">
 						{{ product.product.price }}
 					</th>
-					<th scope="row" class="px-2 whitespace-nowrap border-r">
+					<th scope="row" class="px-2 py-2 whitespace-nowrap border-r">
 						<input
 							type="number"
 							:id="`${product.product.id}`"
-							class="w-16"
+							class="text-xs w-16"
 							value="0"
-							@change="onChangeLinupProductQuantity(product.product.id)"
+							@change="onChangeLineupProductQuantity(product.product.id)"
 						/>
 					</th>
 				</tr>
@@ -64,7 +64,7 @@
 		data() {
 			return {
 				productIds: [],
-				lineup: {},
+				lineups: {},
 			};
 		},
 		computed: {},
@@ -84,17 +84,17 @@
 			console.log(`++++++ [BrandMarketNewProductsTable.vue] created() ++++++`);
 		},
 		methods: {
-			async onChangeLinupProductQuantity(productId) {
+			async onChangeLineupProductQuantity(productId) {
 				console.log(
-					`++++++ [BrandMarketNewProductsTable.vue] onChangeLinupProductQuantity() ++++++`
+					`++++++ [BrandMarketNewProductsTable.vue] onChangeLineupProductQuantity() ++++++`
 				);
 				console.log(
-					`❯❯❯❯❯❯ [BrandMarketNewProductsTable.vue] onChangeLinupProductQuantity() productId:`,
+					`❯❯❯❯❯❯ [BrandMarketNewProductsTable.vue] onChangeLineupProductQuantity() productId:`,
 					productId
 				);
-				this.lineup[productId] = document.getElementById(productId).value;
-				if (this.lineup[productId] <= 0) {
-					delete this.lineup[productId];
+				this.lineups[productId] = document.getElementById(productId).value;
+				if (this.lineups[productId] <= 0) {
+					delete this.lineups[productId];
 					if (this.productIds.includes(productId)) {
 						this.productIds.splice(this.productIds.indexOf(productId), 1);
 					}
@@ -104,15 +104,15 @@
 					}
 				}
 				console.log(
-					`❯❯❯❯❯❯ [BrandMarketNewProductsTable.vue] onChangeLinupProductQuantity() this.lineup:`,
-					this.lineup
+					`❯❯❯❯❯❯ [BrandMarketNewProductsTable.vue] onChangeLineupProductQuantity() this.lineups:`,
+					this.lineups
 				);
 				console.log(
-					`❯❯❯❯❯❯ [BrandMarketNewProductsTable.vue] onChangeLinupProductQuantity() this.productIds:`,
+					`❯❯❯❯❯❯ [BrandMarketNewProductsTable.vue] onChangeLineupProductQuantity() this.productIds:`,
 					this.productIds
 				);
-				await this.loadLineup();
-				this.$emit("brandMarketNewLineup", this.lineup);
+				await this.loadLineups();
+				this.$emit("brandMarketNewLineups", this.lineups);
 			},
 			async checkMarketNewProducts() {
 				console.log(
@@ -123,23 +123,23 @@
 					this.productIds
 				);
 				console.log(
-					`❯❯❯❯❯❯ [BrandMarketNewProductsTable.vue] onChangeLinupProductQuantity() this.lineup:`,
-					this.lineup
+					`❯❯❯❯❯❯ [BrandMarketNewProductsTable.vue] onChangeLineupProductQuantity() this.lineups:`,
+					this.lineups
 				);
-				await this.loadLineup();
-				this.$emit("brandMarketNewLineup", this.lineup);
+				await this.loadLineups();
+				this.$emit("brandMarketNewLineups", this.lineups);
 			},
-			async loadLineup() {
+			async loadLineups() {
 				console.log(
-					`++++++ [BrandMarketNewProductsTable.vue] loadLineup() ++++++`
+					`++++++ [BrandMarketNewProductsTable.vue] loadLineups() ++++++`
 				);
-				const marketNewLineup = await this.productStore.loadMarketNewLineup(
-					this.lineup
+				const marketNewLineups = await this.productStore.loadMarketNewLineups(
+					this.lineups
 				);
-				this.productStore.setBrandMarketNewLineup(marketNewLineup);
+				this.productStore.setBrandMarketNewLineups(marketNewLineups);
 				console.log(
-					`❯❯❯❯❯❯ [BrandMarketNewProductsTable.vue] loadLineup() this.productStore.productBrandMarketNewLineup:`,
-					this.productStore.productBrandMarketNewLineup
+					`❯❯❯❯❯❯ [BrandMarketNewProductsTable.vue] loadLineups() this.productStore.productBrandMarketNewLineups:`,
+					this.productStore.productBrandMarketNewLineups
 				);
 			},
 		},

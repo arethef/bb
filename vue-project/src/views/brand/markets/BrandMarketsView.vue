@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<p>[BrandMarketsView.vue]</p>
+		<!-- <p>[BrandMarketsView.vue]</p> -->
 		<brand-market-new-button></brand-market-new-button>
 		<brand-markets-table></brand-markets-table>
 	</div>

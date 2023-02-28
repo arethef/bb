@@ -1,119 +1,16 @@
 <template>
-  <div>
-    <p>[BrandTicketsView.vue]</p>
-    <!-- 번호 주문번호 주문날짜 구매자닉네임 총수량 총가격 상태(완or미완) -->
-    <div class="md:container md:mx-auto flex flex-col">
-      <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-          <div class="overflow-hidden">
-            <table class="min-w-full border text-center">
-              <thead class="bg-gray-100">
-                <tr class="border-b">
-                  <th scope="col" class="font-medium px-6 py-2 border-r">#</th>
-                  <th scope="col" class="font-medium px-6 py-2 border-r">
-                    주문번호
-                  </th>
-                  <th scope="col" class="font-medium px-6 py-2 border-r">
-                    주문날짜
-                  </th>
-                  <th scope="col" class="font-medium px-6 py-2 border-r">
-                    구매자닉네임
-                  </th>
-                  <th scope="col" class="font-medium px-6 py-2">총수량</th>
-                  <th scope="col" class="font-medium px-6 py-2">총가격</th>
-                  <th scope="col" class="font-medium px-6 py-2">상태</th>
-                </tr>
-              </thead>
-              <!-- <tbody class="bg-white">
-                <tr
-                  v-for="(ticket, index) in this.brandStore.getBrandTickets"
-                  :key="ticket.id"
-                  @click="moveBrandTicketDetailView(ticket.id)"
-                  class="border-b"
-                >
-                  <th
-                    scope="row"
-                    class="
-                      px-6
-                      py-2
-                      whitespace-nowrap
-                      text-sm
-                      font-medium
-                      border-r
-                    "
-                  >
-                    {{ index + 1 }}
-                  </th>
-                  <td
-                    class="
-                      px-6
-                      py-2
-                      whitespace-nowrap
-                      text-sm
-                      font-medium
-                      border-r
-                    "
-                  >
-                    {{ ticket.id }}
-                  </td>
-                  <td
-                    class="
-                      text-sm
-                      font-light
-                      px-6
-                      py-2
-                      whitespace-nowrap
-                      border-r
-                    "
-                  ></td>
-                  <td
-                    class="
-                      text-sm
-                      font-light
-                      px-6
-                      py-2
-                      whitespace-nowrap
-                      border-r
-                    "
-                  ></td>
-                  <td
-                    class="
-                      text-sm
-                      font-light
-                      px-6
-                      py-2
-                      whitespace-nowrap
-                    "
-                  ></td>
-                </tr>
-              </tbody> -->
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div>
+		<!-- <p>[BrandTicketsView.vue]</p> -->
+		<brand-tickets-table></brand-tickets-table>
+	</div>
 </template>
 
 <script>
-import { useBrandStore } from "@/stores/brand";
-import { useTicketStore } from "@/stores/ticket";
-export default {
-  setup() {
-    const brandStore = useBrandStore();
-    const ticketStore = useTicketStore();
-    return { brandStore, ticketStore };
-  },
-  data() {
-    return {};
-  },
-  created() {
-    // this.brandStore.getBrandTickets();
-  },
-  methods: {
-    // 여기부터 컬럼 가져와서 테이블 만들기
-  },
-};
+	import BrandTicketsTable from "../../../components/brand/tickets/BrandTicketsTable.vue";
+	export default {
+		setup() {},
+		components: { BrandTicketsTable },
+	};
 </script>
 
 <style>

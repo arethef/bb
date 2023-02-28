@@ -31,6 +31,8 @@ export const useMarketStore = defineStore("market", {
     currentMarketId: "",
     brandAllTableMarkets: [],
     brandProductDetailMarkets: [],
+    customerAllCardsMarketsLatest: [],
+    customerBrandDetailMarkets: [],
   }),
   getters: {
     marketCurrentMarket(state) {
@@ -45,6 +47,12 @@ export const useMarketStore = defineStore("market", {
     marketBrandProductDetailMarkets(state) {
       return state.brandProductDetailMarkets;
     },
+    marketCustomerAllCardsMarketsLatest(state) {
+      return state.customerAllCardsMarketsLatest;
+    },
+    marketCustomerBrandDetailMarkets(state) {
+      return state.customerBrandDetailMarkets;
+    },
   },
   actions: {
     setCurrentMarket(currentMarket) {
@@ -58,6 +66,12 @@ export const useMarketStore = defineStore("market", {
     },
     setBrandProductDetailMarkets(brandProductDetailMarkets) {
       this.brandProductDetailMarkets = brandProductDetailMarkets;
+    },
+    setCustomerAllCardsMarketsLatest(customerAllCardsMarketsLatest) {
+      this.customerAllCardsMarketsLatest = customerAllCardsMarketsLatest;
+    },
+    setCustomerBrandDetailMarkets(customerBrandDetailMarkets) {
+      this.customerBrandDetailMarkets = customerBrandDetailMarkets;
     },
     async createMarket(reqCreateMarketDto) {
       console.log(`++++++ [market.js] createMarket() ++++++`);
@@ -77,7 +91,7 @@ export const useMarketStore = defineStore("market", {
           result = res.data;
         })
         .catch((err) => {
-          console.log(`❯❯❯❯❯❯ [market.js] createMarket() err:`, err);
+          console.error(`❯❯❯❯❯❯ [market.js] createMarket() err:`, err);
         });
       const { lineups } = reqCreateMarketDto;
       await lineupStore.insertLineups(result.id, lineups);
@@ -127,6 +141,41 @@ export const useMarketStore = defineStore("market", {
             err
           );
         });
+      return result;
+    },
+    async loadCustomerAllCardsMarketsLatest() {
+      console.log(
+        `++++++ [market.js] loadCustomerAllCardsMarketsLatest() ++++++`
+      );
+      let result = {};
+      await axios
+        .get(`/api/markets/customer-market-list-latest`)
+        .then((res) => {
+          result = res.data;
+        })
+        .catch((err) => {
+          console.error(
+            `❯❯❯❯❯❯ [market.js] loadCustomerAllCardsMarketsLatest() err:`,
+            err
+          );
+        });
+      return result;
+    },
+    async loadCustomerBrandDetailMarkets(brandId) {
+      let result = {};
+      await axios
+        .get(`/api/markets/customer-brand-detail-list/${brandId}`)
+        .then((res) => {
+          result = res.data;
+        })
+        .catch((err) => {
+          console.error(
+            `❯❯❯❯❯❯ [market.js] loadCustomerBrandDetailMarkets() err:`,
+            err
+          );
+        });
+      // this.customerBrandDetailMarkets = result;
+      this.setCustomerBrandDetailMarkets(result);
       return result;
     },
   },

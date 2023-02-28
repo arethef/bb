@@ -1,6 +1,6 @@
 <template>
 	<div class="md:container md:mx-auto">
-		<p>[BrandProductDetailView.vue]</p>
+		<!-- <p>[BrandProductDetailView.vue]</p> -->
 		<div class="flex justify-center gap-4">
 			<div class="basis-1/4">
 				<div class="border mt-4 p-4">
@@ -85,7 +85,7 @@
 			return {};
 		},
 		async beforeCreate() {
-			this.productStore.detailProduct(this.$props.productId);
+			await this.productStore.detailProduct(this.$props.productId);
 		},
 		// created() {
 		//   this.productStore.detailProduct(this.$props.productId);

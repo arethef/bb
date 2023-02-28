@@ -4,6 +4,7 @@ import { Image } from 'src/images/entities/image.entity';
 import { Lineup } from 'src/lineups/entities/lineup.entity';
 import { Market } from 'src/markets/entities/market.entity';
 import { Order } from 'src/orders/entities/order.entity';
+import { Ticket } from 'src/tickets/entities/ticket.entity';
 import { ReqCreateProductDto } from './dto/req-create-product.dto';
 import { ResBrandMarketNewProductDto } from './dto/res-brand-market-new-product.dto';
 import { ResBrandTableProductDto } from './dto/res-brand-table-product.dto';
@@ -135,14 +136,15 @@ export class ProductsService {
     return result;
   }
 
-  async loadMarketNewLineupProducts(marketNewLineup: any) {
+  async loadMarketNewLineupsProducts(marketNewLineup: any) {
     console.log(
       `++++++ [products.service.ts] loadMarketNewLineupProducts() ++++++`,
     );
     const result = [];
     for (const key of Object.keys(marketNewLineup)) {
       const product: Product = await Product.findOne({
-        where: { id: marketNewLineup[key] },
+        // where: { id: marketNewLineup[key] },
+        where: { id: key },
       });
       console.log(
         `❯❯❯❯❯❯ [products.service.ts] loadMarketNewLineupProducts() key:`,
@@ -157,13 +159,62 @@ export class ProductsService {
         },
       });
     }
-    // Object.keys(marketNewLineup).forEach(async (key) => {
-
-    // });
     console.log(
       `❯❯❯❯❯❯ [products.service.ts] loadMarketNewLineupProducts() result:`,
       result,
     );
+    return result;
+  }
+
+  async loadTicketNewOrdersProducts(ticketNewOrders: any) {
+    console.log(
+      `++++++ [products.service.ts] loadTicketNewOrdersProducts() ++++++`,
+    );
+    const result = [];
+    for (const key of Object.keys(ticketNewOrders)) {
+      const product: Product = await Product.findOne({
+        where: { id: key },
+      });
+      console.log(
+        `❯❯❯❯❯❯ [products.service.ts] loadTicketNewOrdersProducts() key:`,
+        key,
+      );
+      result.push({
+        product: {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+        },
+      });
+    }
+    console.log(
+      `❯❯❯❯❯❯ [products.service.ts] loadTicketNewOrdersProducts() result:`,
+      result,
+    );
+    return result;
+  }
+
+  async loadCustomerBrandDetailProducts(brandId: string): Promise<Product[]> {
+    const products = await Product.find({
+      where: { brandId },
+    });
+    return products;
+  }
+
+  async loadCustomerTicketDetailProducts(ticketId: string): Promise<Product[]> {
+    const orders: Order[] = await Order.find({
+      where: { ticketId },
+    });
+    const result: Product[] = orders.map((order) => order.product);
+    return result;
+  }
+
+  async loadBrandTicketDetailProducts(ticketId: string): Promise<Product[]> {
+    const orders: Order[] = await Order.find({
+      where: { ticketId },
+    });
+    const result: Product[] = orders.map((order) => order.product);
     return result;
   }
 }

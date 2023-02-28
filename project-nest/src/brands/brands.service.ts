@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Bookmark } from 'src/bookmarks/entities/bookmark.entity';
+import { Customer } from 'src/customers/entities/customer.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { Brand } from './entities/brand.entity';
@@ -24,6 +26,20 @@ export class BrandsService {
   async findBrandByUserId(userId: string): Promise<Brand> {
     const brand: Brand = await Brand.findOne({
       where: { userId },
+    });
+    return brand;
+  }
+
+  async loadCustomerAllCardsBrandsAsc(): Promise<Brand[]> {
+    const brands: Brand[] = await Brand.find({
+      order: { businessName: 'ASC' },
+    });
+    return brands;
+  }
+
+  async findBrandById(id: string): Promise<Brand> {
+    const brand: Brand = await Brand.findOne({
+      where: { id },
     });
     return brand;
   }

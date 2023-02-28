@@ -1,11 +1,15 @@
 <template>
-  <div>
-    <p>[CustomerMarketsView.vue]</p>
-  </div>
+	<div>
+		<!-- <p>[CustomerMarketsView.vue]</p> -->
+		<customer-market-latest-section></customer-market-latest-section>
+	</div>
 </template>
 
 <script>
-export default {};
+	import CustomerMarketLatestSection from "../../../components/customer/markets/CustomerMarketLatestSection.vue";
+	export default {
+		components: { CustomerMarketLatestSection },
+	};
 </script>
 
 <style>

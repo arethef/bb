@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { ReqCreateProductDto } from './dto/req-create-product.dto';
+import { Product } from './entities/product.entity';
 import { ProductsService } from './products.service';
 
 @Controller('products')
@@ -44,6 +45,7 @@ export class ProductsController {
     return result;
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get('table-list')
   async loadTableProducts(
     @Req() req,
@@ -60,6 +62,7 @@ export class ProductsController {
     return result;
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get('list-market-new-products')
   async loadMarketNewProducts(
     @Req() req,
@@ -78,8 +81,9 @@ export class ProductsController {
     return result;
   }
 
-  @Post('list-market-new-lineup')
-  async loadMarketNewLineup(
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Post('list-market-new-lineups')
+  async loadMarketNewLineups(
     @Req() req,
     @Body() marketNewLineup,
     @Res({ passthrough: true }) res: Response,
@@ -93,8 +97,69 @@ export class ProductsController {
       `❯❯❯❯❯❯ [products.controller.ts] loadMarketNewLineup() marketNewLineup:`,
       marketNewLineup,
     );
-    const result = await this.productsService.loadMarketNewLineupProducts(
+    const result = await this.productsService.loadMarketNewLineupsProducts(
       marketNewLineup,
+    );
+    return result;
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Post('list-ticket-new-orders')
+  async loadTicketNewOrders(
+    @Req() req,
+    @Body() ticketNewOrders,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    console.log(`++++++ [products.controller.ts] loadTicketNewOrders() ++++++`);
+    console.log(
+      `❯❯❯❯❯❯ [products.controller.ts] loadTicketNewOrders() req.user:`,
+      req.user,
+    );
+    console.log(
+      `❯❯❯❯❯❯ [products.controller.ts] loadTicketNewOrders() ticketNewOrders:`,
+      ticketNewOrders,
+    );
+    const result = await this.productsService.loadTicketNewOrdersProducts(
+      ticketNewOrders,
+    );
+    return result;
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('customer-brand-detail-list/:brandId')
+  async loadCustomerBrandDetailProducts(
+    @Req() req,
+    @Param('brandId') brandId: string,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<Product[]> {
+    const result = await this.productsService.loadCustomerBrandDetailProducts(
+      brandId,
+    );
+    return result;
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('customer-ticket-detail-list/:ticketId')
+  async loadCustomerTicketDetailproducts(
+    @Req() req,
+    @Param('ticketId') ticketId: string,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<Product[]> {
+    const result = await this.productsService.loadCustomerTicketDetailProducts(
+      ticketId,
+    );
+    return result;
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('brand-ticket-detail-list/:ticketId')
+  async loadBrandTicketDetailproducts(
+    @Req() req,
+    @Param('ticketId') ticketId: string,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<Product[]> {
+    const result = await this.productsService.loadBrandTicketDetailProducts(
+      ticketId,
     );
     return result;
   }

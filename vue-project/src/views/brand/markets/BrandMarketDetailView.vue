@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<p>[BrandMarketDetailView.vue]</p>
-		<div class="lg:container md:mx-auto">
+		<!-- <p>[BrandMarketDetailView.vue]</p> -->
+		<div class="md:container md:mx-auto">
 			<div class="grid grid-cols-12 gap-4">
 				<div class="col-span-2">
 					<div class="border p-4">
@@ -12,7 +12,7 @@
 								name="title"
 								id="title"
 								v-model="this.marketStore.marketCurrentMarket.title"
-								class="block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
+								class="text-xs block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
 								disabled
 							/>
 						</label>
@@ -23,13 +23,17 @@
 								name="content"
 								id="content"
 								v-model="this.marketStore.marketCurrentMarket.content"
-								class="block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
+								class="text-xs block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
 								disabled
 							/>
 						</label>
 						<label for="image" class="block mt-4">
 							<span>Image</span>
-							<div></div>
+							<div>
+								<img
+									:src="`${this.marketStore.marketCurrentMarket.image.url}`"
+								/>
+							</div>
 						</label>
 						<label for="deliveryFee" class="block mt-4">
 							<span>Delivery Fee</span>
@@ -38,7 +42,7 @@
 								name="deliveryFee"
 								id="deliveryFee"
 								v-model="this.marketStore.marketCurrentMarket.deliveryFee"
-								class="block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
+								class="text-xs block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
 								disabled
 							/>
 						</label>
@@ -49,7 +53,7 @@
 								name="deliveryFeeAdded"
 								id="deliveryFeeAdded"
 								v-model="this.marketStore.marketCurrentMarket.deliveryFeeAdded"
-								class="block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
+								class="text-xs block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
 								disabled
 							/>
 						</label>
@@ -60,7 +64,7 @@
 								name="deliveryFree"
 								id="deliveryFree"
 								v-model="this.marketStore.marketCurrentMarket.deliveryFree"
-								class="block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
+								class="text-xs block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
 								disabled
 							/>
 						</label>
@@ -71,7 +75,7 @@
 								name="minimumQuaytity"
 								id="minimumQuaytity"
 								v-model="this.marketStore.marketCurrentMarket.minimumQuaytity"
-								class="block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
+								class="text-xs block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
 								disabled
 							/>
 						</label>
@@ -82,7 +86,7 @@
 								name="openDateTime"
 								id="openDateTime"
 								v-model="this.marketStore.marketCurrentMarket.openDateTime"
-								class="block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
+								class="text-xs block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
 								disabled
 							/>
 						</label>
@@ -93,7 +97,7 @@
 								name="closeDateTime"
 								id="closeDateTime"
 								v-model="this.marketStore.marketCurrentMarket.closeDateTime"
-								class="block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
+								class="text-xs block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
 								disabled
 							/>
 						</label>
@@ -139,7 +143,7 @@
 		beforeCreate() {
 			this.marketStore.detailMarket(this.$props.marketId);
 			this.lineupStore.loadLineups(this.$props.marketId);
-			this.ticketStore.loadMarketDetailTableTickets(this.$props.marketId);
+			this.ticketStore.loadBrandMarketDetailTickets(this.$props.marketId);
 		},
 		methods: {},
 	};

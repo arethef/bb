@@ -8,6 +8,8 @@ import { ReqCreateMarketDto } from './dto/req-create-market.dto';
 import { Market } from './entities/market.entity';
 import { ResBrandTableMarketDto } from './dto/res-brand-table-market.dto';
 import { ResBrandProductDetailMarketDto } from './dto/res-brand-product-detail-table.dto';
+import { ResCustomerCardMarketDto } from './dto/res-customer-card-market.dto';
+import { Customer } from 'src/customers/entities/customer.entity';
 
 @Injectable()
 export class MarketsService {
@@ -129,5 +131,40 @@ export class MarketsService {
       });
     }
     return result;
+  }
+
+  async findMarkets(): Promise<Market[]> {
+    const markets = await Market.find();
+    return markets;
+  }
+
+  async loadCustomerAllCardsMarketsLatest(): Promise<
+    ResCustomerCardMarketDto[]
+  > {
+    const markets = await this.findMarkets();
+    const result: ResCustomerCardMarketDto[] = [];
+    for (const market of markets) {
+      result.push({
+        market: {
+          id: market.id,
+          title: market.title,
+          closeDateTime: market.closeDateTime,
+          brand: {
+            businessName: market.brand.businessName,
+          },
+          image: {
+            url: market.image.url,
+          },
+        },
+      });
+    }
+    return result;
+  }
+
+  async loadCustomerBrandDetailMarkets(brandId: string): Promise<Market[]> {
+    const markets = await Market.find({
+      where: { brandId },
+    });
+    return markets;
   }
 }

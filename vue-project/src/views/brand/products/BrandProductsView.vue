@@ -1,7 +1,6 @@
 <template>
 	<div>
-		<p>[BrandProductsView.vue]</p>
-
+		<!-- <p>[BrandProductsView.vue]</p> -->
 		<brand-product-new-modal></brand-product-new-modal>
 		<brand-products-table></brand-products-table>
 	</div>

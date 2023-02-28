@@ -1,9 +1,15 @@
 import { Brand } from 'src/brands/entities/brand.entity';
 import { Base } from 'src/common/base/base.entity';
+import {
+  generateTicketDayNumber,
+  generateYYYYMMDD,
+  getKST,
+} from 'src/common/un';
 import { Customer } from 'src/customers/entities/customer.entity';
 import { Market } from 'src/markets/entities/market.entity';
 import { Order } from 'src/orders/entities/order.entity';
 import {
+  BeforeInsert,
   Column,
   Entity,
   JoinColumn,
@@ -11,6 +17,9 @@ import {
   OneToMany,
   RelationId,
 } from 'typeorm';
+
+const dayCount = generateTicketDayNumber();
+let lastTicketDate = getKST();
 
 @Entity('tickets')
 export class Ticket extends Base {
@@ -46,9 +55,18 @@ export class Ticket extends Base {
   deliveryFreeApply: boolean;
   @Column()
   deliveryAddress: string;
-  @Column()
-  deliveryStatus: string;
+  @Column({ default: '1' })
+  deliveryStatus: string; // 1:진행중 2:완료 3:취소(?)
 
   @OneToMany(() => Order, (order) => order.ticket)
   orders: Order[];
+
+  @BeforeInsert()
+  increaseDayCount() {
+    lastTicketDate = getKST();
+  }
+
+  generateUN() {
+    return `${generateYYYYMMDD()}15${Date.now()}${dayCount.next().value}`;
+  }
 }

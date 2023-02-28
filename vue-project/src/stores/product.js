@@ -21,7 +21,11 @@ export const useProductStore = defineStore("product", {
     currentProductId: "",
     allTableProducts: [],
     brandMarketNewProducts: [],
-    brandMarketNewLineup: [],
+    brandMarketNewLineups: [],
+    customerTicketNewOrders: [],
+    customerBrandDetailProducts: [],
+    customerTicketDetailProducts: [],
+    brandTicketDetailProducts: [],
   }),
   getters: {
     productCurrentProduct(state) {
@@ -36,8 +40,20 @@ export const useProductStore = defineStore("product", {
     productBrandMarketNewProducts(state) {
       return state.brandMarketNewProducts;
     },
-    productBrandMarketNewLineup(state) {
-      return state.brandMarketNewLineup;
+    productBrandMarketNewLineups(state) {
+      return state.brandMarketNewLineups;
+    },
+    productCustomerTicketNewOrders(state) {
+      return state.customerTicketNewOrders;
+    },
+    productCustomerBrandDetailProducts(state) {
+      return state.customerBrandDetailProducts;
+    },
+    productCustomerTicketDetailProducts(state) {
+      return state.customerTicketDetailProducts;
+    },
+    productBrandTicketDetailProducts(state) {
+      return state.brandTicketDetailProducts;
     },
   },
   actions: {
@@ -53,8 +69,20 @@ export const useProductStore = defineStore("product", {
     setBrandMarketNewProducts(brandMarketNewProducts) {
       this.brandMarketNewProducts = brandMarketNewProducts;
     },
-    setBrandMarketNewLineup(brandMarketNewLineup) {
-      this.brandMarketNewLineup = brandMarketNewLineup;
+    setBrandMarketNewLineups(brandMarketNewLineups) {
+      this.brandMarketNewLineups = brandMarketNewLineups;
+    },
+    setCustomerTicketNewOrders(customerTicketNewOrders) {
+      this.customerTicketNewOrders = customerTicketNewOrders;
+    },
+    setCustomerBrandDetailProducts(customerBrandDetailProducts) {
+      this.customerBrandDetailProducts = customerBrandDetailProducts;
+    },
+    setCustomerTicketDetailProducts(customerTicketDetailProducts) {
+      this.customerTicketDetailProducts = customerTicketDetailProducts;
+    },
+    setBrandTicketDetailProducts(brandTicketDetailProducts) {
+      this.brandTicketDetailProducts = brandTicketDetailProducts;
     },
     async createProduct(reqCreateProductDto) {
       console.log(`++++++ [product.js] createProduct() ++++++`);
@@ -87,17 +115,6 @@ export const useProductStore = defineStore("product", {
         `❯❯❯❯❯❯ [product.js] detailProduct() this.currentProduct:`,
         this.currentProduct
       );
-      // let result = {}
-      // await axios.get(`/api/products/detail/${id}`)
-      //   .then((res) => {
-      //     // console.log(`❯❯❯❯❯❯ [product.js] detailProduct() res:`, res);
-      //     console.log(`❯❯❯❯❯❯ [product.js] detailProduct() res.data:`, res.data);
-      //     result = res.data;
-      //   })
-      //   .catch((err) => {
-      //     console.log(`❯❯❯❯❯❯ [product.js] detailProduct() err:`, err);
-      //   });
-      // return result;
     },
     async loadProducts() {
       console.log(`++++++ [product.js] loadProducts() ++++++`);
@@ -134,21 +151,87 @@ export const useProductStore = defineStore("product", {
         });
       return result;
     },
-    async loadMarketNewLineup(marketNewLineup) {
-      console.log(`++++++ [product.js] loadMarketNewLineup() ++++++`);
+    async loadMarketNewLineups(marketNewLineups) {
+      console.log(`++++++ [product.js] loadMarketNewLineups() ++++++`);
       let result = {};
       await axios
-        .post(`/api/products/list-market-new-lineup`, marketNewLineup)
+        .post(`/api/products/list-market-new-lineups`, marketNewLineups)
         .then((res) => {
           console.log(
-            `❯❯❯❯❯❯ [product.js] loadMarketNewLineup() res.data:`,
+            `❯❯❯❯❯❯ [product.js] loadMarketNewLineups() res.data:`,
             res.data
           );
           result = res.data;
         })
         .catch((err) => {
-          console.error(`❯❯❯❯❯❯ [product.js] loadMarketNewLineup() err:`, err);
+          console.error(`❯❯❯❯❯❯ [product.js] loadMarketNewLineups() err:`, err);
         });
+      return result;
+    },
+    async loadTicketNewOrders(ticketNewOrders) {
+      console.log(`++++++ [product.js] loadTicketNewOrders() ++++++`);
+      let result = {};
+      await axios
+        .post(`/api/products/list-ticket-new-orders`, ticketNewOrders)
+        .then((res) => {
+          console.log(
+            `❯❯❯❯❯❯ [product.js] loadTicketNewOrders() res.data:`,
+            res.data
+          );
+          result = res.data;
+        })
+        .catch((err) => {
+          console.error(`❯❯❯❯❯❯ [product.js] loadTicketNewOrders() err:`, err);
+        });
+      return result;
+    },
+    async loadCustomerBrandDetailProducts(brandId) {
+      let result = {};
+      await axios
+        .get(`/api/products/customer-brand-detail-list/${brandId}`)
+        .then((res) => {
+          result = res.data;
+        })
+        .catch((err) => {
+          console.error(
+            `❯❯❯❯❯❯ [product.js] loadCustomerBrandDetailProducts() err:`,
+            err
+          );
+        });
+      // this.customerBrandDetailProducts = result;
+      this.setCustomerBrandDetailProducts(result);
+      return result;
+    },
+    async loadCustomerTicketDetailProducts(ticketId) {
+      let result = {};
+      await axios
+        .get(`/api/products/customer-ticket-detail-list/${ticketId}`)
+        .then((res) => {
+          result = res.data;
+        })
+        .catch((err) => {
+          console.error(
+            `❯❯❯❯❯❯ [product.js] loadCustomerTicketDetailProducts() err:`,
+            err
+          );
+        });
+      this.setCustomerTicketDetailProducts(result);
+      return result;
+    },
+    async loadBrandTicketDetailProducts(ticketId) {
+      let result = {};
+      await axios
+        .get(`/api/products/brand-ticket-detail-list/${ticketId}`)
+        .then((res) => {
+          result = res.data;
+        })
+        .catch((err) => {
+          console.error(
+            `❯❯❯❯❯❯ [product.js] loadBrandTicketDetailProducts() err:`,
+            err
+          );
+        });
+      this.setBrandTicketDetailProducts(result);
       return result;
     },
   },

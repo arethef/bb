@@ -36,6 +36,7 @@ const router = createRouter({
           name: "BrandTicketDetail",
           component: () =>
             import("../views/brand/tickets/BrandTicketDetailView.vue"),
+          props: true,
         },
         {
           path: "products",
@@ -84,6 +85,7 @@ const router = createRouter({
     {
       path: "/c",
       name: "Customer",
+      redirect: "/c/markets",
       component: () => import("../views/customer/CustomerView.vue"),
       children: [
         {
@@ -93,16 +95,37 @@ const router = createRouter({
             import("../views/customer/markets/CustomerMarketsView.vue"),
         },
         {
+          path: "markets/:marketId",
+          name: "CustomerMarketDetail",
+          component: () =>
+            import("../views/customer/markets/CustomerMarketDetailView.vue"),
+          props: true,
+        },
+        {
           path: "brands",
-          name: "CustomerBrand",
+          name: "CustomerBrands",
           component: () =>
             import("../views/customer/brands/CustomerBrandsView.vue"),
+        },
+        {
+          path: "brands/:brandId",
+          name: "CustomerBrandDetail",
+          component: () =>
+            import("../views/customer/brands/CustomerBrandDetailView.vue"),
+          props: true,
         },
         {
           path: "tickets",
           name: "CustomerTickets",
           component: () =>
             import("../views/customer/tickets/CustomerTicketsView.vue"),
+        },
+        {
+          path: "tickets/:ticketId",
+          name: "CustomerTicketDetail",
+          component: () =>
+            import("../views/customer/tickets/CustomerTicketDetailView.vue"),
+          props: true,
         },
         {
           path: "profile",

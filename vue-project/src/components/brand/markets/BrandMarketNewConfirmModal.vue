@@ -1,6 +1,6 @@
 <template>
 	<div class="container mx-auto">
-		<div class="flex justify-end">
+		<div class="flex justify-end mb-4">
 			<!-- Button trigger modal -->
 			<button
 				type="button"
@@ -14,7 +14,7 @@
 				확인하기
 			</button>
 
-			<!-- Modal -->
+			<!-- Start of Modal -->
 			<div
 				data-te-modal-init
 				class="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
@@ -160,7 +160,7 @@
 											<tbody>
 												<tr
 													v-for="(product, index) in this.productStore
-														.productBrandMarketNewLineup"
+														.productBrandMarketNewLineups"
 													:key="product.product.id"
 												>
 													<th
@@ -214,6 +214,7 @@
 					</div>
 				</div>
 			</div>
+			<!-- End of Modal -->
 		</div>
 	</div>
 </template>
@@ -245,7 +246,7 @@
 				image: {
 					formData: null,
 				},
-				lineups: [],
+				lineups: {},
 			},
 		},
 		data() {

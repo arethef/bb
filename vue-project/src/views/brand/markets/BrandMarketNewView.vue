@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<p>[BrandMarketNewView.vue]</p>
+		<!-- <p>[BrandMarketNewView.vue]</p> -->
 		<div class="md:container md:mx-auto">
 			<div class="flex justify-end">
 				<brand-market-new-confirm-modal
@@ -132,7 +132,7 @@
 						Lineup
 						<div class="overflow-y-auto">
 							<brand-market-new-products-table
-								@brandMarketNewLineup="selectedBrandMarketNewProducts"
+								@brandMarketNewLineups="selectedBrandMarketNewProducts"
 							></brand-market-new-products-table>
 						</div>
 					</div>

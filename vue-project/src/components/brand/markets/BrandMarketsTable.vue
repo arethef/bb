@@ -1,25 +1,21 @@
 <template>
 	<div>
-		<p>[BrandMarketsTable.vue]</p>
-		<p>
-			번호 | 마켓고유번호 | 마켓제목 | 마켓오픈일시 | 마켓마감일시 | 총준비수 |
-			완판시가격 | 총판매수 | 총판매가격
-		</p>
+		<!-- <p>[BrandMarketsTable.vue]</p> -->
 		<div class="md:container md:mx-auto">
 			<table class="min-w-full border text-center">
 				<thead class="bg-gray-100">
 					<tr class="border-b">
-						<th scope="col" class="px-2 border-r">#</th>
-						<th scope="col" class="px-2 border-r">마켓고유번호</th>
-						<th scope="col" class="px-2 border-r">마켓제목</th>
-						<th scope="col" class="px-2 border-r">마켓오픈일시</th>
-						<th scope="col" class="px-2 border-r">마켓마감일시</th>
-						<th scope="col" class="px-2 border-r">총준비수</th>
-						<th scope="col" class="px-2 border-r">완판시가격</th>
-						<th scope="col" class="px-2 border-r">총판매수</th>
-						<th scope="col" class="px-2 border-r">총판매가격</th>
-						<th scope="col" class="px-2 border-r">티켓수</th>
-						<th scope="col" class="px-2">마감여부</th>
+						<th scope="col" class="px-2 py-2 border-r">#</th>
+						<th scope="col" class="px-2 py-2 border-r">마켓고유번호</th>
+						<th scope="col" class="px-2 py-2 border-r">마켓제목</th>
+						<th scope="col" class="px-2 py-2 border-r">마켓오픈일시</th>
+						<th scope="col" class="px-2 py-2 border-r">마켓마감일시</th>
+						<th scope="col" class="px-2 py-2 border-r">총준비수</th>
+						<th scope="col" class="px-2 py-2 border-r">완판시가격</th>
+						<th scope="col" class="px-2 py-2 border-r">총판매수</th>
+						<th scope="col" class="px-2 py-2 border-r">총판매가격</th>
+						<th scope="col" class="px-2 py-2 border-r">티켓수</th>
+						<th scope="col" class="px-2 py-2">마감여부</th>
 					</tr>
 				</thead>
 				<tbody class="bg-white">
@@ -30,37 +26,37 @@
 						@click="moveBrandMarketDetailView(market.market.id)"
 						class="border-b cursor-pointer"
 					>
-						<th scope="row" class="px-2 whitespace-nowrap border-r">
+						<th scope="row" class="px-2 py-2 whitespace-nowrap border-r">
 							{{ index + 1 }}
 						</th>
-						<td class="px-2 whitespace-nowrap border-r">
+						<td class="px-2 py-2 whitespace-nowrap border-r">
 							{{ market.market.un }}
 						</td>
-						<td class="px-2 whitespace-nowrap border-r">
+						<td class="px-2 py-2 whitespace-nowrap border-r">
 							{{ market.market.title }}
 						</td>
-						<td class="px-2 whitespace-nowrap border-r">
+						<td class="px-2 py-2 whitespace-nowrap border-r">
 							{{ market.market.openDateTime }}
 						</td>
-						<td class="px-2 whitespace-nowrap border-r">
+						<td class="px-2 py-2 whitespace-nowrap border-r">
 							{{ market.market.closeDateTime }}
 						</td>
-						<td class="px-2 whitespace-nowrap border-r">
+						<td class="px-2 py-2 whitespace-nowrap border-r">
 							{{ market.totalNumberOfPreparations }}
 						</td>
-						<td class="px-2 whitespace-nowrap border-r">
+						<td class="px-2 py-2 whitespace-nowrap border-r">
 							{{ market.totalPriceSoldOut }}
 						</td>
-						<td class="px-2 whitespace-nowrap border-r">
+						<td class="px-2 py-2 whitespace-nowrap border-r">
 							{{ market.totalNumberOfSales }}
 						</td>
-						<td class="px-2 whitespace-nowrap border-r">
+						<td class="px-2 py-2 whitespace-nowrap border-r">
 							{{ market.totalPriceSelling }}
 						</td>
-						<td class="px-2 whitespace-nowrap border-r">
+						<td class="px-2 py-2 whitespace-nowrap border-r">
 							{{ market.totalNumberOfTickets }}
 						</td>
-						<td class="px-2 whitespace-nowrap border-r">
+						<td class="px-2 py-2 whitespace-nowrap border-r">
 							{{ market.done }}
 						</td>
 					</tr>

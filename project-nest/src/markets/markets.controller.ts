@@ -11,6 +11,10 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { ReqCreateMarketDto } from './dto/req-create-market.dto';
+import { ResBrandProductDetailMarketDto } from './dto/res-brand-product-detail-table.dto';
+import { ResBrandTableMarketDto } from './dto/res-brand-table-market.dto';
+import { ResCustomerCardMarketDto } from './dto/res-customer-card-market.dto';
+import { Market } from './entities/market.entity';
 import { MarketsService } from './markets.service';
 
 @Controller('markets')
@@ -47,7 +51,7 @@ export class MarketsController {
   async loadBrandAllTableMarkets(
     @Req() req,
     @Res({ passthrough: true }) res: Response,
-  ) {
+  ): Promise<ResBrandTableMarketDto[]> {
     const result = await this.marketsService.loadBrandAllTableMarkets(
       req.user.id,
     );
@@ -60,9 +64,33 @@ export class MarketsController {
     @Req() req,
     @Param('productId') productId: string,
     @Res({ passthrough: true }) res: Response,
-  ) {
+  ): Promise<ResBrandProductDetailMarketDto[]> {
     const result = await this.marketsService.loadBrandProductDetailMarkets(
       productId,
+    );
+    return result;
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('customer-market-list-latest')
+  async loadCustomerAllCardsMarketsLatest(
+    @Req() req,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<ResCustomerCardMarketDto[]> {
+    const result =
+      await this.marketsService.loadCustomerAllCardsMarketsLatest();
+    return result;
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('customer-brand-detail-list/:brandId')
+  async loadCustomerBrandDetailMarkets(
+    @Req() req,
+    @Param('brandId') brandId: string,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<Market[]> {
+    const result = await this.marketsService.loadCustomerBrandDetailMarkets(
+      brandId,
     );
     return result;
   }

@@ -1,11 +1,21 @@
 <template>
-  <div>
-    <p>[CustomerTicketsView.vue]</p>
-  </div>
+	<div>
+		<!-- <p>[CustomerTicketsView.vue]</p> -->
+		<customer-tickets-table></customer-tickets-table>
+	</div>
 </template>
 
 <script>
-export default {};
+	import CustomerTicketsTable from "../../../components/customer/tickets/CustomerTicketsTable.vue";
+	export default {
+		setup() {},
+		components: { CustomerTicketsTable },
+		data() {
+			return {};
+		},
+		created() {},
+		methods: {},
+	};
 </script>
 
 <style>

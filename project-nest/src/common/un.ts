@@ -39,3 +39,14 @@ export const generateMarketDayNumber = function* () {
     yield count++;
   }
 };
+export const generateTicketDayNumber = function* () {
+  let count = 0;
+  let lastDateTime = getKST();
+  while (true) {
+    if (lastDateTime.getDate() - getKST().getDate() > 1) {
+      count = 0;
+      lastDateTime = getKST();
+    }
+    yield count++;
+  }
+};
