@@ -12,6 +12,7 @@ import {
 import { Response } from 'express';
 import { Public } from 'src/auth/decorators/public-auth.decorator';
 import { ReqCheckEmailUserDto } from './dto/req-check-email-user.dto';
+import { ReqCheckUsernameUserDto } from './dto/req-check-username-user.dto';
 import { ReqSignupUserDto } from './dto/req-signup-user.dto';
 import { UsersService } from './users.service';
 
@@ -24,7 +25,7 @@ export class UsersController {
   async checkUserEmailExists(
     @Body() dto: ReqCheckEmailUserDto,
   ): Promise<boolean> {
-    console.log(`++++++ [users.controller.ts] signup() ++++++`);
+    console.log(`++++++ [users.controller.ts] checkUserEmailExists() ++++++`);
     const { email } = dto;
     const isUserEmailExists = await this.usersService.checkUserEmailExists(
       email,
@@ -32,6 +33,22 @@ export class UsersController {
     console.log(`❯❯❯❯❯❯ isUserEmailExists:`, isUserEmailExists);
 
     return isUserEmailExists;
+  }
+
+  @Public()
+  @Post('username-check')
+  async checkUserUsernameExists(
+    @Body() dto: ReqCheckUsernameUserDto,
+  ): Promise<boolean> {
+    console.log(
+      `++++++ [users.controller.ts] checkUserUsernameExists() ++++++`,
+    );
+    const { username } = dto;
+    const isUserUsernameExists =
+      await this.usersService.checkUserUsernameExists(username);
+    console.log(`❯❯❯❯❯❯ isUserUsernameExists:`, isUserUsernameExists);
+
+    return isUserUsernameExists;
   }
 
   @Public()

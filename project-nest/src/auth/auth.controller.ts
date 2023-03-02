@@ -46,6 +46,7 @@ export class AuthController {
     res.cookie('Authentication', accessToken, accessOption);
     res.cookie('Refresh', refreshToken, refreshOption);
     return req.user;
+    // return { user: req.user, Authentication: accessToken };
   }
 
   @Public()
@@ -59,6 +60,15 @@ export class AuthController {
     // console.log(`++++++ [auth.controller.ts] refresh() ++++++`);
     // console.log(`❯❯❯❯❯❯ user:`, user);
     return user;
+  }
+
+  @Get('logout')
+  async logout(@Req() req, @Res({ passthrough: true }) res: Response) {
+    await this.usersService.clearRefreshTokenWithUserId(req.user.id);
+    const { accessOption, refreshOption } =
+      this.authService.genCookieForLogout();
+    res.cookie('Authentication', '', accessOption);
+    res.cookie('Refresh', '', refreshOption);
   }
 
   @UseGuards(JwtGuard)

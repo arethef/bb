@@ -3,118 +3,104 @@
 		<!-- <p>[BrandMarketDetailView.vue]</p> -->
 		<div class="md:container md:mx-auto">
 			<div class="grid grid-cols-12 gap-4">
-				<div class="col-span-2">
+				<div class="col-span-3">
 					<div class="border p-4">
 						<label for="title" class="block">
 							<span>Title</span>
-							<input
-								type="text"
-								name="title"
-								id="title"
-								v-model="this.marketStore.marketCurrentMarket.title"
-								class="text-xs block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
-								disabled
-							/>
+							<div class="border-2 my-1">
+								<div class="text-xs m-2">
+									{{ this.marketStore.marketCurrentMarket.title }}
+								</div>
+							</div>
 						</label>
 						<label for="content" class="block mt-4">
 							<span>Content</span>
-							<input
-								type="text"
-								name="content"
-								id="content"
-								v-model="this.marketStore.marketCurrentMarket.content"
-								class="text-xs block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
-								disabled
-							/>
+							<div class="border-2 my-1">
+								<div class="text-xs m-2">
+									{{ this.marketStore.marketCurrentMarket.content }}
+								</div>
+							</div>
 						</label>
 						<label for="image" class="block mt-4">
 							<span>Image</span>
-							<div>
-								<img
-									:src="`${this.marketStore.marketCurrentMarket.image.url}`"
-								/>
+							<div class="my-1">
+								<div class="my-2">
+									<img
+										:src="`${this.marketStore.marketCurrentMarket.image.url}`"
+									/>
+								</div>
 							</div>
 						</label>
 						<label for="deliveryFee" class="block mt-4">
 							<span>Delivery Fee</span>
-							<input
-								type="text"
-								name="deliveryFee"
-								id="deliveryFee"
-								v-model="this.marketStore.marketCurrentMarket.deliveryFee"
-								class="text-xs block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
-								disabled
-							/>
+							<div class="border-2 my-1">
+								<div class="text-xs m-2">
+									{{ this.marketStore.marketCurrentMarket.deliveryFee }}
+								</div>
+							</div>
 						</label>
 						<label for="deliveryFeeAdded" class="block mt-4">
 							<span>Delivery Fee Added</span>
-							<input
-								type="text"
-								name="deliveryFeeAdded"
-								id="deliveryFeeAdded"
-								v-model="this.marketStore.marketCurrentMarket.deliveryFeeAdded"
-								class="text-xs block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
-								disabled
-							/>
+							<div class="border-2 my-1">
+								<div class="text-xs m-2">
+									{{ this.marketStore.marketCurrentMarket.deliveryFeeAdded }}
+								</div>
+							</div>
 						</label>
 						<label for="deliveryFree" class="block mt-4">
 							<span>Delivery Free</span>
-							<input
-								type="text"
-								name="deliveryFree"
-								id="deliveryFree"
-								v-model="this.marketStore.marketCurrentMarket.deliveryFree"
-								class="text-xs block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
-								disabled
-							/>
+							<div class="border-2 my-1">
+								<div class="text-xs m-2">
+									{{ this.marketStore.marketCurrentMarket.deliveryFree }}
+								</div>
+							</div>
 						</label>
 						<label for="minimumQuaytity" class="block mt-4">
 							<span>Minimum Quantity</span>
-							<input
-								type="text"
-								name="minimumQuaytity"
-								id="minimumQuaytity"
-								v-model="this.marketStore.marketCurrentMarket.minimumQuaytity"
-								class="text-xs block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
-								disabled
-							/>
+							<div class="border-2 my-1">
+								<div class="text-xs m-2">
+									{{ this.marketStore.marketCurrentMarket.minimumQuantity }}
+								</div>
+							</div>
 						</label>
-						<label for="openDateTime" class="block">
+						<label for="openDateTime" class="block mt-4">
 							<span>Open Date Time</span>
-							<input
-								type="text"
-								name="openDateTime"
-								id="openDateTime"
-								v-model="this.marketStore.marketCurrentMarket.openDateTime"
-								class="text-xs block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
-								disabled
-							/>
+							<div class="border-2 my-1">
+								<div class="text-xs m-2">
+									{{ open.getFullYear() }}년{{ open.getMonth() + 1 }}월{{
+										open.getDate()
+									}}일 {{ open.getHours() }}시{{ open.getMinutes() }}분{{
+										open.getSeconds()
+									}}초
+								</div>
+							</div>
 						</label>
-						<label for="closeDateTime" class="block">
+						<label for="closeDateTime" class="block mt-4">
 							<span>Close Date Time</span>
-							<input
-								type="text"
-								name="closeDateTime"
-								id="closeDateTime"
-								v-model="this.marketStore.marketCurrentMarket.closeDateTime"
-								class="text-xs block w-full px-0.5 border-0 border-b-2 bg-inherit border-gray-200"
-								disabled
-							/>
+							<div class="border-2 my-1">
+								<div class="text-xs m-2">
+									{{ close.getFullYear() }}년{{ close.getMonth() + 1 }}월{{
+										close.getDate()
+									}}일 {{ close.getHours() }}시{{ close.getMinutes() }}분{{
+										close.getSeconds()
+									}}초
+								</div>
+							</div>
 						</label>
 					</div>
 				</div>
-				<div class="col-span-4">
-					<div class="border p-4">
-						<brand-market-detail-lineups-table
-							:marketId="this.$props.marketId"
-						></brand-market-detail-lineups-table>
-					</div>
-				</div>
-				<div class="col-span-6">
-					<div class="border p-4">
-						<brand-market-detail-orders-table
-							:marketId="this.$props.marketId"
-						></brand-market-detail-orders-table>
+				<div class="col-span-9">
+					<div class="flex flex-col gap-4">
+						<div class="border p-4">
+							<brand-market-detail-lineups-table
+								:marketId="this.$props.marketId"
+							></brand-market-detail-lineups-table>
+						</div>
+						<div class="border p-4">
+							<brand-market-detail-orders-table
+								:marketId="this.$props.marketId"
+							></brand-market-detail-orders-table>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -140,10 +126,18 @@
 		data() {
 			return {};
 		},
-		beforeCreate() {
-			this.marketStore.detailMarket(this.$props.marketId);
-			this.lineupStore.loadLineups(this.$props.marketId);
-			this.ticketStore.loadBrandMarketDetailTickets(this.$props.marketId);
+		computed: {
+			open() {
+				return new Date(this.marketStore.marketCurrentMarket.openDateTime);
+			},
+			close() {
+				return new Date(this.marketStore.marketCurrentMarket.closeDateTime);
+			},
+		},
+		async beforeCreate() {
+			await this.marketStore.detailMarket(this.$props.marketId);
+			await this.lineupStore.loadLineups(this.$props.marketId);
+			await this.ticketStore.loadBrandMarketDetailTickets(this.$props.marketId);
 		},
 		methods: {},
 	};

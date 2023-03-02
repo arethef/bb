@@ -21,11 +21,9 @@
 </template>
 
 <script>
-	import CustomerLoginForm from "../components/login/CustomerLoginForm.vue";
-	import BrandLoginForm from "../components/login/BrandLoginForm.vue";
 	import LoginForm from "../components/login/LoginForm.vue";
 	export default {
-		components: { CustomerLoginForm, BrandLoginForm, LoginForm },
+		components: { LoginForm },
 		data() {
 			return {
 				loginTarget: "Customer",

@@ -208,7 +208,7 @@ export const useTicketStore = defineStore("ticket", {
             err
           );
         });
-      this.brandMarketDetailTickets = result;
+      this.setBrandMarketDetailTickets(result);
       return result;
     },
     async loadBrandAllTableTickets() {

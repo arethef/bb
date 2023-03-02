@@ -205,6 +205,7 @@
 							<button
 								@click="onClickMarketNewCreateBtn"
 								class="px-4 py-2 text-xs ml-2 text-bb-bg bg-bb-b rounded"
+								data-te-modal-dismiss
 								data-te-ripple-init
 								data-te-ripple-color="light"
 							>
@@ -250,14 +251,9 @@
 			},
 		},
 		data() {
-			return {
-				isMarketNewConfirmModalOpen: false,
-			};
+			return {};
 		},
 		computed: {
-			isMarketNewConfirmModalVisible() {
-				return this.isMarketNewConfirmModalOpen;
-			},
 			openDateTime() {
 				return `${this.reqCreateMarketDto.market.openDate} ${this.reqCreateMarketDto.market.closeTime}:00`;
 			},
@@ -281,11 +277,8 @@
 				console.log(
 					`++++++ [BrandMarketNewConfirmModal.vue] openMarketNewConfirmModal() ++++++`
 				);
-				this.isMarketNewConfirmModalOpen = true;
+				this.clearMarketImage();
 				this.showMarketImage();
-			},
-			closeMarketNewConfirmModal() {
-				this.isMarketNewConfirmModalOpen = false;
 			},
 			clearMarketImage() {
 				document.getElementById("marketImagePreview").innerHTML = "";

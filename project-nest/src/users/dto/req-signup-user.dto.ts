@@ -7,6 +7,10 @@ export class ReqSignupUserDto {
   readonly role: {
     readonly position: 'brand' | 'customer';
   };
+  readonly image: {
+    readonly id: string;
+  };
+
   readonly place?: {
     // brand는 필수o, customer는 필수x
     readonly zipcode: string;

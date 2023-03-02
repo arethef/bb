@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
+import { Public } from 'src/auth/decorators/public-auth.decorator';
 import { ResSaveImageDto } from './dto/res-save-image.dto';
 import { ImagesService } from './images.service';
 import { multerDiskDestinationOptions } from './multer.option';
@@ -18,6 +19,7 @@ import { multerDiskDestinationOptions } from './multer.option';
 export class ImagesController {
   constructor(private readonly imagesService: ImagesService) {}
 
+  @Public()
   @Post('upload-disk-destination')
   @UseInterceptors(FileInterceptor('imageFile', multerDiskDestinationOptions))
   async uploadFileDiskDestination(

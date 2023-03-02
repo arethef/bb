@@ -50,6 +50,9 @@
 		data() {
 			return {};
 		},
+		async beforeCreate() {
+			await this.ticketStore.loadBrandMarketDetailTickets(this.$props.marketId);
+		},
 		created() {},
 		methods: {},
 	};

@@ -3,7 +3,7 @@
 		<!-- <p>[CustomerBrandDetailMarketCard.vue]</p> -->
 		<div class="border p-4">
 			<!-- {{ this.$props.market }} -->
-			<div class="flex justify-start gap-4 relative">
+			<div class="flex flex-row gap-4 relative">
 				<div class="absolute right-0 top-0">
 					<customer-bookmark-heart
 						targetEntity="market"
@@ -36,8 +36,24 @@
 							}}
 						</span>
 					</div>
-					<div class="">Open {{ this.$props.market.openDateTime }}</div>
-					<div class="">Close {{ this.$props.market.closeDateTime }}</div>
+					<div class="">
+						Open
+						<!-- {{ this.$props.market.openDateTime }} -->
+						{{ open.getFullYear() }}년{{ open.getMonth() + 1 }}월{{
+							open.getDate()
+						}}일 {{ open.getHours() }}시{{ open.getMinutes() }}분{{
+							open.getSeconds()
+						}}초
+					</div>
+					<div class="">
+						Close
+						<!-- {{ this.$props.market.closeDateTime }} -->
+						{{ close.getFullYear() }}년{{ close.getMonth() + 1 }}월{{
+							close.getDate()
+						}}일 {{ close.getHours() }}시{{ close.getMinutes() }}분{{
+							close.getSeconds()
+						}}초
+					</div>
 				</div>
 			</div>
 		</div>
@@ -56,6 +72,14 @@
 		props: ["market"],
 		data() {
 			return {};
+		},
+		computed: {
+			open() {
+				return new Date(this.$props.market.openDateTime);
+			},
+			close() {
+				return new Date(this.$props.market.closeDateTime);
+			},
 		},
 		async beforeCreate() {
 			await this.lineupStore.loadLineups(this.$props.market.id);

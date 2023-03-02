@@ -27,7 +27,13 @@
 						</th>
 						<td class="p-2 whitespace-nowrap border-r">{{ ticket.un }}</td>
 						<td class="p-2 whitespace-nowrap border-r">
-							{{ ticket.createdAt }}
+							<!-- {{ ticket.createdAt }} -->
+							{{ new Date(ticket.createdAt).getFullYear() }}년{{
+								new Date(ticket.createdAt).getMonth() + 1
+							}}월{{ new Date(ticket.createdAt).getDate() }}일
+							{{ new Date(ticket.createdAt).getHours() }}시{{
+								new Date(ticket.createdAt).getMinutes()
+							}}분{{ new Date(ticket.createdAt).getSeconds() }}초
 						</td>
 						<td class="p-2 whitespace-nowrap border-r">
 							{{ ticket.brand.businessName }}

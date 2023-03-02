@@ -2,7 +2,7 @@
 	<div>
 		<!-- <p>[CustomerBrandDetailProductsSection.vue]</p> -->
 		<!-- {{ this.$props.products }} -->
-		<div class="grid grid-cols-1 gap-4 overflow-y-scroll h-screen">
+		<div class="flex flex-col gap-4 overflow-y-auto h-screen">
 			<div v-for="(product, index) in this.$props.products" :key="product.id">
 				<customer-brand-detail-product-card
 					:product="product"

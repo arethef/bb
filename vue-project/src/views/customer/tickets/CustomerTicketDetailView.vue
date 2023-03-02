@@ -23,7 +23,12 @@
 								<div class="flex flex-row gap-4">
 									<div>구매일시 |</div>
 									<div>
-										{{ this.ticketStore.ticketCurrentTicket.createdAt }}
+										{{ ticketCreatedAt.getFullYear() }}년{{
+											ticketCreatedAt.getMonth() + 1
+										}}월{{ ticketCreatedAt.getDate() }}일
+										{{ ticketCreatedAt.getHours() }}시{{
+											ticketCreatedAt.getMinutes()
+										}}분{{ ticketCreatedAt.getSeconds() }}초
 									</div>
 								</div>
 							</div>
@@ -166,6 +171,11 @@
 		},
 		components: {},
 		props: ["ticketId"],
+		computed: {
+			ticketCreatedAt() {
+				return new Date(this.ticketStore.ticketCurrentTicket.createdAt);
+			},
+		},
 		data() {
 			return {};
 		},

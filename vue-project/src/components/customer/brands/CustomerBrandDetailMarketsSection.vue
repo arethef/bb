@@ -2,7 +2,7 @@
 	<div>
 		<!-- <p>[CustomerBrandDetailMarketsSection]</p> -->
 		<!-- {{ this.$props.markets }} -->
-		<div class="grid grid-cols-1 gap-4 overflow-y-scroll h-screen">
+		<div class="flex flex-col gap-4 overflow-y-auto h-screen">
 			<div v-for="(market, index) in this.$props.markets" :key="market.id">
 				<customer-brand-detail-market-card
 					:market="market"

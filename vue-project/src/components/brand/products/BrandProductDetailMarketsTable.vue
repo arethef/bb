@@ -5,7 +5,7 @@
 			<thead class="bg-gray-100">
 				<tr class="border-b">
 					<th scope="col" class="font-medium px-2 py-2 border-r">#</th>
-					<th scope="col" class="font-medium px-2 py-2 border-r">마켓번호</th>
+					<!-- <th scope="col" class="font-medium px-2 py-2 border-r">마켓번호</th> -->
 					<th scope="col" class="font-medium px-2 py-2 border-r">마켓제목</th>
 					<th scope="col" class="font-medium px-2 py-2 border-r">
 						마켓오픈일시
@@ -27,17 +27,29 @@
 					<th scope="row" class="px-2 py-2 whitespace-nowrap border-r">
 						{{ index + 1 }}
 					</th>
-					<td class="px-2 py-2 whitespace-nowrap border-r">
+					<!-- <td class="px-2 py-2 whitespace-nowrap border-r">
 						{{ market.market.un }}
-					</td>
+					</td> -->
 					<td class="px-2 py-2 whitespace-nowrap border-r">
 						{{ market.market.title }}
 					</td>
 					<td class="px-2 py-2 whitespace-nowrap border-r">
-						{{ market.market.openDateTime }}
+						<!-- {{ market.market.openDateTime }} -->
+						{{ new Date(market.market.openDateTime).getFullYear() }}년{{
+							new Date(market.market.openDateTime).getMonth() + 1
+						}}월{{ new Date(market.market.openDateTime).getDate() }}일
+						{{ new Date(market.market.openDateTime).getHours() }}시{{
+							new Date(market.market.openDateTime).getMinutes()
+						}}분{{ new Date(market.market.openDateTime).getSeconds() }}초
 					</td>
 					<td class="px-2 py-2 whitespace-nowrap border-r">
-						{{ market.market.closeDateTime }}
+						<!-- {{ market.market.closeDateTime }} -->
+						{{ new Date(market.market.closeDateTime).getFullYear() }}년{{
+							new Date(market.market.closeDateTime).getMonth() + 1
+						}}월{{ new Date(market.market.closeDateTime).getDate() }}일
+						{{ new Date(market.market.closeDateTime).getHours() }}시{{
+							new Date(market.market.closeDateTime).getMinutes()
+						}}분{{ new Date(market.market.closeDateTime).getSeconds() }}초
 					</td>
 					<td class="px-2 py-2 whitespace-nowrap border-r">
 						{{ market.totalNumberOfTickets }}

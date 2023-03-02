@@ -84,16 +84,12 @@
 									</div>
 								</div>
 								<div class="border p-4 mt-4">
-									<label for="deliveryAddress" class="block">
-										<span class="text-gray-700">배송지</span>
-										<textarea
-											type="text"
-											id="deliveryAddress"
-											class="mt-1 block w-full text-sm"
-											placeholder=""
-											v-model="this.reqCreateTicketDto.ticket.deliveryAddress"
-										/>
-									</label>
+									<span class="text-gray-700">배송지</span>
+									<div class="border-2 my-1">
+										<div class="text-xs m-2">
+											{{ this.reqCreateTicketDto.ticket.deliveryAddress }}
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="col-span-8">
@@ -104,12 +100,12 @@
 												.productCustomerTicketNewOrders"
 											:key="order.product.id"
 										>
-											<div class="grid grid-flow-col gap-1">
+											<div class="flex flex-row gap-4">
 												<div>#{{ index + 1 }}</div>
 												<div>
 													<img
 														:src="`${order.product.image.url}`"
-														style="max-width: 200px"
+														style="max-width: 120px"
 													/>
 												</div>
 												<div>
@@ -141,7 +137,9 @@
 										티켓가격:
 										{{
 											this.reqCreateTicketDto.ticket.totalPrice +
-											this.marketStore.marketCurrentMarket.deliveryFee
+											(this.reqCreateTicketDto.ticket.deliveryFreeApply
+												? 0
+												: this.marketStore.marketCurrentMarket.deliveryFee)
 										}}
 									</div>
 								</div>

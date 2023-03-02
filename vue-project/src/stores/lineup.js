@@ -11,7 +11,7 @@ export const useLineupStore = defineStore("lineup", {
     },
   },
   actions: {
-    setLineupCurrentLineups(currentLineups) {
+    setCurrentLineups(currentLineups) {
       this.currentLineups = currentLineups;
     },
     async insertLineups(marketId, lineups) {
@@ -44,7 +44,7 @@ export const useLineupStore = defineStore("lineup", {
         .catch((err) => {
           console.error(`❯❯❯❯❯❯ [lineup.js] loadLineups() err:`, err);
         });
-      this.currentLineups = result;
+      this.setCurrentLineups(result);
       return result;
     },
   },

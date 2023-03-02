@@ -5,17 +5,13 @@
 			<table class="min-w-full border text-center">
 				<thead class="bg-gray-100">
 					<tr class="border-b">
-						<th scope="col" class="font-medium px-2 py-2 border-r">#</th>
-						<th scope="col" class="font-medium px-2 py-2 border-r">
-							상품고유번호
-						</th>
-						<th scope="col" class="font-medium px-2 py-2 border-r">상품이름</th>
-						<th scope="col" class="font-medium px-2 py-2 border-r">상품가격</th>
-						<th scope="col" class="font-medium px-2 py-2 border-r">총마켓수</th>
-						<th scope="col" class="font-medium px-2 py-2 border-r">총판매수</th>
-						<th scope="col" class="font-medium px-2 py-2">
-							마지막마켓오픈일시
-						</th>
+						<th scope="col" class="p-2 border-r">#</th>
+						<th scope="col" class="p-2 border-r">상품고유번호</th>
+						<th scope="col" class="p-2 border-r">상품이름</th>
+						<th scope="col" class="p-2 border-r">상품가격</th>
+						<th scope="col" class="p-2 border-r">총마켓수</th>
+						<th scope="col" class="p-2 border-r">총판매수</th>
+						<th scope="col" class="p-2">마지막마켓오픈일시</th>
 					</tr>
 				</thead>
 				<tbody class="bg-white">
@@ -26,29 +22,34 @@
 						@click="moveBrandProductDetailView(product.product.id)"
 						class="border-b cursor-pointer"
 					>
-						<th
-							scope="row"
-							class="px-2 py-2 whitespace-nowrap font-medium border-r"
-						>
+						<th scope="row" class="p-2 whitespace-nowrap border-r">
 							{{ index + 1 }}
 						</th>
-						<td class="px-2 py-2 whitespace-nowrap font-medium border-r">
+						<td class="p-2 whitespace-nowrap border-r">
 							{{ product.product.un }}
 						</td>
-						<td class="font-light px-2 py-2 whitespace-nowrap border-r">
+						<td class="p-2 whitespace-nowrap border-r">
 							{{ product.product.name }}
 						</td>
-						<td class="font-light px-2 py-2 whitespace-nowrap border-r">
+						<td class="p-2 whitespace-nowrap border-r">
 							{{ product.product.price }}
 						</td>
-						<td class="font-light px-2 py-2 whitespace-nowrap border-r">
+						<td class="p-2 whitespace-nowrap border-r">
 							{{ product.totalNumberOfMarkets }}
 						</td>
-						<td class="font-light px-2 py-2 whitespace-nowrap border-r">
+						<td class="p-2 whitespace-nowrap border-r">
 							{{ product.totalNumberOfSales }}
 						</td>
-						<td class="font-light px-2 py-2 whitespace-nowrap">
-							{{ product.openDateTimeOfLastMarket }}
+						<td class="p-2 whitespace-nowrap">
+							<!-- {{ product.openDateTimeOfLastMarket }} -->
+							{{ new Date(product.openDateTimeOfLastMarket).getFullYear() }}년{{
+								new Date(product.openDateTimeOfLastMarket).getMonth() + 1
+							}}월{{ new Date(product.openDateTimeOfLastMarket).getDate() }}일
+							{{ new Date(product.openDateTimeOfLastMarket).getHours() }}시{{
+								new Date(product.openDateTimeOfLastMarket).getMinutes()
+							}}분{{
+								new Date(product.openDateTimeOfLastMarket).getSeconds()
+							}}초
 						</td>
 					</tr>
 				</tbody>

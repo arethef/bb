@@ -38,6 +38,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     console.log(`++++++ [jwt.strategy.ts] validate() ++++++`);
     console.log(`❯❯❯❯❯❯ [jwt.strategy.ts] validate() payload:`, payload);
     const user: User = await this.usersService.findUserByUserId(payload.id);
+    console.log(`❯❯❯❯❯❯ [jwt.strategy.ts] validate() user:`, user);
     const { password, refreshToken, ...result } = user;
     return result;
   }

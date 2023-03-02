@@ -1,6 +1,16 @@
-import { Controller, Get, Req, Res } from '@nestjs/common';
+import {
+  Body,
+  ClassSerializerInterceptor,
+  Controller,
+  Get,
+  Put,
+  Req,
+  Res,
+  UseInterceptors,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { CustomersService } from './customers.service';
+import { ReqUpdateCustomerDto } from './dto/req-update-customer.dto';
 import { Customer } from './entities/customer.entity';
 
 @Controller('customers')
@@ -27,5 +37,16 @@ export class CustomersController {
       user,
       nickname: customer.nickname,
     };
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Put()
+  async updateCustomer(
+    @Req() req,
+    @Body() dto: ReqUpdateCustomerDto,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<Customer> {
+    const result = await this.customersService.updateCustomer(req.user.id, dto);
+    return result;
   }
 }

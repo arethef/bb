@@ -80,7 +80,7 @@ export const useMarketStore = defineStore("market", {
       );
       const dto = {
         market: { ...reqCreateMarketDto.market },
-        image: { imageId },
+        image: { id: imageId },
       };
       console.log(`❯❯❯❯❯❯ [market.js] createMarket() dto:`, dto);
       let result = {};

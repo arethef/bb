@@ -3,27 +3,29 @@
 		<!-- <p>[CustomerBrandDetailProductCard.vue]</p> -->
 		<div class="border p-4">
 			<!-- {{ this.$props.product }} -->
-			<div class="flex justify-start gap-4 relative">
+			<div class="grid grid-cols-12 gap-4 relative">
 				<div class="absolute right-0 top-0">
 					<customer-bookmark-heart
 						targetEntity="product"
 						:targetEntityId="this.$props.product.id"
 					></customer-bookmark-heart>
 				</div>
-				<div class="">
+				<div class="col-span-4">
 					<img
 						:src="`${this.$props.product.image.url}`"
 						style="height: 120px; width: 120px"
 					/>
 				</div>
-				<div class="flex flex-col gap-2">
-					<div class="">
-						<span class="text-base font-bold">{{
-							this.$props.product.name
-						}}</span>
+				<div class="col-span-7">
+					<div class="flex flex-col gap-2">
+						<div class="">
+							<span class="text-base font-bold">{{
+								this.$props.product.name
+							}}</span>
+						</div>
+						<div>{{ this.$props.product.description }}</div>
+						<div>{{ this.$props.product.price }}</div>
 					</div>
-					<div>{{ this.$props.product.description }}</div>
-					<div>{{ this.$props.product.price }}</div>
 				</div>
 			</div>
 		</div>

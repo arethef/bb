@@ -12,6 +12,7 @@ import { Role } from 'src/roles/entities/role.entity';
 import { ReqSignupUserDto } from './dto/req-signup-user.dto';
 import { User } from './entities/user.entity';
 import { DataSource } from 'typeorm';
+import { Image } from 'src/images/entities/image.entity';
 
 @Injectable()
 export class UsersService {
@@ -45,6 +46,10 @@ export class UsersService {
       where: { position: dto.role.position },
     });
     user.role = role;
+    const image: Image = await Image.findOne({
+      where: { id: dto.image.id },
+    });
+    user.image = image;
     // const userSaveResult = await User.save(user);
     // console.log(`❯❯❯❯❯❯ userSaveResult:`, userSaveResult);
     if (dto.role.position === 'brand') {
@@ -62,6 +67,8 @@ export class UsersService {
       await qr.connect();
       await qr.startTransaction();
       try {
+        const placeSaveResult = await qr.manager.save(place);
+        console.log(`❯❯❯❯❯❯ placeSaveResult:`, placeSaveResult);
         const userSaveResult = await qr.manager.save(user);
         console.log(`❯❯❯❯❯❯ userSaveResult:`, userSaveResult);
         const brandSaveResult = await qr.manager.save(brand);
@@ -104,7 +111,7 @@ export class UsersService {
     console.log(`❯❯❯❯❯❯ user:`, user);
     return user !== null;
   }
-  private async checkUserUsernameExists(username: string): Promise<boolean> {
+  async checkUserUsernameExists(username: string): Promise<boolean> {
     console.log(`++++++ [users.service.ts] checkUserUsernameExists() ++++++`);
     console.log(`❯❯❯❯❯❯ username:`, username);
     const user: User = await User.findOne({
@@ -166,6 +173,14 @@ export class UsersService {
     console.log(`❯❯❯❯❯❯ id:`, id, `, refreshToken:`, refreshToken);
     const user: User = await User.findOne({ where: { id } });
     await user.encryptRefreshToken(refreshToken);
+    await User.save(user);
+  }
+
+  async clearRefreshTokenWithUserId(id: string) {
+    const user: User = await User.findOne({
+      where: { id },
+    });
+    user.refreshToken = null;
     await User.save(user);
   }
 

@@ -15,7 +15,7 @@
 			</div>
 			<div class="mt-4 mb-4">
 				<div class="grid grid-cols-12 gap-4">
-					<div class="col-span-4 grid gap-2">
+					<div class="col-span-5 grid gap-2">
 						<div class="text-base">
 							{{ this.brandStore.brandCurrentBrand.businessName }}의 상품
 						</div>
@@ -26,7 +26,7 @@
 							></customer-brand-detail-products-section>
 						</div>
 					</div>
-					<div class="col-span-8 grid gap-2">
+					<div class="col-span-7 grid gap-2">
 						<div class="text-base">
 							{{ this.brandStore.brandCurrentBrand.businessName }}의 마켓
 						</div>

@@ -108,7 +108,7 @@
 										/>
 									</div>
 									<div class="p-1">
-										<div id="profileImagePreview">
+										<div id="imagePreview">
 											<!-- <p>프로필 이미지 미리보기</p> -->
 										</div>
 									</div>
@@ -200,9 +200,9 @@
 					const formData = new FormData();
 					formData.append("imageFile", files[0]);
 					this.reqCreateProductDto.image.formData = formData;
-					this.showProfileImage(files[0]);
+					this.showImage(files[0]);
 				} else {
-					this.clearProfileImage();
+					this.clearImage();
 				}
 
 				////
@@ -214,12 +214,12 @@
 				//   headers
 				// );
 			},
-			showProfileImage(file) {
-				this.clearProfileImage();
+			showImage(file) {
+				this.clearImage();
 				const figure = document.createElement("figure");
 				figure.classList.add("figure");
 				figure.id = "figure";
-				document.getElementById("profileImagePreview").appendChild(figure);
+				document.getElementById("imagePreview").appendChild(figure);
 				const img = document.createElement("img");
 				img.src = URL.createObjectURL(file);
 				img.style = `width:100px; height:100px`;
@@ -229,8 +229,8 @@
 				figcaption.innerHTML = `${file.name}`;
 				document.getElementById("figure").appendChild(figcaption);
 			},
-			clearProfileImage() {
-				document.getElementById("profileImagePreview").innerHTML = "";
+			clearImage() {
+				document.getElementById("imagePreview").innerHTML = "";
 			},
 			openProductNewModal() {
 				this.isProductNewModalOpen = true;

@@ -128,6 +128,12 @@ const router = createRouter({
           props: true,
         },
         {
+          path: "bookmarks",
+          name: "CustomerBookmarks",
+          component: () =>
+            import("../views/customer/bookmarks/CustomerBookmarksView.vue"),
+        },
+        {
           path: "profile",
           name: "CustomerProfile",
           component: () =>

@@ -30,15 +30,17 @@ export class TicketsService {
     });
     const result: ResBrandMarketDetailTableTicketDto[] = [];
     for (const t of tickets) {
-      const resBrandMarketDetailTableTicketDto: ResBrandMarketDetailTableTicketDto =
-        new ResBrandMarketDetailTableTicketDto();
-      resBrandMarketDetailTableTicketDto.ticket.id = t.id;
-      resBrandMarketDetailTableTicketDto.ticket.un = t.un;
-      resBrandMarketDetailTableTicketDto.ticket.customer.nickname =
-        t.customer.nickname;
-      resBrandMarketDetailTableTicketDto.ticket.totalQuantity = t.totalQuantity;
-      resBrandMarketDetailTableTicketDto.ticket.totalPrice = t.totalPrice;
-      result.push(resBrandMarketDetailTableTicketDto);
+      result.push({
+        ticket: {
+          id: t.id,
+          un: t.un,
+          customer: {
+            nickname: t.customer.nickname,
+          },
+          totalQuantity: t.totalQuantity,
+          totalPrice: t.totalPrice,
+        },
+      });
     }
     return result;
   }

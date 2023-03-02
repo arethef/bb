@@ -1,25 +1,33 @@
 <template>
 	<div>
-		<!-- <p>[CustomerBrandCard.vue]</p> -->
+		<!-- <p>[CustomerBookmarkBrandCard.vue]</p> -->
 		<div class="border p-4">
-			<div class="grid gird-flow-row gap-4 relative">
+			<div class="flex flex-col gap-4 relative">
 				<div class="absolute right-0 top-0">
 					<customer-bookmark-heart
 						targetEntity="brand"
-						:targetEntityId="this.$props.brand.id"
+						:targetEntityId="this.$props.bookmarkBrand.target.brand.id"
 					></customer-bookmark-heart>
 				</div>
 				<div
 					class="cursor-pointer"
-					@click="moveCustomerBrandDetailView(this.$props.brand.id)"
+					@click="
+						moveCustomerBrandDetailView(
+							this.$props.bookmarkBrand.target.brand.id
+						)
+					"
 				>
-					{{ this.$props.brand.businessName }}
+					{{ this.$props.bookmarkBrand.target.brand.businessName }}
 				</div>
-				<div class="">
+				<div>
 					<img
-						:src="`${this.$props.brand.user.image.url}`"
+						:src="`${this.$props.bookmarkBrand.target.brand.user.image.url}`"
 						class="cursor-pointer"
-						@click="moveCustomerBrandDetailView(this.$props.brand.id)"
+						@click="
+							moveCustomerBrandDetailView(
+								this.$props.bookmarkBrand.target.brand.id
+							)
+						"
 					/>
 				</div>
 			</div>
@@ -31,7 +39,7 @@
 	import { useBrandStore } from "../../../stores/brand";
 	import { useMarketStore } from "../../../stores/market";
 	import { useProductStore } from "../../../stores/product";
-	import CustomerBookmarkHeart from "../bookmarks/CustomerBookmarkHeart.vue";
+	import CustomerBookmarkHeart from "./CustomerBookmarkHeart.vue";
 	export default {
 		setup() {
 			const brandStore = useBrandStore();
@@ -40,7 +48,7 @@
 			return { brandStore, marketStore, productStore };
 		},
 		components: { CustomerBookmarkHeart },
-		props: ["brand"],
+		props: ["bookmarkBrand"],
 		data() {
 			return {};
 		},
