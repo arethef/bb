@@ -2,35 +2,32 @@
 	<div>
 		<!-- <p>[CustomerBookmarkMarketCard.vue]</p> -->
 		<div class="border p-4">
-			<div class="flex flex-col gap-2">
+			<div class="flex flex-col gap-4">
 				<div
-					class="flex justify-center cursor-pointer"
+					class="flex justify-center cursor-pointer font-bold"
 					@click="
-						moveCustomerMarketDetailView(
-							this.$props.bookmarkMarket.target.market.id
-						)
+						moveCustomerMarketDetailView(this.$props.bookmarkMarket.market.id)
 					"
 				>
-					{{ this.$props.bookmarkMarket.target.market.title }}
+					{{ this.$props.bookmarkMarket.market.title }}
 				</div>
 				<div>
 					<img
-						:src="`${this.$props.bookmarkMarket.target.market.image.url}`"
+						:src="`${this.$props.bookmarkMarket.market.image.url}`"
 						class="cursor-pointer"
 						@click="
-							moveCustomerMarketDetailView(
-								this.$props.bookmarkMarket.target.market.id
-							)
+							moveCustomerMarketDetailView(this.$props.bookmarkMarket.market.id)
 						"
 					/>
 				</div>
-				<div class="text-xs relative">
-					<div class="p-0.5"></div>
-					{{ this.$props.bookmarkMarket.target.market.brand.businessName }}
+				<div class="text-xs relative grid grid-cols-6">
+					<div class="col-span-5 text-xs">
+						{{ this.$props.bookmarkMarket.market.brand.businessName }}
+					</div>
 					<div class="absolute right-0 top-0">
 						<customer-bookmark-heart
 							targetEntity="market"
-							:targetEntityId="this.$props.bookmarkMarket.target.market.id"
+							:targetEntityId="this.$props.bookmarkMarket.market.id"
 						></customer-bookmark-heart>
 					</div>
 				</div>

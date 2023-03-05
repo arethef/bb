@@ -1,6 +1,6 @@
 export class ReqCreateTicketDto {
   ticket: {
-    brandId: string;
+    // brandId: string;
     marketId: string;
     totalQuantity: number;
     totalPrice: number;

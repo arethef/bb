@@ -1,3 +1,4 @@
+import { Bookmark } from 'src/bookmarks/entities/bookmark.entity';
 import { Brand } from 'src/brands/entities/brand.entity';
 import { Base } from 'src/common/base/base.entity';
 import {
@@ -54,8 +55,10 @@ export class Product extends Base {
   lineups: Lineup[];
   @OneToMany(() => Order, (order) => order.product)
   orders: Order[];
-  @OneToMany(() => Target, (target) => target.product)
-  targets: Target[];
+  // @OneToMany(() => Target, (target) => target.product)
+  // targets: Target[];
+  @OneToMany(() => Bookmark, (bookmark) => bookmark.product)
+  bookmarks: Bookmark[];
 
   @BeforeInsert()
   increaseDayCount() {

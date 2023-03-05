@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<!-- <p>[CustomerBrandDetailMarketCard.vue]</p> -->
+		<!-- <p>[CustomerProductDetailMarketCard.vue]</p> -->
 		<div class="border p-4">
 			<!-- {{ this.$props.market }} -->
 			<div class="grid grid-cols-12 gap-4 relative">
@@ -79,9 +79,6 @@
 		},
 		components: { CustomerBookmarkHeart },
 		props: ["market"],
-		data() {
-			return {};
-		},
 		computed: {
 			open() {
 				return new Date(this.$props.market.openDateTime);
@@ -89,6 +86,9 @@
 			close() {
 				return new Date(this.$props.market.closeDateTime);
 			},
+		},
+		data() {
+			return {};
 		},
 		async beforeCreate() {
 			await this.lineupStore.loadLineups(this.$props.market.id);

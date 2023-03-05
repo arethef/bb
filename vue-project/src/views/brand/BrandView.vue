@@ -4,14 +4,22 @@
 		<header>
 			<div class="relative">
 				<div class="absolute right-8 top-0">
-					<logout-button target="brand"></logout-button>
+					<logout-button
+						target="brand"
+						@click="moveBrandView()"
+					></logout-button>
 				</div>
 			</div>
 			<div class="flex justify-center m-8">
 				<div>
-					<button type="button" @click="moveBrandView()">
-						<div class="text-5xl font-bold">
+					<button type="button">
+						<div
+							v-if="this.brandStore.brandProfile !== undefined"
+							class="text-5xl font-bold"
+						>
 							{{ this.brandStore.brandProfile.businessName }}
+							<!-- {{ this.$session }} -->
+							<!-- {{ sessionStorage.getItem("brand") }} -->
 						</div>
 					</button>
 				</div>
@@ -64,24 +72,25 @@
 <script>
 	import LogoutButton from "../../components/logout/LogoutButton.vue";
 	import { useBrandStore } from "../../stores/brand";
+	import { useLinkStore } from "../../stores/link";
 	export default {
 		components: { LogoutButton },
 		setup() {
 			const brandStore = useBrandStore();
-			return { brandStore };
+			const linkStore = useLinkStore();
+			return { brandStore, linkStore };
 		},
 		data() {
 			return {};
 		},
-		// created() {
-		// 	this.brandStore.getBrandProfile();
-		// },
-		async created() {
+		computed: {},
+		async beforeCreate() {
 			try {
 				await this.brandStore.getBrandProfile();
 			} catch (err) {
 				this.$router.push("/login");
 			}
+			await this.linkStore.loadLinks(this.brandStore.brandProfile.id);
 		},
 		methods: {
 			moveBrandView() {

@@ -1,10 +1,10 @@
 <template>
-	<div>
+	<div v-if="this.bookmarkStore.bookmarkCurrentBookmarks">
 		<button @click="onClickBookmarkHeartBtn()">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
-				:fill="`${computedHeartFilled ? 'full' : 'none'}`"
-				viewBox="0 0 24 24"
+				:fill="`${this.heartFilled ? 'full' : 'none'}`"
+				viewBox="0 0 28 28"
 				stroke-width="1.5"
 				stroke="currentColor"
 				class="w-6 h-6"
@@ -44,18 +44,7 @@
 						  ),
 			};
 		},
-		computed: {
-			computedHeartFilled() {
-				// console.log(
-				// 	`++++++ [CustomerBookmarkHear.vue] computedHeartFilled() ++++++`
-				// );
-				// console.log(
-				// 	`❯❯❯❯❯❯ [CustomerBookmarkHear.vue] computedHeartFilled() this.heartFilled:`,
-				// 	this.heartFilled
-				// );
-				return this.heartFilled;
-			},
-		},
+		computed: {},
 		async beforeCreate() {
 			await this.bookmarkStore.loadCurrentBookmarks();
 		},

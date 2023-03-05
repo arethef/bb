@@ -163,4 +163,27 @@ export class ProductsController {
     );
     return result;
   }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('list/customer-products')
+  async loadCustomerProducts(
+    @Req() req,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<Product[]> {
+    const result = await this.productsService.loadCustomerProducts();
+    return result;
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('search/:searchStr')
+  async loadSearchProductsResult(
+    @Req() req,
+    @Param('searchStr') searchStr: string,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<Product[]> {
+    const result = await this.productsService.findProductsBySearchStr(
+      searchStr,
+    );
+    return result;
+  }
 }

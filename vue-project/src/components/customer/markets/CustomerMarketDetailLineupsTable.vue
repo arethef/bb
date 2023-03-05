@@ -35,11 +35,13 @@
 							{{ lineup.product.name }}
 						</td>
 						<td scope="row" class="px-2 py-2 whitespace-nowrap border-r">
-							<img
-								:src="`${lineup.product.image.url}`"
-								style="max-width: 100px"
-								alt=""
-							/>
+							<div class="flex justify-center">
+								<img
+									:src="`${lineup.product.image.url}`"
+									style="max-width: 100px"
+									alt=""
+								/>
+							</div>
 						</td>
 						<td scope="row" class="px-2 py-2 whitespace-nowrap border-r">
 							{{ lineup.product.price }}

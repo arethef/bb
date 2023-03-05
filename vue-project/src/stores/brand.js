@@ -180,4 +180,8 @@ export const useBrandStore = defineStore("brand", {
       return result;
     },
   },
+  // persist: true,
+  // persist: {
+  //   storage: sessionStorage,
+  // },
 });

@@ -1,63 +1,55 @@
 <template>
 	<div class="md:container md:mx-auto">
 		<!-- <p>[BrandProductDetailView.vue]</p> -->
-		<div class="flex justify-center gap-4">
-			<div class="basis-1/4">
-				<div class="border mt-4 p-4">
-					<div class="grid grid-cols-1 gap-4">
-						<label class="block">
-							<span class="">상품고유번호</span>
-							<input
-								type="text"
-								class="mt-1 block w-full text-xs"
-								placeholder=""
-								v-model="this.productStore.productCurrentProduct.un"
-								disabled
-							/>
-						</label>
-						<label class="block">
-							<span class="">상품이름</span>
-							<input
-								type="text"
-								class="mt-1 block w-full text-xs"
-								placeholder=""
-								v-model="this.productStore.productCurrentProduct.name"
-								disabled
-							/>
-						</label>
-						<label class="block">
-							<span class="">상품설명</span>
-							<input
-								type="text"
-								class="mt-1 block w-full text-xs"
-								placeholder=""
-								v-model="this.productStore.productCurrentProduct.description"
-								disabled
-							/>
-						</label>
-						<label class="block">
-							<span class="">상품가격</span>
-							<input
-								type="text"
-								class="mt-1 block w-full text-xs"
-								placeholder=""
-								v-model="this.productStore.productCurrentProduct.price"
-								disabled
-							/>
-						</label>
-						<label class="block">
-							<span class="">상품사진</span>
-							<div>
+		<div class="grid grid-cols-12 gap-4">
+			<div class="col-span-3">
+				<div class="border p-4 grid gap-4">
+					<label for="un" class="block">
+						<span>상품번호</span>
+						<div class="border-2 my-1 bg-white">
+							<div class="text-xs m-2">
+								{{ this.productStore.productCurrentProduct.un }}
+							</div>
+						</div>
+					</label>
+					<label for="name" class="block">
+						<span>상품이름</span>
+						<div class="border-2 my-1 bg-white">
+							<div class="text-xs m-2">
+								{{ this.productStore.productCurrentProduct.name }}
+							</div>
+						</div>
+					</label>
+					<label for="description" class="block">
+						<span>상품설명</span>
+						<div class="border-2 my-1 bg-white">
+							<div class="text-xs m-2">
+								{{ this.productStore.productCurrentProduct.description }}
+							</div>
+						</div>
+					</label>
+					<label for="price" class="block">
+						<span>상품가격</span>
+						<div class="border-2 my-1 bg-white">
+							<div class="text-xs m-2">
+								{{ this.productStore.productCurrentProduct.price }}
+							</div>
+						</div>
+					</label>
+					<label for="image" class="block">
+						<span>상품사진</span>
+						<div class="">
+							<div class="my-2">
 								<img
 									:src="`${this.productStore.productCurrentProduct.image.url}`"
 								/>
 							</div>
-						</label>
-					</div>
+						</div>
+					</label>
 				</div>
 			</div>
-			<div class="basis-3/4">
-				<div class="border mt-4 p-4">
+			<div class="col-span-9">
+				<div class="border p-4">
 					<brand-product-detail-markets-table
 						:productId="this.$props.productId"
 					></brand-product-detail-markets-table>

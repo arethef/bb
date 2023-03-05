@@ -5,7 +5,7 @@ import { Customer } from 'src/customers/entities/customer.entity';
 import { Image } from 'src/images/entities/image.entity';
 import { Place } from 'src/places/entities/place.entity';
 import { User } from 'src/users/entities/user.entity';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { ReqUpdateBrandDto } from './dto/req-update-brand.dto';
 import { Brand } from './entities/brand.entity';
 
@@ -58,6 +58,7 @@ export class BrandsService {
     user.username = dto.user.username;
     if (dto.user.password !== '') {
       user.password = dto.user.password;
+      await user.encryptPassword();
     }
     if (user.image.id !== dto.user.image.id) {
       const image: Image = await Image.findOne({
@@ -83,6 +84,13 @@ export class BrandsService {
     brand.introduction = dto.introduction;
     await User.save(user);
     const result: Brand = await Brand.save(brand);
+    return result;
+  }
+
+  async findBrandsBySearchStr(searchStr: string): Promise<Brand[]> {
+    const result: Brand[] = await Brand.find({
+      where: { businessName: Like(`%${searchStr}%`) },
+    });
     return result;
   }
 }

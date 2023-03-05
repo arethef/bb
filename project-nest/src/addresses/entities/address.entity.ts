@@ -1,11 +1,13 @@
 import { Customer } from 'src/customers/entities/customer.entity';
 import { Place } from 'src/places/entities/place.entity';
+import { Ticket } from 'src/tickets/entities/ticket.entity';
 import {
   BaseEntity,
   Column,
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   RelationId,
 } from 'typeorm';
@@ -29,6 +31,9 @@ export class Address extends BaseEntity {
   @JoinColumn()
   place: Place;
 
-  @Column()
+  @Column({ nullable: true })
   alias: string;
+
+  // @OneToMany(() => Ticket, (ticket) => ticket.address)
+  // tickets: Ticket[];
 }

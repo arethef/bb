@@ -7,9 +7,9 @@
 					v-for="(
 						bookmark, index
 					) in this.bookmarkStore.bookmarkCurrentBookmarks.filter(
-						(bookmark) => bookmark.target.market
+						(bookmark) => bookmark.market
 					)"
-					:key="bookmark.target.market.id"
+					:key="bookmark.market.id"
 				>
 					<customer-bookmark-market-card
 						:bookmarkMarket="bookmark"
@@ -32,6 +32,9 @@
 		components: { CustomerBookmarkMarketCard },
 		data() {
 			return {};
+		},
+		async beforeCreate() {
+			await this.bookmarkStore.loadCurrentBookmarks();
 		},
 		created() {},
 		methods: {},

@@ -39,7 +39,7 @@
 			};
 		},
 		async beforeCreate() {
-			this.bookmarkStore.loadCurrentBookmarks();
+			await this.bookmarkStore.loadCurrentBookmarks();
 		},
 		created() {},
 		methods: {

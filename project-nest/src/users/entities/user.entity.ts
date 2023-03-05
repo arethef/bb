@@ -9,6 +9,7 @@ import { Place } from 'src/places/entities/place.entity';
 import { Role } from 'src/roles/entities/role.entity';
 import {
   BeforeInsert,
+  BeforeUpdate,
   Column,
   Entity,
   JoinColumn,

@@ -18,6 +18,7 @@ import { Brand } from './entities/brand.entity';
 export class BrandsController {
   constructor(private readonly brandsService: BrandsService) {}
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get('profile')
   async getBrandProfile(@Req() req, @Res({ passthrough: true }) res: Response) {
     console.log(`++++++ [brands.controller.ts] getBrandProfile() ++++++`);
@@ -68,6 +69,24 @@ export class BrandsController {
     @Res({ passthrough: true }) res: Response,
   ): Promise<Brand> {
     const result = await this.brandsService.updateBrand(req.user.id, dto);
+    return result;
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('search/:searchStr')
+  async loadSearchBrandsResult(
+    @Req() req,
+    @Param('searchStr') searchStr: string,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<Brand[]> {
+    console.log(
+      `++++++ [brands.controller.ts] loadSearchBrandsResult() ++++++`,
+    );
+    console.log(
+      `❯❯❯❯❯❯ [brands.controller.ts] loadSearchBrandsResult() searchStr:`,
+      searchStr,
+    );
+    const result = await this.brandsService.findBrandsBySearchStr(searchStr);
     return result;
   }
 }

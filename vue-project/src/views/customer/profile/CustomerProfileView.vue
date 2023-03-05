@@ -1,7 +1,10 @@
 <template>
 	<div>
 		<!-- <p>[CustomerProfileView.vue]</p> -->
-		<div class="grid grid-cols-10 gap-8">
+		<div
+			v-if="this.customerStore.customerProfile !== undefined"
+			class="grid grid-cols-10 gap-8"
+		>
 			<div class="col-span-2"></div>
 			<div class="col-span-2">
 				<div class="flex flex-col gap-1">
@@ -49,7 +52,7 @@
 									type="text"
 									id="zipcode"
 									class="col-span-7 form-input block text-xs"
-									:v-model="
+									:value="
 										this.customerStore.customerProfile.user.place
 											? this.customerStore.customerProfile.user.place.zipcode
 											: ''
@@ -70,7 +73,7 @@
 									type="text"
 									id="basic"
 									class="col-span-7 form-input block text-xs"
-									:v-model="
+									:value="
 										this.customerStore.customerProfile.user.place
 											? this.customerStore.customerProfile.user.place.basic
 											: ''
@@ -91,7 +94,7 @@
 									type="text"
 									id="detail"
 									class="col-span-7 form-input block text-xs"
-									:v-model="
+									:value="
 										this.customerStore.customerProfile.user.place
 											? this.customerStore.customerProfile.user.place.detail
 											: ''

@@ -10,6 +10,7 @@ import { ResBrandTableMarketDto } from './dto/res-brand-table-market.dto';
 import { ResBrandProductDetailMarketDto } from './dto/res-brand-product-detail-table.dto';
 import { ResCustomerCardMarketDto } from './dto/res-customer-card-market.dto';
 import { Customer } from 'src/customers/entities/customer.entity';
+import { Like } from 'typeorm';
 
 @Injectable()
 export class MarketsService {
@@ -166,5 +167,23 @@ export class MarketsService {
       where: { brandId },
     });
     return markets;
+  }
+
+  async findMarketsBySearchStr(searchStr: string): Promise<Market[]> {
+    const result: Market[] = await Market.find({
+      where: [
+        { title: Like(`%${searchStr}%`) },
+        { content: Like(`%${searchStr}%`) },
+      ],
+    });
+    return result;
+  }
+
+  async loadCustomerProductDetailMarkets(productId: string): Promise<Market[]> {
+    const lineups: Lineup[] = await Lineup.find({
+      where: { productId },
+    });
+    const result: Market[] = lineups.map((lineup) => lineup.market);
+    return result;
   }
 }

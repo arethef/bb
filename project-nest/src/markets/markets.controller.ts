@@ -94,4 +94,28 @@ export class MarketsController {
     );
     return result;
   }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('search/:searchStr')
+  async loadSearchMarketsResult(
+    @Req() req,
+    @Param('searchStr') searchStr: string,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<Market[]> {
+    const result = await this.marketsService.findMarketsBySearchStr(searchStr);
+    return result;
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('list/customer-product/:productId')
+  async loadCustomerProductDetailMarkets(
+    @Req() req,
+    @Param('productId') productId: string,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<Market[]> {
+    const result = await this.marketsService.loadCustomerProductDetailMarkets(
+      productId,
+    );
+    return result;
+  }
 }

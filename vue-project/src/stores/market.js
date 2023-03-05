@@ -16,11 +16,44 @@ export const useMarketStore = defineStore("market", {
       version: 0,
       un: "",
       brandId: "",
-      brand: {},
+      brand: {
+        id: "",
+        userId: "",
+        user: {
+          id: "",
+          createdAt: "",
+          updatedAt: "",
+          deletedAt: "",
+          version: "",
+          email: "",
+          password: "",
+          username: "",
+          roleId: "",
+          role: {},
+          imageId: "",
+          image: {
+            id: "",
+            url: "",
+          },
+          placeId: "",
+          place: {
+            id: "",
+            zipcode: "",
+            basic: "",
+            detail: "",
+          },
+        },
+        businessName: "",
+        brn: "",
+        introduction: "",
+      },
       title: "",
       content: "",
       imageId: "",
-      image: {},
+      image: {
+        id: "",
+        url: "",
+      },
       deliveryFee: 0,
       deliveryFeeAdded: 0,
       deliveryFree: 0,
@@ -33,6 +66,7 @@ export const useMarketStore = defineStore("market", {
     brandProductDetailMarkets: [],
     customerAllCardsMarketsLatest: [],
     customerBrandDetailMarkets: [],
+    customerProductDetailMarkets: [],
   }),
   getters: {
     marketCurrentMarket(state) {
@@ -53,6 +87,9 @@ export const useMarketStore = defineStore("market", {
     marketCustomerBrandDetailMarkets(state) {
       return state.customerBrandDetailMarkets;
     },
+    marketCustomerProductDetailMarkets(state) {
+      return state.customerProductDetailMarkets;
+    },
   },
   actions: {
     setCurrentMarket(currentMarket) {
@@ -72,6 +109,9 @@ export const useMarketStore = defineStore("market", {
     },
     setCustomerBrandDetailMarkets(customerBrandDetailMarkets) {
       this.customerBrandDetailMarkets = customerBrandDetailMarkets;
+    },
+    setCustomerProductDetailMarkets(customerProductDetailMarkets) {
+      this.customerProductDetailMarkets = customerProductDetailMarkets;
     },
     async createMarket(reqCreateMarketDto) {
       console.log(`++++++ [market.js] createMarket() ++++++`);
@@ -176,6 +216,22 @@ export const useMarketStore = defineStore("market", {
         });
       // this.customerBrandDetailMarkets = result;
       this.setCustomerBrandDetailMarkets(result);
+      return result;
+    },
+    async loadCustomerProductDetailMarkets(productId) {
+      let result = {};
+      await axios
+        .get(`/api/markets/list/customer-product/${productId}`)
+        .then((res) => {
+          result = res.data;
+        })
+        .catch((err) => {
+          console.error(
+            `❯❯❯❯❯❯ [market.js] loadCustomerProductDetailMarkets() err:`,
+            err
+          );
+        });
+      this.setCustomerProductDetailMarkets(result);
       return result;
     },
   },

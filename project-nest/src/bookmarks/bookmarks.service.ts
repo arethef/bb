@@ -17,12 +17,15 @@ export class BookmarksService {
     });
     const bookmark: Bookmark = new Bookmark();
     bookmark.customer = customer;
-    const target: Target = new Target();
-    target.product = await Product.findOne({
+    bookmark.product = await Product.findOne({
       where: { id: productId },
     });
-    const targetResult = await Target.save(target);
-    bookmark.target = targetResult;
+    // const target: Target = new Target();
+    // target.product = await Product.findOne({
+    //   where: { id: productId },
+    // });
+    // const targetResult = await Target.save(target);
+    // bookmark.target = targetResult;
     const result = await Bookmark.save(bookmark);
     return result;
   }
@@ -35,12 +38,15 @@ export class BookmarksService {
     });
     const bookmark: Bookmark = new Bookmark();
     bookmark.customer = customer;
-    const target: Target = new Target();
-    target.market = await Market.findOne({
+    bookmark.market = await Market.findOne({
       where: { id: marketId },
     });
-    const targetResult = await Target.save(target);
-    bookmark.target = targetResult;
+    // const target: Target = new Target();
+    // target.market = await Market.findOne({
+    //   where: { id: marketId },
+    // });
+    // const targetResult = await Target.save(target);
+    // bookmark.target = targetResult;
     const result = await Bookmark.save(bookmark);
     return result;
   }
@@ -53,12 +59,15 @@ export class BookmarksService {
     });
     const bookmark: Bookmark = new Bookmark();
     bookmark.customer = customer;
-    const target: Target = new Target();
-    target.brand = await Brand.findOne({
+    bookmark.brand = await Brand.findOne({
       where: { id: brandId },
     });
-    const targetResult = await Target.save(target);
-    bookmark.target = targetResult;
+    // const target: Target = new Target();
+    // target.brand = await Brand.findOne({
+    //   where: { id: brandId },
+    // });
+    // const targetResult = await Target.save(target);
+    // bookmark.target = targetResult;
     const result = await Bookmark.save(bookmark);
     return result;
   }
@@ -80,9 +89,7 @@ export class BookmarksService {
     const bookmarks: Bookmark[] = await Bookmark.find({
       where: { customerId: customer.id },
     });
-    const result = bookmarks.filter(
-      (bookmark) => bookmark.target.product !== null,
-    );
+    const result = bookmarks.filter((bookmark) => bookmark.product !== null);
     return result;
   }
   async loadCurrentBookmarksMarket(userId: string): Promise<Bookmark[]> {
@@ -92,9 +99,7 @@ export class BookmarksService {
     const bookmarks: Bookmark[] = await Bookmark.find({
       where: { customerId: customer.id },
     });
-    const result = bookmarks.filter(
-      (bookmark) => bookmark.target.market !== null,
-    );
+    const result = bookmarks.filter((bookmark) => bookmark.market !== null);
     return result;
   }
   async loadCurrentBookmarksBrand(userId: string): Promise<Bookmark[]> {
@@ -104,9 +109,7 @@ export class BookmarksService {
     const bookmarks: Bookmark[] = await Bookmark.find({
       where: { customerId: customer.id },
     });
-    const result = bookmarks.filter(
-      (bookmark) => bookmark.target.brand !== null,
-    );
+    const result = bookmarks.filter((bookmark) => bookmark.brand !== null);
     return result;
   }
 
@@ -114,12 +117,15 @@ export class BookmarksService {
     const customer: Customer = await Customer.findOne({
       where: { userId },
     });
-    const target: Target = await Target.findOne({
-      where: { productId },
+    const bookmark: Bookmark = await Bookmark.findOne({
+      where: { customerId: customer.id, productId },
     });
-    const bookmark = await Bookmark.findOne({
-      where: { customerId: customer.id, targetId: target.id },
-    });
+    // const target: Target = await Target.findOne({
+    //   where: { productId },
+    // });
+    // const bookmark = await Bookmark.findOne({
+    //   where: { customerId: customer.id, targetId: target.id },
+    // });
     const result = await Bookmark.remove(bookmark);
     return result;
   }
@@ -128,12 +134,15 @@ export class BookmarksService {
     const customer: Customer = await Customer.findOne({
       where: { userId },
     });
-    const target: Target = await Target.findOne({
-      where: { marketId },
+    const bookmark: Bookmark = await Bookmark.findOne({
+      where: { customerId: customer.id, marketId },
     });
-    const bookmark = await Bookmark.findOne({
-      where: { customerId: customer.id, targetId: target.id },
-    });
+    // const target: Target = await Target.findOne({
+    //   where: { marketId },
+    // });
+    // const bookmark = await Bookmark.findOne({
+    //   where: { customerId: customer.id, targetId: target.id },
+    // });
     const result = await Bookmark.remove(bookmark);
     return result;
   }
@@ -142,12 +151,15 @@ export class BookmarksService {
     const customer: Customer = await Customer.findOne({
       where: { userId },
     });
-    const target: Target = await Target.findOne({
-      where: { brandId },
+    const bookmark: Bookmark = await Bookmark.findOne({
+      where: { customerId: customer.id, brandId },
     });
-    const bookmark = await Bookmark.findOne({
-      where: { customerId: customer.id, targetId: target.id },
-    });
+    // const target: Target = await Target.findOne({
+    //   where: { brandId },
+    // });
+    // const bookmark = await Bookmark.findOne({
+    //   where: { customerId: customer.id, targetId: target.id },
+    // });
     const result = await Bookmark.remove(bookmark);
     return result;
   }

@@ -13,9 +13,42 @@ export const useProductStore = defineStore("product", {
       name: "",
       description: "",
       price: 0,
-      brand: {},
+      brand: {
+        id: "",
+        userId: "",
+        user: {
+          id: "",
+          createdAt: "",
+          updatedAt: "",
+          deletedAt: "",
+          version: "",
+          email: "",
+          password: "",
+          username: "",
+          roleId: "",
+          role: {},
+          imageId: "",
+          image: {
+            id: "",
+            url: "",
+          },
+          placeId: "",
+          place: {
+            id: "",
+            zipcode: "",
+            basic: "",
+            detail: "",
+          },
+        },
+        businessName: "",
+        brn: "",
+        introduction: "",
+      },
       brandId: "",
-      image: {},
+      image: {
+        id: "",
+        url: "",
+      },
       imageId: "",
     },
     currentProductId: "",
@@ -26,6 +59,7 @@ export const useProductStore = defineStore("product", {
     customerBrandDetailProducts: [],
     customerTicketDetailProducts: [],
     brandTicketDetailProducts: [],
+    customerProducts: [],
   }),
   getters: {
     productCurrentProduct(state) {
@@ -55,6 +89,9 @@ export const useProductStore = defineStore("product", {
     productBrandTicketDetailProducts(state) {
       return state.brandTicketDetailProducts;
     },
+    productCustomerProducts(state) {
+      return state.customerProducts;
+    },
   },
   actions: {
     setCurrentProductId(currentProductId) {
@@ -83,6 +120,9 @@ export const useProductStore = defineStore("product", {
     },
     setBrandTicketDetailProducts(brandTicketDetailProducts) {
       this.brandTicketDetailProducts = brandTicketDetailProducts;
+    },
+    setCustomerProducts(customerProducts) {
+      this.customerProducts = customerProducts;
     },
     async createProduct(reqCreateProductDto) {
       console.log(`++++++ [product.js] createProduct() ++++++`);
@@ -232,6 +272,19 @@ export const useProductStore = defineStore("product", {
           );
         });
       this.setBrandTicketDetailProducts(result);
+      return result;
+    },
+    async loadCustomerProducts() {
+      let result = {};
+      await axios
+        .get(`/api/products/list/customer-products`)
+        .then((res) => {
+          result = res.data;
+        })
+        .catch((err) => {
+          console.error(`❯❯❯❯❯❯ [product.js] loadCustomerProducts() err:`, err);
+        });
+      this.setCustomerProducts(result);
       return result;
     },
   },

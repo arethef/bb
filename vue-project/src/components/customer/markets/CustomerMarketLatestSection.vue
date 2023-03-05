@@ -7,8 +7,6 @@
 					v-for="(market, index) in this.marketStore
 						.marketCustomerAllCardsMarketsLatest"
 					:key="market.market.id"
-					class="cursor-pointer"
-					@click="moveCustomerMarketDetailView(market.market.id)"
 				>
 					<customer-market-card
 						:market="market.market"
@@ -53,28 +51,7 @@
 			);
 		},
 		created() {},
-		methods: {
-			async moveCustomerMarketDetailView(id) {
-				console.log(
-					`++++++ [CustomerMarketLatestSection.vue] moveCustomerMarketDetailView() ++++++`
-				);
-				await this.marketStore.detailMarket(id);
-				this.marketStore.setCurrentMarketId(id);
-				console.log(
-					`❯❯❯❯❯❯ [CustomerMarketLatestSection.vue] beforeCreate() moveCustomerMarketDetailView() this.marketStore.marketCurrentMarket:`,
-					this.marketStore.marketCurrentMarket
-				);
-				console.log(
-					`❯❯❯❯❯❯ [CustomerMarketLatestSection.vue] beforeCreate() moveCustomerMarketDetailView() this.marketStore.marketCurrentMarketId:`,
-					this.marketStore.marketCurrentMarketId
-				);
-				await this.lineupStore.loadLineups(id);
-				this.$router.push({
-					name: `CustomerMarketDetail`,
-					params: { marketId: id },
-				});
-			},
-		},
+		methods: {},
 	};
 </script>
 

@@ -1,3 +1,4 @@
+import { Address } from 'src/addresses/entities/address.entity';
 import { Brand } from 'src/brands/entities/brand.entity';
 import { Base } from 'src/common/base/base.entity';
 import {
@@ -8,6 +9,7 @@ import {
 import { Customer } from 'src/customers/entities/customer.entity';
 import { Market } from 'src/markets/entities/market.entity';
 import { Order } from 'src/orders/entities/order.entity';
+import { Place } from 'src/places/entities/place.entity';
 import {
   BeforeInsert,
   Column,
@@ -55,6 +57,18 @@ export class Ticket extends Base {
   deliveryFreeApply: boolean;
   @Column()
   deliveryAddress: string;
+  // @Column({ nullable: false })
+  // @RelationId((ticket: Ticket) => ticket.place)
+  // placeId: string;
+  // @ManyToOne(() => Place, { eager: true })
+  // @JoinColumn()
+  // place: Place;
+  // @Column({ nullable: true })
+  // @RelationId((ticket: Ticket) => ticket.address)
+  // addressId: string;
+  // @ManyToOne(() => Address, { eager: true })
+  // @JoinColumn()
+  // address: Address;
   @Column({ default: '1' })
   deliveryStatus: string; // 1:진행중 2:완료 3:취소(?)
 

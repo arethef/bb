@@ -59,7 +59,7 @@
 						</button>
 					</div>
 					<!-- Start of Modal Body -->
-					<div class="relative overflow-y-auto mt-8">
+					<div class="relative overflow-y-auto mt-4 p-4">
 						<div class="grid grid-cols-12 gap-4">
 							<div class="col-span-4">
 								<div class="border p-4">
@@ -83,11 +83,73 @@
 										</div>
 									</div>
 								</div>
-								<div class="border p-4 mt-4">
-									<span class="text-gray-700">배송지</span>
-									<div class="border-2 my-1">
-										<div class="text-xs m-2">
-											{{ this.reqCreateTicketDto.ticket.deliveryAddress }}
+								<div
+									v-if="addressInputFormVisible"
+									class="border p-4 mt-4 flex flex-col gap-2"
+								>
+									<div class="flex flex-col gap-1">
+										<label for="zipcode">우편번호</label>
+										<input
+											type="text"
+											name="zipcode"
+											id="zipcode"
+											class="text-xs"
+											v-model="this.place.zipcode"
+										/>
+									</div>
+									<div class="flex flex-col gap-1">
+										<label for="basic">주소</label>
+										<input
+											type="text"
+											name="basic"
+											id="basic"
+											class="text-xs"
+											v-model="this.place.basic"
+										/>
+									</div>
+									<div class="flex flex-col gap-1">
+										<label for="detail">상세주소</label>
+										<input
+											type="text"
+											name="detail"
+											id="detail"
+											class="text-xs"
+											v-model="this.place.detail"
+										/>
+									</div>
+								</div>
+								<div v-else class="border p-4 mt-4">
+									<div class="flex flex-row gap-4 items-center relative">
+										<div class="text-gray-700">배송지</div>
+									</div>
+									<div class="border-2 my-2">
+										<div class="flex flex-row gap-4 items-center relative">
+											<div class="text-xs m-2">
+												{{
+													`${this.customerStore.customerProfile.user.place.zipcode}) 
+												${this.customerStore.customerProfile.user.place.basic}, 
+												${this.customerStore.customerProfile.user.place.detail}`
+												}}
+											</div>
+											<button
+												class="absolute right-1"
+												@click="this.addressInputFormVisible = true"
+											>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													fill="none"
+													viewBox="0 0 28 28"
+													stroke-width="1.5"
+													stroke="currentColor"
+													class="w-6 h-6"
+												>
+													<path
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														d="M6 18L18 6M6 6l12 12"
+													/>
+												</svg>
+											</button>
 										</div>
 									</div>
 								</div>
@@ -201,15 +263,22 @@
 			return {
 				reqCreateTicketDto: {
 					ticket: {
-						brandId: this.marketStore.marketCurrentMarket.brandId,
+						// brandId: this.marketStore.marketCurrentMarket.brandId,
 						marketId: this.$props.marketId,
 						totalQuantity: this.$props.totalQuantity,
 						totalPrice: this.$props.totalPrice,
 						deliveryFreeApply: false,
-						deliveryAddress: "광안리",
+						deliveryAddress: "",
 					},
 					orders: this.$props.orders,
 				},
+				place: {
+					zipcode: "",
+					basic: "",
+					detail: "",
+				},
+				addressInputFormVisible:
+					this.customerStore.customerProfile.user.place === undefined,
 			};
 		},
 		computed: {},
@@ -219,6 +288,9 @@
 		created() {},
 		methods: {
 			async onClickMarketDetailTicketNewCreateBtn() {
+				if (!this.reqCreateTicketDto.ticket.deliveryAddress) {
+					this.combineAndSetDeliveryAddress();
+				}
 				const result = await this.ticketStore.createTicket(
 					this.reqCreateTicketDto
 				);
@@ -243,7 +315,16 @@
 					params: { ticketId: result.id },
 				});
 			},
+			combineAndSetDeliveryAddress() {
+				this.reqCreateTicketDto.ticket.deliveryAddress = `${
+					document.getElementById("zipcode").value
+				}) ${document.getElementById("basic").value}, ${
+					document.getElementById("detail").value
+				}`;
+			},
 			async onClickMarketDetailTicketNewConfirmBtn() {
+				this.addressInputFormVisible =
+					this.customerStore.customerProfile.user.place === undefined;
 				const customerTicketNewOrders =
 					await this.productStore.loadTicketNewOrders(this.$props.orders);
 				this.productStore.setCustomerTicketNewOrders(customerTicketNewOrders);

@@ -2,8 +2,10 @@ import axios from "axios";
 import { defineStore } from "pinia";
 
 export const useBookmarkStore = defineStore("bookmark", {
+  persist: true,
   state: () => ({
     currentBookmarks: [],
+    currentBookmarksIdList: [],
     currentBookmarksProductIdList: [],
     currentBookmarksMarketIdList: [],
     currentBookmarksBrandIdList: [],
@@ -14,6 +16,9 @@ export const useBookmarkStore = defineStore("bookmark", {
   getters: {
     bookmarkCurrentBookmarks(state) {
       return state.currentBookmarks;
+    },
+    bookmarkCurrentBookmarksIdList(state) {
+      return state.currentBookmarksIdList;
     },
     bookmarkCurrentBookmarksProductIdList(state) {
       return state.currentBookmarksProductIdList;
@@ -38,42 +43,24 @@ export const useBookmarkStore = defineStore("bookmark", {
     setCurrentBookmarks(currentBookmarks) {
       this.currentBookmarks = currentBookmarks;
       this.currentBookmarksProduct = currentBookmarks.filter(
-        (bookmark) => bookmark.target.product !== null
+        (bookmark) => bookmark.product !== null
       );
       this.currentBookmarksProductIdList = this.currentBookmarksProduct.map(
-        (bookmark) => bookmark.target.productId
+        (bookmark) => bookmark.productId
       );
       this.currentBookmarksMarket = currentBookmarks.filter(
-        (bookmark) => bookmark.target.market !== null
+        (bookmark) => bookmark.market !== null
       );
       this.currentBookmarksMarketIdList = this.currentBookmarksMarket.map(
-        (bookmark) => bookmark.target.marketId
+        (bookmark) => bookmark.marketId
       );
       this.currentBookmarksBrand = currentBookmarks.filter(
-        (bookmark) => bookmark.target.brand !== null
+        (bookmark) => bookmark.brand !== null
       );
       this.currentBookmarksBrandIdList = this.currentBookmarksBrand.map(
-        (bookmark) => bookmark.target.brandId
+        (bookmark) => bookmark.brandId
       );
     },
-    // setCurrentBookmarksProductIdList(currentBookmarksProductIdList) {
-    //   this.currentBookmarksProductIdList = currentBookmarksProductIdList;
-    // },
-    // setCurrentBookmarksMarketIdList(currentBookmarksMarketIdList) {
-    //   this.currentBookmarksMarketIdList = currentBookmarksMarketIdList;
-    // },
-    // setCurrentBookmarksBrandIdList(currentBookmarksBrandIdList) {
-    //   this.currentBookmarksBrandIdList = currentBookmarksBrandIdList;
-    // },
-    // setCurrentBookmarksProduct(currentBookmarksProduct) {
-    //   this.currentBookmarksProduct = currentBookmarksProduct;
-    // },
-    // setCurrentBookmarksMarket(currentBookmarksMarket) {
-    //   this.currentBookmarksMarket = currentBookmarksMarket;
-    // },
-    // setCurrentBookmarksBrand(currentBookmarksBrand) {
-    //   this.currentBookmarksBrand = currentBookmarksBrand;
-    // },
     async insertBookmarkProduct(productId) {
       let result = {};
       await axios
@@ -140,60 +127,6 @@ export const useBookmarkStore = defineStore("bookmark", {
       this.setCurrentBookmarks(result);
       return result;
     },
-    // async loadCurrentBookmarksProduct() {
-    //   const result = {};
-    //   await axios
-    //     .get(`/api/bookmarks/list-product`)
-    //     .then((res) => {
-    //       result = res.data;
-    //     })
-    //     .catch((err) => {
-    //       console.error(
-    //         `❯❯❯❯❯❯ [bookmark.js] loadCurrentBookmarksProduct() err:`,
-    //         err
-    //       );
-    //     });
-    //   this.setCurrentBookmarksProduct(result);
-    //   const idListResult = result.map((bookmark) => bookmark.target.productId);
-    //   this.setCurrentBookmarksProductIdList(idListResult);
-    //   return result;
-    // },
-    // async loadCurrentBookmarksMarket() {
-    //   const result = {};
-    //   await axios
-    //     .get(`/api/bookmarks/list-market`)
-    //     .then((res) => {
-    //       result = res.data;
-    //     })
-    //     .catch((err) => {
-    //       console.error(
-    //         `❯❯❯❯❯❯ [bookmark.js] loadCurrentBookmarksMarket() err:`,
-    //         err
-    //       );
-    //     });
-    //   this.setCurrentBookmarksMarket(result);
-    //   const idListResult = result.map((bookmark) => bookmark.target.marketId);
-    //   this.setCurrentBookmarksMarketIdList(idListResult);
-    //   return result;
-    // },
-    // async loadCurrentBookmarksBrand() {
-    //   const result = {};
-    //   await axios
-    //     .get(`/api/bookmarks/list-brand`)
-    //     .then((res) => {
-    //       result = res.data;
-    //     })
-    //     .catch((err) => {
-    //       console.error(
-    //         `❯❯❯❯❯❯ [bookmark.js] loadCurrentBookmarksBrand() err:`,
-    //         err
-    //       );
-    //     });
-    //   this.setCurrentBookmarksBrand(result);
-    //   const idListResult = result.map((bookmark) => bookmark.target.brandId);
-    //   this.setCurrentBookmarksBrandIdList(idListResult);
-    //   return result;
-    // },
     async deleteBookmarkProduct(productId) {
       let result = {};
       await axios

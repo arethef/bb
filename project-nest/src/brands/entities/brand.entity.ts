@@ -1,3 +1,4 @@
+import { Bookmark } from 'src/bookmarks/entities/bookmark.entity';
 import { Link } from 'src/links/entities/link.entity';
 import { Market } from 'src/markets/entities/market.entity';
 import { Product } from 'src/products/entities/product.entity';
@@ -40,8 +41,10 @@ export class Brand extends BaseEntity {
   markets: Market[];
   @OneToMany(() => Ticket, (ticket) => ticket.brand)
   tickets: Ticket[];
-  @OneToMany(() => Target, (target) => target.brand)
-  targets: Target[];
+  // @OneToMany(() => Target, (target) => target.brand)
+  // targets: Target[];
   @OneToMany(() => Link, (link) => link.brand)
   links: Link[];
+  @OneToMany(() => Bookmark, (bookmark) => bookmark.brand)
+  bookmarks: Bookmark[];
 }

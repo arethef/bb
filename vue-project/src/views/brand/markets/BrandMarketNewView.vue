@@ -9,7 +9,7 @@
 			</div>
 			<div class="flex justify-center flex-row gap-4">
 				<div class="basis-2/5">
-					<p>사용자가 직접 입력해야하는 것들</p>
+					<!-- <p>사용자가 직접 입력해야하는 것들</p> -->
 					<!--          title content image-->
 					<!--          deliveryFee deliveryFeeAdded deliveryFree minimumQuantity-->
 					<!--          openDateTime closeDateTime-->
@@ -127,7 +127,7 @@
 					</div>
 				</div>
 				<div class="basis-3/5">
-					<p>상품이 포함된 마켓 리스트</p>
+					<!-- <p>상품이 포함된 마켓 리스트</p> -->
 					<div class="border mt-4 mb-4 p-4">
 						Lineup
 						<div class="overflow-y-auto">

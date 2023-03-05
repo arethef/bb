@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { Address } from 'src/addresses/entities/address.entity';
 import { Brand } from 'src/brands/entities/brand.entity';
 import { Customer } from 'src/customers/entities/customer.entity';
 import { Market } from 'src/markets/entities/market.entity';
 import { Order } from 'src/orders/entities/order.entity';
+import { Place } from 'src/places/entities/place.entity';
 import { ReqCreateTicketDto } from './dto/req-create-ticket.dto';
 import { ResBrandMarketDetailTableTicketDto } from './dto/res-brand-market-detail-table-ticket.dto';
 import { ResBrandTableTicketDto } from './dto/res-brand-table-ticket.dto';
@@ -104,20 +106,31 @@ export class TicketsService {
 
     const ticket: Ticket = new Ticket();
     const customer: Customer = await Customer.findOne({ where: { userId } });
-    const brand: Brand = await Brand.findOne({
-      where: { id: dto.ticket.brandId },
-    });
+    // const brand: Brand = await Brand.findOne({
+    //   where: { id: dto.ticket.brandId },
+    // });
     const market: Market = await Market.findOne({
       where: { id: dto.ticket.marketId },
     });
     ticket.un = ticket.generateUN();
     ticket.customer = customer;
-    ticket.brand = brand;
+    ticket.customerId = customer.id;
+    // ticket.brand = brand;
+    // ticket.brandId = dto.ticket.brandId;
+    ticket.brand = market.brand;
     ticket.market = market;
     ticket.totalQuantity = dto.ticket.totalQuantity;
     ticket.totalPrice = dto.ticket.totalPrice;
     ticket.deliveryFreeApply = dto.ticket.deliveryFreeApply;
     ticket.deliveryAddress = dto.ticket.deliveryAddress;
+    // const place: Place = await Place.findOne({
+    //   where: { id: dto.place.id },
+    // });
+    // ticket.place = place;
+    // const address: Address = await Address.findOne({
+    //   where: { id: dto.address.id },
+    // });
+    // ticket.address = address;
     const result = await Ticket.save(ticket);
     return result;
   }

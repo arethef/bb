@@ -16,7 +16,7 @@ export class Link extends BaseEntity {
 
   @Column({ nullable: false })
   @RelationId((link: Link) => link.brand)
-  barndId: string;
+  brandId: string;
   @ManyToOne(() => Brand, { eager: true })
   @JoinColumn()
   brand: Brand;

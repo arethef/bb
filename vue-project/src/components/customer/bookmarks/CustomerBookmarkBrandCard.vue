@@ -6,27 +6,23 @@
 				<div class="absolute right-0 top-0">
 					<customer-bookmark-heart
 						targetEntity="brand"
-						:targetEntityId="this.$props.bookmarkBrand.target.brand.id"
+						:targetEntityId="this.$props.bookmarkBrand.brand.id"
 					></customer-bookmark-heart>
 				</div>
 				<div
 					class="cursor-pointer"
 					@click="
-						moveCustomerBrandDetailView(
-							this.$props.bookmarkBrand.target.brand.id
-						)
+						moveCustomerBrandDetailView(this.$props.bookmarkBrand.brand.id)
 					"
 				>
-					{{ this.$props.bookmarkBrand.target.brand.businessName }}
+					{{ this.$props.bookmarkBrand.brand.businessName }}
 				</div>
 				<div>
 					<img
-						:src="`${this.$props.bookmarkBrand.target.brand.user.image.url}`"
+						:src="`${this.$props.bookmarkBrand.brand.user.image.url}`"
 						class="cursor-pointer"
 						@click="
-							moveCustomerBrandDetailView(
-								this.$props.bookmarkBrand.target.brand.id
-							)
+							moveCustomerBrandDetailView(this.$props.bookmarkBrand.brand.id)
 						"
 					/>
 				</div>

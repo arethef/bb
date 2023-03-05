@@ -115,6 +115,19 @@ const router = createRouter({
           props: true,
         },
         {
+          path: "products",
+          name: "CustomerProducts",
+          component: () =>
+            import("../views/customer/products/CustomerProductsView.vue"),
+        },
+        {
+          path: "products/:productId",
+          name: "CustomerProductDetail",
+          component: () =>
+            import("../views/customer/products/CustomerProductDetailView.vue"),
+          props: true,
+        },
+        {
           path: "tickets",
           name: "CustomerTickets",
           component: () =>
@@ -138,6 +151,13 @@ const router = createRouter({
           name: "CustomerProfile",
           component: () =>
             import("../views/customer/profile/CustomerProfileView.vue"),
+        },
+        {
+          path: "search/:searchStr",
+          name: "CustomerSearch",
+          component: () =>
+            import("../views/customer/search/CustomerSearchView.vue"),
+          props: true,
         },
       ],
     },

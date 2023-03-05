@@ -5,6 +5,7 @@ import { Lineup } from 'src/lineups/entities/lineup.entity';
 import { Market } from 'src/markets/entities/market.entity';
 import { Order } from 'src/orders/entities/order.entity';
 import { Ticket } from 'src/tickets/entities/ticket.entity';
+import { Like } from 'typeorm';
 import { ReqCreateProductDto } from './dto/req-create-product.dto';
 import { ResBrandMarketNewProductDto } from './dto/res-brand-market-new-product.dto';
 import { ResBrandTableProductDto } from './dto/res-brand-table-product.dto';
@@ -215,6 +216,26 @@ export class ProductsService {
       where: { ticketId },
     });
     const result: Product[] = orders.map((order) => order.product);
+    return result;
+  }
+
+  async findProducts() {
+    const products: Product[] = await Product.find();
+    return products;
+  }
+
+  async loadCustomerProducts() {
+    const result = await this.findProducts();
+    return result;
+  }
+
+  async findProductsBySearchStr(searchStr: string): Promise<Product[]> {
+    const result: Product[] = await Product.find({
+      where: [
+        { name: Like(`%${searchStr}%`) },
+        { description: Like(`%${searchStr}%`) },
+      ],
+    });
     return result;
   }
 }

@@ -4,89 +4,71 @@
 		<div class="md:container md:mx-auto">
 			<div class="grid grid-cols-12 gap-4">
 				<div class="col-span-3">
-					<div class="border p-4">
-						<label for="title" class="block">
-							<span>Title</span>
-							<div class="border-2 my-1">
-								<div class="text-xs m-2">
-									{{ this.marketStore.marketCurrentMarket.title }}
-								</div>
+					<div class="border p-4 grid gap-4">
+						<div class="flex flex-col justify-center">
+							<div class="text-base font-bold text-center">
+								{{ this.marketStore.marketCurrentMarket.brand.businessName }}
 							</div>
-						</label>
-						<label for="content" class="block mt-4">
-							<span>Content</span>
-							<div class="border-2 my-1">
-								<div class="text-xs m-2">
-									{{ this.marketStore.marketCurrentMarket.content }}
-								</div>
-							</div>
-						</label>
-						<label for="image" class="block mt-4">
-							<span>Image</span>
 							<div class="my-1">
 								<div class="my-2">
-									<img
-										:src="`${this.marketStore.marketCurrentMarket.image.url}`"
-									/>
+									<div class="grid grid-cols-3">
+										<div class="col-span-1"></div>
+										<div class="col-span-1">
+											<img
+												:src="`${this.marketStore.marketCurrentMarket.brand.user.image.url}`"
+											/>
+										</div>
+										<div class="col-span-1"></div>
+									</div>
 								</div>
 							</div>
-						</label>
-						<label for="deliveryFee" class="block mt-4">
-							<span>Delivery Fee</span>
-							<div class="border-2 my-1">
-								<div class="text-xs m-2">
-									{{ this.marketStore.marketCurrentMarket.deliveryFee }}
-								</div>
+						</div>
+						<div class="font-bold">
+							{{ this.marketStore.marketCurrentMarket.title }}
+						</div>
+						<div>
+							<img :src="`${this.marketStore.marketCurrentMarket.image.url}`" />
+						</div>
+						<div>
+							{{ this.marketStore.marketCurrentMarket.content }}
+						</div>
+						<div class="flex flex-col gap-1 text-xs text-gray-400">
+							<div class="">
+								배송비 |
+								{{ this.marketStore.marketCurrentMarket.deliveryFee }}
 							</div>
-						</label>
-						<label for="deliveryFeeAdded" class="block mt-4">
-							<span>Delivery Fee Added</span>
-							<div class="border-2 my-1">
-								<div class="text-xs m-2">
-									{{ this.marketStore.marketCurrentMarket.deliveryFeeAdded }}
-								</div>
+							<div class="">
+								도서산간지역 추가 배송비 |
+								{{ this.marketStore.marketCurrentMarket.deliveryFeeAdded }}
 							</div>
-						</label>
-						<label for="deliveryFree" class="block mt-4">
-							<span>Delivery Free</span>
-							<div class="border-2 my-1">
-								<div class="text-xs m-2">
-									{{ this.marketStore.marketCurrentMarket.deliveryFree }}
-								</div>
+							<div class="">
+								무료배송 |
+								{{ this.marketStore.marketCurrentMarket.deliveryFree }}원 이상
+								구매시
 							</div>
-						</label>
-						<label for="minimumQuaytity" class="block mt-4">
-							<span>Minimum Quantity</span>
-							<div class="border-2 my-1">
-								<div class="text-xs m-2">
-									{{ this.marketStore.marketCurrentMarket.minimumQuantity }}
-								</div>
+							<div class="">
+								최소주문수량 |
+								{{ this.marketStore.marketCurrentMarket.minimumQuantity }}
 							</div>
-						</label>
-						<label for="openDateTime" class="block mt-4">
-							<span>Open Date Time</span>
-							<div class="border-2 my-1">
-								<div class="text-xs m-2">
-									{{ open.getFullYear() }}년{{ open.getMonth() + 1 }}월{{
-										open.getDate()
-									}}일 {{ open.getHours() }}시{{ open.getMinutes() }}분{{
-										open.getSeconds()
-									}}초
-								</div>
+						</div>
+						<div class="flex flex-col gap-1">
+							<div>
+								시작일시 |
+								{{ open.getFullYear() }}년{{ open.getMonth() + 1 }}월{{
+									open.getDate()
+								}}일 {{ open.getHours() }}시{{ open.getMinutes() }}분{{
+									open.getSeconds()
+								}}초
 							</div>
-						</label>
-						<label for="closeDateTime" class="block mt-4">
-							<span>Close Date Time</span>
-							<div class="border-2 my-1">
-								<div class="text-xs m-2">
-									{{ close.getFullYear() }}년{{ close.getMonth() + 1 }}월{{
-										close.getDate()
-									}}일 {{ close.getHours() }}시{{ close.getMinutes() }}분{{
-										close.getSeconds()
-									}}초
-								</div>
+							<div>
+								마감일시 |
+								{{ close.getFullYear() }}년{{ close.getMonth() + 1 }}월{{
+									close.getDate()
+								}}일 {{ close.getHours() }}시{{ close.getMinutes() }}분{{
+									close.getSeconds()
+								}}초
 							</div>
-						</label>
+						</div>
 					</div>
 				</div>
 				<div class="col-span-9">

@@ -17,6 +17,7 @@ import { Customer } from './entities/customer.entity';
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get('profile')
   async getCustomerProfile(
     @Req() req,
@@ -31,12 +32,13 @@ export class CustomersController {
       customer.user,
     );
     console.log(`❯❯❯❯❯❯ [customers.controller.ts] user:`, user);
-    return {
-      id: customer.id,
-      userId: customer.userId,
-      user,
-      nickname: customer.nickname,
-    };
+    return customer;
+    // return {
+    //   id: customer.id,
+    //   userId: customer.userId,
+    //   user,
+    //   nickname: customer.nickname,
+    // };
   }
 
   @UseInterceptors(ClassSerializerInterceptor)

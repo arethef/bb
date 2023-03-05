@@ -2,32 +2,51 @@
 	<div>
 		<!-- <p>[CustomerMarketCard.vue]</p> -->
 		<div class="border p-4">
-			<div class="grid grid-flow-row gap-2">
-				<div class="flex justify-center text-sm">
-					{{ this.$props.market.brand.businessName }}
+			<div class="grid grid-flow-row gap-4">
+				<div
+					class="flex justify-center cursor-pointer font-bold"
+					@click="moveCustomerMarketDetailView(this.$props.market.id)"
+				>
+					{{ this.$props.market.title }}
 				</div>
-				<div><img :src="`${this.$props.market.image.url}`" /></div>
-				<div class="grid grid-flow-col relative">
-					<div class="absolute right-0 top-0">
+				<div>
+					<img
+						:src="`${this.$props.market.image.url}`"
+						@click="moveCustomerMarketDetailView(this.$props.market.id)"
+						class="cursor-pointer"
+					/>
+				</div>
+				<div class="grid grid-cols-6 relative">
+					<div class="col-span-5 text-xs">
+						{{ this.$props.market.brand.businessName }}
+					</div>
+					<div class="absolute right-0">
 						<customer-bookmark-heart
 							targetEntity="market"
 							:targetEntityId="this.$props.market.id"
 						></customer-bookmark-heart>
 					</div>
 				</div>
-				<div class="flex justify-center text-sm">
-					{{ this.$props.market.title }}
-				</div>
-				<div class="flex justify-center text-sm">D{{ this.closeDDay }}</div>
+				<div class="flex justify-start">D{{ this.closeDDay }}</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+	import { useBrandStore } from "../../../stores/brand";
+	import { useLineupStore } from "../../../stores/lineup";
+	import { useMarketStore } from "../../../stores/market";
+	import { useProductStore } from "../../../stores/product";
 	import CustomerBookmarkHeart from "../bookmarks/CustomerBookmarkHeart.vue";
 	export default {
-		setup() {},
+		setup() {
+			const marketStore = useMarketStore();
+			const lineupStore = useLineupStore();
+			const brandStore = useBrandStore();
+			const productStore = useProductStore();
+			return { marketStore, lineupStore, brandStore, productStore };
+		},
 		components: { CustomerBookmarkHeart },
 		props: ["market"],
 		data() {
@@ -42,6 +61,26 @@
 			setInterval(this.dDay.bind(this), 1000);
 		},
 		methods: {
+			async moveCustomerMarketDetailView(id) {
+				console.log(
+					`++++++ [CustomerMarketCard.vue] moveCustomerMarketDetailView() ++++++`
+				);
+				await this.marketStore.detailMarket(id);
+				this.marketStore.setCurrentMarketId(id);
+				console.log(
+					`❯❯❯❯❯❯ [CustomerMarketCard.vue] beforeCreate() moveCustomerMarketDetailView() this.marketStore.marketCurrentMarket:`,
+					this.marketStore.marketCurrentMarket
+				);
+				console.log(
+					`❯❯❯❯❯❯ [CustomerMarketCard.vue] beforeCreate() moveCustomerMarketDetailView() this.marketStore.marketCurrentMarketId:`,
+					this.marketStore.marketCurrentMarketId
+				);
+				await this.lineupStore.loadLineups(id);
+				this.$router.push({
+					name: `CustomerMarketDetail`,
+					params: { marketId: id },
+				});
+			},
 			dDay() {
 				const now = new Date(Date.now());
 				const close = new Date(this.$props.market.closeDateTime);

@@ -13,32 +13,32 @@ import {
   RelationId,
 } from 'typeorm';
 
-@Entity('targets')
+// @Entity('targets')
 export class Target extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: string;
 
-  @Column({ nullable: true })
-  @RelationId((target: Target) => target.brand)
-  brandId: string;
-  @ManyToOne(() => Brand, { eager: true })
-  @JoinColumn()
-  brand: Brand;
+  // @Column({ nullable: true })
+  // @RelationId((target: Target) => target.brand)
+  // brandId: string;
+  // @ManyToOne(() => Brand, { eager: true })
+  // @JoinColumn()
+  // brand: Brand;
 
-  @Column({ nullable: true })
-  @RelationId((target: Target) => target.product)
-  productId: string;
-  @ManyToOne(() => Product, { eager: true })
-  @JoinColumn()
-  product: Product;
+  // @Column({ nullable: true })
+  // @RelationId((target: Target) => target.product)
+  // productId: string;
+  // @ManyToOne(() => Product, { eager: true })
+  // @JoinColumn()
+  // product: Product;
 
-  @Column({ nullable: true })
-  @RelationId((target: Target) => target.market)
-  marketId: string;
-  @ManyToOne(() => Market, { eager: true })
-  @JoinColumn()
-  market: Market;
+  // @Column({ nullable: true })
+  // @RelationId((target: Target) => target.market)
+  // marketId: string;
+  // @ManyToOne(() => Market, { eager: true })
+  // @JoinColumn()
+  // market: Market;
 
-  @OneToMany(() => Bookmark, (bookmark) => bookmark.target)
-  bookmarks: Bookmark[];
+  // @OneToMany(() => Bookmark, (bookmark) => bookmark.target)
+  // bookmarks: Bookmark[];
 }
