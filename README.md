@@ -8,41 +8,41 @@
 
 - 로그인 및 회원가입
 
-<img src="./assets/v1/pages/home/home.png" height="256">
-<img src="./assets/v1/pages/login/login.png" height="256">
-<img src="./assets/v1/pages/signup/signup-customer.png" height="256">
-<img src="./assets/v1/pages/signup/signup-brand.png" height="256">
+<img src="./assets/v1/pages/home/home.png" height="200">
+<img src="./assets/v1/pages/login/login.png" height="200">
+<img src="./assets/v1/pages/signup/signup-customer.png" height="200">
+<img src="./assets/v1/pages/signup/signup-brand.png" height="200">
 
 - 고객
 
-<img src="./assets/v1/pages/customer/markets.png" height="256">
-<img src="./assets/v1/pages/customer/market-detail.png" height="256">
-<img src="./assets/v1/pages/customer/market-detail-ticket-new.png" height="256">
-<img src="./assets/v1/pages/customer/market-detail-ticket-new-result.png" height="256">
-<img src="./assets/v1/pages/customer/brands.png" height="256">
-<img src="./assets/v1/pages/customer/brand-detail.png" height="256">
-<img src="./assets/v1/pages/customer/products.png" height="256">
-<img src="./assets/v1/pages/customer/product-detail.png" height="256">
-<img src="./assets/v1/pages/customer/tickets.png" height="256">
-<img src="./assets/v1/pages/customer/ticket-detail.png" height="256">
-<img src="./assets/v1/pages/customer/bookmarks.png" height="256">
-<img src="./assets/v1/pages/customer/profile.png" height="256">
-<img src="./assets/v1/pages/customer/search.png" height="256">
+<img src="./assets/v1/pages/customer/markets.png" height="200">
+<img src="./assets/v1/pages/customer/market-detail.png" height="200">
+<img src="./assets/v1/pages/customer/market-detail-ticket-new.png" height="200">
+<img src="./assets/v1/pages/customer/market-detail-ticket-new-result.png" height="200">
+<img src="./assets/v1/pages/customer/brands.png" height="200">
+<img src="./assets/v1/pages/customer/brand-detail.png" height="200">
+<img src="./assets/v1/pages/customer/products.png" height="200">
+<img src="./assets/v1/pages/customer/product-detail.png" height="200">
+<img src="./assets/v1/pages/customer/tickets.png" height="200">
+<img src="./assets/v1/pages/customer/ticket-detail.png" height="200">
+<img src="./assets/v1/pages/customer/bookmarks.png" height="200">
+<img src="./assets/v1/pages/customer/profile.png" height="200">
+<img src="./assets/v1/pages/customer/search.png" height="200">
 
 - 브랜드
 
-<img src="./assets/v1/pages/brand/tickets.png" height="256">
-<img src="./assets/v1/pages/brand/ticket-detail.png" height="256">
-<img src="./assets/v1/pages/brand/products.png" height="256">
-<img src="./assets/v1/pages/brand/product-new.png" height="256">
-<img src="./assets/v1/pages/brand/product-new-result.png" height="256">
-<img src="./assets/v1/pages/brand/product-detail.png" height="256">
-<img src="./assets/v1/pages/brand/markets.png" height="256">
-<img src="./assets/v1/pages/brand/market-new.png" height="256">
-<img src="./assets/v1/pages/brand/market-new-confirm.png" height="256">
-<img src="./assets/v1/pages/brand/market-new-result.png" height="256">
-<img src="./assets/v1/pages/brand/market-detail.png" height="256">
-<img src="./assets/v1/pages/brand/profile.png" height="256">
+<img src="./assets/v1/pages/brand/tickets.png" height="200">
+<img src="./assets/v1/pages/brand/ticket-detail.png" height="200">
+<img src="./assets/v1/pages/brand/products.png" height="200">
+<img src="./assets/v1/pages/brand/product-new.png" height="200">
+<img src="./assets/v1/pages/brand/product-new-result.png" height="200">
+<img src="./assets/v1/pages/brand/product-detail.png" height="200">
+<img src="./assets/v1/pages/brand/markets.png" height="200">
+<img src="./assets/v1/pages/brand/market-new.png" height="200">
+<img src="./assets/v1/pages/brand/market-new-confirm.png" height="200">
+<img src="./assets/v1/pages/brand/market-new-result.png" height="200">
+<img src="./assets/v1/pages/brand/market-detail.png" height="200">
+<img src="./assets/v1/pages/brand/profile.png" height="200">
 
 ---
 
@@ -67,7 +67,7 @@
 
 ### ERD
 
-<img src="./assets/v1/exec/erd.png" height="512">
+<img src="./assets/v1/exec/erd.png" width="512">
 
 ---
 
