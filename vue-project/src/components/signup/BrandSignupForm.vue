@@ -15,7 +15,7 @@
 								type="email"
 								id="email"
 								class="col-span-7 form-input block text-xs"
-								placeholder="bbang@example.com"
+								placeholder="the-butter-place@example.com"
 								v-model="reqBrandSignupDto.user.email"
 							/>
 							<button
@@ -76,7 +76,7 @@
 								type="text"
 								id="username"
 								class="col-span-7 form-input block text-xs"
-								placeholder="johncoopermaster"
+								placeholder="the.butter.place"
 								v-model="reqBrandSignupDto.user.username"
 							/>
 						</div>
@@ -94,7 +94,7 @@
 								type="text"
 								id="businessName"
 								class="col-span-7 form-input block text-xs"
-								placeholder="John Cooper"
+								placeholder="The Butter Place"
 								v-model="reqBrandSignupDto.brand.businessName"
 							/>
 						</div>
@@ -137,7 +137,7 @@
 								type="text"
 								id="introduction"
 								class="col-span-7 form-input block text-xs"
-								placeholder="ZZONDEUK GGUDOK PEOKPEOK"
+								placeholder="The place for butter lover :)"
 								v-model="reqBrandSignupDto.brand.introduction"
 							/>
 						</div>
@@ -173,7 +173,7 @@
 								type="text"
 								id="basic"
 								class="col-span-7 form-input block text-xs"
-								placeholder="부산광역시 수영구 광안동"
+								placeholder="부산광역시 해운대구 우동"
 								v-model="reqBrandSignupDto.place.basic"
 							/>
 						</div>
@@ -191,7 +191,7 @@
 								type="text"
 								id="detail"
 								class="col-span-7 form-input block text-xs"
-								placeholder="Haeundae"
+								placeholder="해운대"
 								v-model="reqBrandSignupDto.place.detail"
 							/>
 						</div>

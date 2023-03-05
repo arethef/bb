@@ -6,7 +6,7 @@
 				<div class="col-span-3">
 					<div class="border p-4">
 						<label for="title" class="block">
-							<span>Title</span>
+							<span>제목</span>
 							<div class="border-2 my-1">
 								<div class="text-xs m-2">
 									{{ this.marketStore.marketCurrentMarket.title }}
@@ -14,7 +14,7 @@
 							</div>
 						</label>
 						<label for="content" class="block mt-4">
-							<span>Content</span>
+							<span>내용</span>
 							<div class="border-2 my-1">
 								<div class="text-xs m-2">
 									{{ this.marketStore.marketCurrentMarket.content }}
@@ -22,7 +22,7 @@
 							</div>
 						</label>
 						<label for="image" class="block mt-4">
-							<span>Image</span>
+							<span>마켓이미지</span>
 							<div class="my-1">
 								<div class="my-2">
 									<img
@@ -32,7 +32,7 @@
 							</div>
 						</label>
 						<label for="deliveryFee" class="block mt-4">
-							<span>Delivery Fee</span>
+							<span>배송비</span>
 							<div class="border-2 my-1">
 								<div class="text-xs m-2">
 									{{ this.marketStore.marketCurrentMarket.deliveryFee }}
@@ -40,7 +40,7 @@
 							</div>
 						</label>
 						<label for="deliveryFeeAdded" class="block mt-4">
-							<span>Delivery Fee Added</span>
+							<span>도서산간지역 추가 배송비</span>
 							<div class="border-2 my-1">
 								<div class="text-xs m-2">
 									{{ this.marketStore.marketCurrentMarket.deliveryFeeAdded }}
@@ -48,7 +48,7 @@
 							</div>
 						</label>
 						<label for="deliveryFree" class="block mt-4">
-							<span>Delivery Free</span>
+							<span>무료배송</span>
 							<div class="border-2 my-1">
 								<div class="text-xs m-2">
 									{{ this.marketStore.marketCurrentMarket.deliveryFree }}
@@ -56,7 +56,7 @@
 							</div>
 						</label>
 						<label for="minimumQuaytity" class="block mt-4">
-							<span>Minimum Quantity</span>
+							<span>최소주문수량</span>
 							<div class="border-2 my-1">
 								<div class="text-xs m-2">
 									{{ this.marketStore.marketCurrentMarket.minimumQuantity }}
@@ -64,7 +64,7 @@
 							</div>
 						</label>
 						<label for="openDateTime" class="block mt-4">
-							<span>Open Date Time</span>
+							<span>시작일시</span>
 							<div class="border-2 my-1">
 								<div class="text-xs m-2">
 									{{ open.getFullYear() }}년{{ open.getMonth() + 1 }}월{{
@@ -76,7 +76,7 @@
 							</div>
 						</label>
 						<label for="closeDateTime" class="block mt-4">
-							<span>Close Date Time</span>
+							<span>마감일시</span>
 							<div class="border-2 my-1">
 								<div class="text-xs m-2">
 									{{ close.getFullYear() }}년{{ close.getMonth() + 1 }}월{{

@@ -288,9 +288,7 @@
 		created() {},
 		methods: {
 			async onClickMarketDetailTicketNewCreateBtn() {
-				if (!this.reqCreateTicketDto.ticket.deliveryAddress) {
-					this.combineAndSetDeliveryAddress();
-				}
+				this.combineAndSetDeliveryAddress();
 				const result = await this.ticketStore.createTicket(
 					this.reqCreateTicketDto
 				);
@@ -316,11 +314,15 @@
 				});
 			},
 			combineAndSetDeliveryAddress() {
-				this.reqCreateTicketDto.ticket.deliveryAddress = `${
-					document.getElementById("zipcode").value
-				}) ${document.getElementById("basic").value}, ${
-					document.getElementById("detail").value
-				}`;
+				if (!this.addressInputFormVisible) {
+					this.reqCreateTicketDto.ticket.deliveryAddress = `${this.customerStore.customerProfile.user.place.zipcode}) ${this.customerStore.customerProfile.user.place.basic}, ${this.customerStore.customerProfile.user.place.detail}`;
+				} else {
+					this.reqCreateTicketDto.ticket.deliveryAddress = `${
+						document.getElementById("zipcode").value
+					}) ${document.getElementById("basic").value}, ${
+						document.getElementById("detail").value
+					}`;
+				}
 			},
 			async onClickMarketDetailTicketNewConfirmBtn() {
 				this.addressInputFormVisible =

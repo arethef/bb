@@ -17,7 +17,7 @@
 					<div class="border mt-4 p-4">
 						<div class="grid grid-cols-1 gap-4">
 							<label for="title" class="block form-label">
-								<span class="">Title</span>
+								<span class="">제목</span>
 								<input
 									id="title"
 									type="text"
@@ -27,7 +27,7 @@
 								/>
 							</label>
 							<label for="content" class="block form-label">
-								<span class="">Content</span>
+								<span class="">내용</span>
 								<textarea
 									id="content"
 									type="text"
@@ -37,7 +37,7 @@
 								/>
 							</label>
 							<label for="imageFile" class="block form-label">
-								<span class="">Image</span>
+								<span class="">마켓 이미지</span>
 								<input
 									id="imageFile"
 									type="file"
@@ -50,7 +50,7 @@
 								</div>
 							</label>
 							<label for="deliveryFee" class="block form-label">
-								<span class="">Delivery Fee</span>
+								<span class="">배송비</span>
 								<input
 									id="deliveryFee"
 									type="number"
@@ -60,7 +60,7 @@
 								/>
 							</label>
 							<label for="deliveryFeeAdded" class="block form-label">
-								<span class="">Delivery Fee Added</span>
+								<span class="">도서산간지역 추가 배송비</span>
 								<input
 									id="deliveryFeeAdded"
 									type="number"
@@ -70,7 +70,7 @@
 								/>
 							</label>
 							<label for="deliveryFree" class="block form-label">
-								<span class="">Delivery Free</span>
+								<span class="">무료배송</span>
 								<input
 									id="deliveryFree"
 									type="number"
@@ -80,7 +80,7 @@
 								/>
 							</label>
 							<label for="minimumQuantity" class="block form-label">
-								<span class="">Minimum Quantity</span>
+								<span class="">최소주문수량</span>
 								<input
 									id="minimumQuantity"
 									type="number"
@@ -90,7 +90,7 @@
 								/>
 							</label>
 							<label for="openDate" class="block form-label">
-								<span class="">Open Date Time</span>
+								<span class="">시작일시</span>
 								<div class="grid grid-flow-col gap-4">
 									<input
 										id="openDate"
@@ -107,7 +107,7 @@
 								</div>
 							</label>
 							<label for="closeDate" class="block form-label">
-								<span class="">Close Date Time</span>
+								<span class="">마감일시</span>
 								<div class="grid grid-flow-col gap-4">
 									<input
 										id="closeDate"
@@ -129,7 +129,7 @@
 				<div class="basis-3/5">
 					<!-- <p>상품이 포함된 마켓 리스트</p> -->
 					<div class="border mt-4 mb-4 p-4">
-						Lineup
+						마켓 라인업
 						<div class="overflow-y-auto">
 							<brand-market-new-products-table
 								@brandMarketNewLineups="selectedBrandMarketNewProducts"

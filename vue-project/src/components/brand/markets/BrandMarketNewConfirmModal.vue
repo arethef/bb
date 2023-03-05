@@ -63,72 +63,58 @@
 							<div class="grid grid-cols-12 gap-4">
 								<div class="col-span-4">
 									<div class="border p-4">
-										<label class="block col-span-4">
-											<span class="">Title</span>
-											<input
-												type="text"
-												class="text-xs mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
-												v-model="reqCreateMarketDto.market.title"
-												disabled
-											/>
-										</label>
-										<label class="block col-span-4 mt-4">
-											<span class="">Content</span>
-											<textarea
-												type="text"
-												class="text-xs mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
-												v-model="reqCreateMarketDto.market.content"
-												disabled
-											/>
-										</label>
-										<label class="block col-span-4 mt-4">
-											<span class="">Image</span>
-											<div id="marketImagePreview" class="mt-1">
-												<!-- 마켓 이미지 미리보기 -->
+										<div class="flex flex-col gap-4">
+											<div class="flex flex-col gap-2">
+												<div>제목</div>
+												<div class="border p-2 text-xs">
+													{{ reqCreateMarketDto.market.title }}
+												</div>
 											</div>
-										</label>
-										<label class="block col-span-4 mt-4">
-											<span class="">Delivery Fee</span>
-											<input
-												type="text"
-												class="text-xs mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
-												v-model="reqCreateMarketDto.market.deliveryFee"
-												disabled
-											/>
-										</label>
-										<label class="block col-span-4 mt-4">
-											<span class="">Delivery Fee Added</span>
-											<input
-												type="text"
-												class="text-xs mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
-												v-model="reqCreateMarketDto.market.deliveryFeeAdded"
-												disabled
-											/>
-										</label>
-										<label class="block col-span-4 mt-4">
-											<span class="">Delivery Free</span>
-											<input
-												type="text"
-												class="text-xs mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
-												v-model="reqCreateMarketDto.market.deliveryFree"
-												disabled
-											/>
-										</label>
-										<label class="block col-span-4 mt-4">
-											<span class="">Minimum Quantity</span>
-											<input
-												type="text"
-												class="text-xs mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
-												v-model="reqCreateMarketDto.market.minimumQuantity"
-												disabled
-											/>
-										</label>
+											<div class="flex flex-col gap-2">
+												<div>내용</div>
+												<div class="border p-2 text-xs">
+													{{ reqCreateMarketDto.market.content }}
+												</div>
+											</div>
+											<div class="flex flex-col gap-2">
+												<div>마켓 이미지</div>
+												<div class="">
+													<div id="marketImagePreview" class="mt-1">
+														<!-- 마켓 이미지 미리보기 -->
+													</div>
+												</div>
+											</div>
+											<div class="flex flex-col gap-2">
+												<div>배송비</div>
+												<div class="border p-2 text-xs">
+													{{ reqCreateMarketDto.market.deliveryFee }}
+												</div>
+											</div>
+											<div class="flex flex-col gap-2">
+												<div>도서산간지역 추가 배송비</div>
+												<div class="border p-2 text-xs">
+													{{ reqCreateMarketDto.market.deliveryFeeAdded }}
+												</div>
+											</div>
+											<div class="flex flex-col gap-2">
+												<div>무료배송</div>
+												<div class="border p-2 text-xs">
+													{{ reqCreateMarketDto.market.deliveryFree }}
+												</div>
+											</div>
+											<div class="flex flex-col gap-2">
+												<div>최소주문수량</div>
+												<div class="border p-2 text-xs">
+													{{ reqCreateMarketDto.market.minimumQuantity }}
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 								<div class="col-span-8">
 									<div class="border p-4">
 										<label class="block col-span-4">
-											<span class="">Open Date Time</span>
+											<span class="">시작일시</span>
 											<input
 												type="text"
 												class="text-xs mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
@@ -137,7 +123,7 @@
 											/>
 										</label>
 										<label class="block col-span-4 mt-4">
-											<span class="">Close Date Time</span>
+											<span class="">마감일시</span>
 											<input
 												type="text"
 												class="text-xs mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
@@ -147,14 +133,18 @@
 										</label>
 									</div>
 									<div class="border p-4 mt-4">
-										Lineup
+										<div class="mb-2">마켓 라인업</div>
 										<table class="min-w-full border text-center">
 											<thead class="bg-gray-100">
 												<tr class="border-b">
-													<th scope="col" class="px-2 border-r">#</th>
-													<th scope="col" class="px-2 border-r">상품이름</th>
-													<th scope="col" class="px-2 border-r">상품가격</th>
-													<th scope="col" class="px-2 border-r">수량</th>
+													<th scope="col" class="px-2 py-1 border-r">#</th>
+													<th scope="col" class="px-2 py-1 border-r">
+														상품이름
+													</th>
+													<th scope="col" class="px-2 py-1 border-r">
+														상품가격
+													</th>
+													<th scope="col" class="px-2 py-1 border-r">수량</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -162,26 +152,27 @@
 													v-for="(product, index) in this.productStore
 														.productBrandMarketNewLineups"
 													:key="product.product.id"
+													class="border-b"
 												>
 													<th
 														scope="row"
-														class="px-2 whitespace-nowrap border-r"
+														class="px-2 py-1 whitespace-nowrap border-r"
 													>
 														{{ index + 1 }}
 													</th>
 													<td
 														scope="row"
-														class="px-2 whitespace-nowrap border-r"
+														class="px-2 py-1 whitespace-nowrap border-r"
 													>
 														{{ product.product.name }}
 													</td>
 													<td
 														scope="row"
-														class="px-2 whitespace-nowrap border-r"
+														class="px-2 py-1 whitespace-nowrap border-r"
 													>
 														{{ product.product.price }}
 													</td>
-													<td scope="row" class="px-2 whitespace-nowrap">
+													<td scope="row" class="px-2 py-1 whitespace-nowrap">
 														{{ reqCreateMarketDto.lineups[product.product.id] }}
 													</td>
 												</tr>

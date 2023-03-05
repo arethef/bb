@@ -76,7 +76,7 @@
 								type="text"
 								id="username"
 								class="col-span-7 form-input block text-xs"
-								placeholder="johncoopermaster"
+								placeholder="bbangsuni"
 								v-model="reqCustomerSignupDto.user.username"
 							/>
 						</div>
@@ -94,7 +94,7 @@
 								type="text"
 								id="nickname"
 								class="col-span-7 form-input block text-xs"
-								placeholder="John Cooper"
+								placeholder="BBANGs2"
 								v-model="reqCustomerSignupDto.customer.nickname"
 							/>
 						</div>
