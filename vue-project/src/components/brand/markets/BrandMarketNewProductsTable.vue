@@ -88,6 +88,10 @@
 				console.log(
 					`++++++ [BrandMarketNewProductsTable.vue] onChangeLineupProductQuantity() ++++++`
 				);
+				if (document.getElementById(productId).value < 0) {
+					document.getElementById(productId).value = 0;
+					return;
+				}
 				console.log(
 					`❯❯❯❯❯❯ [BrandMarketNewProductsTable.vue] onChangeLineupProductQuantity() productId:`,
 					productId

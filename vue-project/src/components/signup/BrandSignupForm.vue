@@ -42,14 +42,16 @@
 								class="col-span-7 form-input block text-xs"
 								placeholder="********"
 								v-model="reqBrandSignupDto.user.password"
+								@change="possiblePassword()"
 							/>
 						</div>
+						<div class="text-xs p-1" id="notice-password-possible"></div>
 					</div>
 				</div>
 				<div class="grid grid-cols-4 gap-2">
 					<div class="col-span-1">
 						<div class="p-1">
-							<label for="passwordCheck" class="block">비밀번호</label>
+							<label for="passwordCheck" class="block">비밀번호 확인</label>
 						</div>
 					</div>
 					<div class="col-span-3">
@@ -60,8 +62,10 @@
 								class="col-span-7 form-input block text-xs"
 								placeholder="********"
 								v-model="passwordCheck"
+								@change="comparePassword()"
 							/>
 						</div>
+						<div class="text-xs p-1" id="notice-password-compare"></div>
 					</div>
 				</div>
 				<div class="grid grid-cols-4 gap-2">
@@ -273,12 +277,34 @@
 				passwordCheck: "unicornbakery",
 				emailPossible: false,
 				brnPossible: false,
+				passwordPossible: false,
+				passwordCompare: false,
 				image: {
 					formData: null,
 				},
 			};
 		},
 		methods: {
+			possiblePassword() {
+				const notice = document.getElementById("notice-password-possible");
+				const regExp = /^[A-Za-z\d!@#$%^&*()]{8,30}$/;
+				if (!regExp.test(document.getElementById("password").value)) {
+					notice.innerHTML = `<span class="text-red-500">8-30 사이 영어대소문자, 숫자, 특수문자를 사용해주세요</span>`;
+				} else {
+					notice.innerHTML = ``;
+				}
+			},
+			comparePassword() {
+				const notice = document.getElementById("notice-password-compare");
+				if (
+					document.getElementById("password").value !==
+					document.getElementById("passwordCheck").value
+				) {
+					notice.innerHTML = `<span class="text-red-500">비밀번호가 일치하지 않습니다.<span>`;
+				} else {
+					notice.innerHTML = `<span class="text-green-500">비밀번호가 일치합니다.<span>`;
+				}
+			},
 			async onClickEmailCheckBtn() {
 				console.log(`[BrandSignupForm.vue] onClickEmailCheckBtn()`);
 				const email = this.reqBrandSignupDto.user.email;
@@ -313,6 +339,26 @@
 				}
 				if (!this.brnPossible) {
 					alert(`사업자 확인이 완료되지 않았습니다.`);
+					return;
+				}
+				if (!this.passwordPossible) {
+					alert(`비밀번호 조건을 확인해주세요.`);
+					return;
+				}
+				if (!this.passwordCompare) {
+					alert(`비밀번호가 일치하지 않습니다.`);
+					return;
+				}
+				if (!this.image.formData) {
+					alert(`이미지를 등록해주세요.`);
+					return;
+				}
+				if (
+					!this.reqBrandSignupDto.place.zipcode ||
+					!this.reqBrandSignupDto.place.basic ||
+					!this.reqBrandSignupDto.place.basic
+				) {
+					alert(`주소 작성을 완료해주세요.`);
 					return;
 				}
 

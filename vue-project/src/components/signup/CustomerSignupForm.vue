@@ -42,8 +42,10 @@
 								class="col-span-7 form-input block text-xs"
 								placeholder="********"
 								v-model="reqCustomerSignupDto.user.password"
+								@change="possiblePassword()"
 							/>
 						</div>
+						<div class="text-xs p-1" id="notice-password-possible"></div>
 					</div>
 				</div>
 				<div class="grid grid-cols-4 gap-2">
@@ -60,8 +62,10 @@
 								class="col-span-7 form-input block text-xs"
 								placeholder="********"
 								v-model="passwordCheck"
+								@change="comparePassword()"
 							/>
 						</div>
+						<div class="text-xs p-1" id="notice-password-compare"></div>
 					</div>
 				</div>
 				<div class="grid grid-cols-4 gap-2">
@@ -174,6 +178,26 @@
 			};
 		},
 		methods: {
+			possiblePassword() {
+				const notice = document.getElementById("notice-password-possible");
+				const regExp = /^[A-Za-z\d!@#$%^&*()]{8,30}$/;
+				if (!regExp.test(document.getElementById("password").value)) {
+					notice.innerHTML = `<span class="text-red-500">8-30 사이 영어대소문자, 숫자, 특수문자를 사용해주세요</span>`;
+				} else {
+					notice.innerHTML = ``;
+				}
+			},
+			comparePassword() {
+				const notice = document.getElementById("notice-password-compare");
+				if (
+					document.getElementById("password").value !==
+					document.getElementById("passwordCheck").value
+				) {
+					notice.innerHTML = `<span class="text-red-500">비밀번호가 일치하지 않습니다.<span>`;
+				} else {
+					notice.innerHTML = `<span class="text-green-500">비밀번호가 일치합니다.<span>`;
+				}
+			},
 			async onClickEmailCheckBtn() {
 				console.log(`[CustomerSignupForm.vue] onClickEmailCheckBtn()`);
 				const email = this.reqCustomerSignupDto.user.email;
@@ -189,6 +213,18 @@
 				console.log(`[CustomerSignupForm.vue] onClickCustomerSignupBtn()`);
 				if (!this.emailPossible) {
 					alert("이메일 확인이 완료되지 않았습니다.");
+					return;
+				}
+				if (!this.passwordPossible) {
+					alert(`비밀번호 조건을 확인해주세요.`);
+					return;
+				}
+				if (!this.passwordCompare) {
+					alert(`비밀번호가 일치하지 않습니다.`);
+					return;
+				}
+				if (!this.image.formData) {
+					alert(`이미지를 등록해주세요.`);
 					return;
 				}
 

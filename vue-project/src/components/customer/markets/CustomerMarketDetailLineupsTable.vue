@@ -101,6 +101,10 @@
 				console.log(
 					`++++++ [CustomerMarketDetailLinupsTable.vue] onChangeOrderProductQuantity() ++++++`
 				);
+				if (document.getElementById(productId).value < 0) {
+					document.getElementById(productId).value = 0;
+					return;
+				}
 				this.orders[productId] = document.getElementById(productId).value;
 				if (this.orders[productId] <= 0) {
 					delete this.orders[productId];
