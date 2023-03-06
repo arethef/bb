@@ -71,6 +71,8 @@ export class Ticket extends Base {
   // address: Address;
   @Column({ default: '1' })
   deliveryStatus: string; // 1:진행중 2:완료 3:취소(?)
+  @Column({ default: '1' })
+  payStatus: string; // 1:진행중 2:완료 3:취소(?) 4:실패(?)
 
   @OneToMany(() => Order, (order) => order.ticket)
   orders: Order[];

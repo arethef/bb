@@ -134,4 +134,18 @@ export class TicketsService {
     const result = await Ticket.save(ticket);
     return result;
   }
+
+  async updatePayStatusFail(id: string): Promise<Ticket> {
+    const ticket: Ticket = await Ticket.findOne({ where: { id } });
+    ticket.payStatus = '4';
+    const result = await Ticket.save(ticket);
+    return result;
+  }
+
+  async updatePayStatusSuccess(id: string): Promise<Ticket> {
+    const ticket: Ticket = await Ticket.findOne({ where: { id } });
+    ticket.payStatus = '2';
+    const result = await Ticket.save(ticket);
+    return result;
+  }
 }

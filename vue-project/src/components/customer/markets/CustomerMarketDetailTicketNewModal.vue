@@ -229,6 +229,8 @@
 							빵티켓 사기
 						</button>
 					</div>
+					<!-- End of Modal Footer -->
+					<div id="payment-method"></div>
 				</div>
 			</div>
 		</div>
@@ -242,6 +244,7 @@
 	import { useOrderStore } from "../../../stores/order";
 	import { useProductStore } from "../../../stores/product";
 	import { useTicketStore } from "../../../stores/ticket";
+	import { loadPaymentWidget, ANONYMOUS } from "@tosspayments/payment-widget-sdk";
 	export default {
 		setup() {
 			const productStore = useProductStore();
@@ -249,12 +252,14 @@
 			const customerStore = useCustomerStore();
 			const orderStore = useOrderStore();
 			const ticketStore = useTicketStore();
+			const testClientKey = "test_ck_qLlDJaYngroENKNBKOm3ezGdRpXx";
 			return {
 				productStore,
 				marketStore,
 				customerStore,
 				orderStore,
 				ticketStore,
+				testClientKey,
 			};
 		},
 		components: {},
@@ -308,10 +313,66 @@
 					this.marketStore.marketCurrentMarket.brandId
 				);
 				await this.ticketStore.detailTicket(result.id);
+				try {
+					await this.pay(result.un);
+				} catch (e) {
+					console.log(
+						`❯❯❯❯❯❯ [CustomerMarketDetailTicketNewModal.vue] onClickMarketDetailTicketNewCreateBtn() e:`,
+						e
+					);
+					// // 결제 실패 -> ticket 삭제하는 작업
+					// await this.ticketStore.deleteTicket(result.id);
+					// 결제 실패 -> ticket payStatus 변경
+					await this.ticketStore.updatePayStatusFail(result.id);
+					this.$router.push({
+						name: `CustomerFail`,
+						params: { marketId: this.$props.marketId },
+					});
+					// return;
+				}
+				// 결제 성공 -> ticket status 바꾸는 작업
+				await this.ticketStore.updatePayStatusSuccess(result.id);
 				this.$router.push({
 					name: `CustomerTicketDetail`,
 					params: { ticketId: result.id },
 				});
+			},
+			async pay(orderId) {
+				const paymentWidget = await loadPaymentWidget(
+					this.testClientKey,
+					ANONYMOUS
+				);
+				const paymentMethods = paymentWidget.renderPaymentMethods(
+					"#payment-method",
+					1
+				);
+				paymentWidget
+					.requestPayment({
+						// 결제 정보 파라미터
+						orderId,
+						// orderId: "AD8aZDpbzXs4EQa-UkIX6",
+						orderName: `${
+							this.productStore.productCustomerTicketNewOrders[0].product.name
+						}외 ${
+							this.productStore.productCustomerTicketNewOrders.length - 1
+						} 건`,
+						// successUrl: `http://127.0.0.1:5173/c/success`,
+						// failUrl: "http://127.0.0.1:5173/c/fail",
+						customerEmail: this.customerStore.customerProfile.user.email,
+						customerName: this.customerStore.customerProfile.user.username,
+					})
+					.then(function (data) {
+						// 결제 요청 성공 처리
+					})
+					.catch(function (error) {
+						if (error.code === "USER_CANCEL") {
+							// 결제 고객이 결제창을 닫았을 때 에러 처리
+							alert("결제창을 닫아 결제가 취소되었습니다.");
+						} else if (error.code === "INVALID_CARD_COMPANY") {
+							// 유효하지 않은 카드 코드에 대한 에러 처리
+							alert("유효하지 않은 카드입니다 ?");
+						}
+					});
 			},
 			combineAndSetDeliveryAddress() {
 				if (!this.addressInputFormVisible) {

@@ -87,4 +87,26 @@ export class TicketsController {
     const result = await this.ticketsService.createTicket(dto, req.user.id);
     return result;
   }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Post('update/pay-status/fail/:id')
+  async updatePayStatusFail(
+    @Req() req,
+    @Param('id') id: string,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<Ticket> {
+    const result = await this.ticketsService.updatePayStatusFail(id);
+    return result;
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Post('update/pay-status/success/:id')
+  async updatePayStatusSuccess(
+    @Req() req,
+    @Param('id') id: string,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<Ticket> {
+    const result = await this.ticketsService.updatePayStatusSuccess(id);
+    return result;
+  }
 }

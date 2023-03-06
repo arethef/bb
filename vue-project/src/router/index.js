@@ -159,6 +159,25 @@ const router = createRouter({
             import("../views/customer/search/CustomerSearchView.vue"),
           props: true,
         },
+        {
+          path: "tests",
+          name: "CustomerTests",
+          component: () =>
+            import("../views/customer/tests/CustomerTestsView.vue"),
+        },
+        {
+          path: "success",
+          name: "CustomerSuccess",
+          component: () =>
+            import("../views/customer/tests/CustomerSuccessView.vue"),
+        },
+        {
+          path: "fail",
+          name: "CustomerFail",
+          component: () =>
+            import("../views/customer/tests/CustomerFailView.vue"),
+          props: true,
+        },
       ],
     },
     // {

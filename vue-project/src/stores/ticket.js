@@ -257,5 +257,55 @@ export const useTicketStore = defineStore("ticket", {
         });
       this.setCurrentTicket(axiosResult.data);
     },
+    // async deleteTicket(id) {
+    //   let result = {};
+    //   await axios
+    //     .delete(`/api/tickets/${id}`)
+    //     .then((res) => {
+    //       console.log(`❯❯❯❯❯❯ [ticket.js] deleteTicket() res.data:`, res.data);
+    //       result = res.data;
+    //     })
+    //     .catch((err) => {
+    //       console.error(`❯❯❯❯❯❯ [ticket.js] deleteTicket() err:`, err);
+    //     });
+    //   return result;
+    // },
+    async updatePayStatusFail(id) {
+      let result = {};
+      await axios
+        .post(`/api/tickets/update/pay-status/fail/${id}`)
+        .then((res) => {
+          console.log(
+            `❯❯❯❯❯❯ [ticket.js] updatePayStatusFail() res.data:`,
+            res.data
+          );
+          result = res.data;
+        })
+        .catch((err) => {
+          console.error(`❯❯❯❯❯❯ [ticket.js] updatePayStatusFail() err:`, err);
+        });
+      this.setCurrentTicket(result);
+      return result;
+    },
+    async updatePayStatusSuccess(id) {
+      let result = {};
+      await axios
+        .post(`/api/tickets/update/pay-status/success/${id}`)
+        .then((res) => {
+          console.log(
+            `❯❯❯❯❯❯ [ticket.js] updatePayStatusSuccess() res.data:`,
+            res.data
+          );
+          result = res.data;
+        })
+        .catch((err) => {
+          console.error(
+            `❯❯❯❯❯❯ [ticket.js] updatePayStatusSuccess() err:`,
+            err
+          );
+        });
+      this.setCurrentTicket(result);
+      return result;
+    },
   },
 });
