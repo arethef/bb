@@ -55,7 +55,7 @@
 
 ---
 
-### Library
+### etc
 
 - ORM: TypeORM
 - Authentication: passport
