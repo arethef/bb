@@ -14,7 +14,10 @@ async function bootstrap() {
       forbidUnknownValues: false,
     }),
   );
-  app.enableCors();
+  app.enableCors({
+    origin: true,
+    credentials: true,
+  });
   app.use(cookieParser());
   app.setGlobalPrefix('api');
   const config = new DocumentBuilder()

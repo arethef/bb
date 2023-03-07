@@ -55,4 +55,10 @@
 
 ---
 
-###
+### Library
+
+- ORM: TypeORM
+- Authentication: passport
+- File upload: multer
+- Payments test: tosspayments
+- 사업자조회: 공공데이터포털 Open API

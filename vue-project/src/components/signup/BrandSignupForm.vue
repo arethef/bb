@@ -290,8 +290,10 @@
 				const regExp = /^[A-Za-z\d!@#$%^&*()]{8,30}$/;
 				if (!regExp.test(document.getElementById("password").value)) {
 					notice.innerHTML = `<span class="text-red-500">8-30 사이 영어대소문자, 숫자, 특수문자를 사용해주세요</span>`;
+					this.passwordPossible = false;
 				} else {
 					notice.innerHTML = ``;
+					this.passwordPossible = true;
 				}
 			},
 			comparePassword() {
@@ -301,8 +303,10 @@
 					document.getElementById("passwordCheck").value
 				) {
 					notice.innerHTML = `<span class="text-red-500">비밀번호가 일치하지 않습니다.<span>`;
+					this.passwordCompare = false;
 				} else {
 					notice.innerHTML = `<span class="text-green-500">비밀번호가 일치합니다.<span>`;
+					this.passwordCompare = true;
 				}
 			},
 			async onClickEmailCheckBtn() {
